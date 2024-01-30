@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../widget/common/Safty.dart';
 
-String server = 'http://172.23.10.40:16700/';
-// String server = 'http://127.0.0.1:16700/';
+// String server = 'http://172.23.10.40:16700/';
+String server = 'http://127.0.0.1:16700/';
 
 class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
   ReportPDFCommon_Cubit()
@@ -19,7 +19,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
     List<String> passlist = [];
 
     final response = await Dio().post(
-      server + "HESG_Report_PDF",
+      server + "BP12PH_Report_PDF",
       data: {
         "PO": PO,
       },
@@ -1888,6 +1888,249 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     FREQ: FREQ,
                     datapackset: listdataset,
                     RESULT: avgall.toStringAsFixed(desinal),
+                    LOAD: LOAD,
+                    Remark: remark,
+                  ));
+                }
+              }
+            }
+          }
+
+          if (PATTERNlist['FINAL'][fi]['RESULTFORMAT'] == 'CAL1') {
+            NO_NUMBER++;
+
+            for (var mi = 0; mi < MACHINElist.length; mi++) {
+              if (FINALdata[MACHINElist[mi]] != null) {
+                if (FINALdata[MACHINElist[mi]]
+                        [PATTERNlist['FINAL'][fi]['ITEMs']] !=
+                    null) {
+                  // print(PATTERNlist['FINAL'][fi]['RESULTFORMAT']);
+                  // print(FINALdata[MACHINElist[mi]]
+                  //     [PATTERNlist['FINAL'][fi]['ITEMs']]);
+
+                  String POINTs = (int.parse(ConverstStrOne(
+                          PATTERNlist['FINAL'][fi]['PCS'].toString())))
+                      .toString();
+
+                  String SPECIFICATIONbuff =
+                      PATTERNlist['FINAL'][fi]['SPECIFICATIONve'].toString();
+                  String itemss = PATTERNlist['FINAL'][fi]['ITEMs'].toString();
+                  String SCmasks =
+                      PATTERNlist['FINAL'][fi]['SCMARK'].toString();
+                  String ITEMname = '';
+                  String METHODss = '';
+                  String METHODname = '';
+                  String FREQ =
+                      '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                  String SPECIFICATION = '';
+                  String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
+
+                  double maxdata = 0;
+                  double mindata = 0;
+
+                  String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
+
+                  print('>>${remark}');
+
+                  String convss =
+                      PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
+
+                  if (convss != '' && convss != '-') {
+                    for (var ih = 0; ih < UNITlist.length; ih++) {
+                      // print(UNITlist[ih]['masterID'].toString());
+                      if (convss == UNITlist[ih]['masterID'].toString()) {
+                        // print(UNITlist[ih]);
+                        String Unitss = "${UNITlist[ih]['UNIT']}";
+                        if (Unitss.contains("-") == false) {
+                          remark = "From ${UNITlist[ih]['UNIT']}";
+                        }
+
+                        break;
+                      }
+                    }
+                  }
+
+                  try {
+                    String SPECIFICATIONbuff2 =
+                        SPECIFICATIONbuff.replaceAll('{', '{"');
+                    String SPECIFICATIONbuff3 =
+                        SPECIFICATIONbuff2.replaceAll('}', '"}');
+                    String SPECIFICATIONbuff4 =
+                        SPECIFICATIONbuff3.replaceAll(':', '":"');
+                    String SPECIFICATIONbuff5 =
+                        SPECIFICATIONbuff4.replaceAll(',', '","');
+                    // print(SPECIFICATIONbuff5);
+                    var SPECIFICATIONdata =
+                        json.decode(SPECIFICATIONbuff5.replaceAll(' ', ''));
+                    if (SPECIFICATIONdata['condition'] != null) {
+                      // print(SPECIFICATIONdata['condition']);
+                      String condition =
+                          SPECIFICATIONdata['condition'].toString();
+
+                      // print(condition.contains("LOL(<)"));
+                      // print(condition.contains("HIM(>)"));
+                      // Actual
+                      // print(SPECIFICATIONdata);
+
+                      String dataUNIT =
+                          PATTERNlist['FINAL'][fi]['UNIT'].toString();
+
+                      String unitP = '';
+
+                      for (var ih = 0; ih < UNITlist.length; ih++) {
+                        // print(UNITlist[ih]['masterID'].toString());
+                        if (dataUNIT == UNITlist[ih]['masterID'].toString()) {
+                          // print(UNITlist[ih]);
+                          unitP = UNITlist[ih]['UNIT'].toString();
+                          break;
+                        }
+                      }
+
+                      if (condition.contains("BTW")) {
+                        print(SPECIFICATIONdata['BTW_LOW']);
+                        print(SPECIFICATIONdata['BTW_HI']);
+                        SPECIFICATION =
+                            '${SPECIFICATIONdata['BTW_LOW'].toString()}-${SPECIFICATIONdata['BTW_HI'].toString()} ${unitP.replaceAll('?', 'µ')}';
+
+                        maxdata = double.parse(ConverstStr(
+                            SPECIFICATIONdata['BTW_HI'].toString()));
+                        mindata = double.parse(ConverstStr(
+                            SPECIFICATIONdata['BTW_LOW'].toString()));
+                      } else if (condition.contains("LOL(<)")) {
+                        // print(SPECIFICATIONdata['LOL_H']);
+                        SPECIFICATION =
+                            '≤ ${SPECIFICATIONdata['LOL_H'].toString()} ${unitP.replaceAll('?', 'µ')}';
+                        maxdata = double.parse(
+                            ConverstStr(SPECIFICATIONdata['LOL_H'].toString()));
+                      } else if (condition.contains("HIM(>)")) {
+                        // print(SPECIFICATIONdata['HIM_L']);
+                        SPECIFICATION =
+                            '≥ ${SPECIFICATIONdata['HIM_L'].toString()} ${unitP.replaceAll('?', 'µ')}';
+                        mindata = double.parse(
+                            ConverstStr(SPECIFICATIONdata['HIM_L'].toString()));
+                      } else if (condition.contains("Actual")) {
+                        // print(SPECIFICATIONdata['TARGET']);
+                        SPECIFICATION = 'Actual';
+                      }
+                    }
+                  } catch (er) {
+                    print(er);
+                  }
+
+                  for (var Fci = 0; Fci < FINALCHECKlist.length; Fci++) {
+                    if (FINALCHECKlist[Fci]['key'].toString() == itemss) {
+                      ITEMname = FINALCHECKlist[Fci]['value'].toString();
+                      METHODss = FINALCHECKlist[Fci]['METHOD'].toString();
+                    }
+                  }
+
+                  for (var Fci = 0; Fci < METHODlist.length; Fci++) {
+                    if (METHODlist[Fci]['masterID'].toString() == METHODss) {
+                      METHODname = METHODlist[Fci]['METHOD'].toString();
+                      break;
+                    }
+                  }
+                  int desinal = 4;
+
+                  // for (var Fci = 0; Fci < ITEMSlist.length; Fci++) {
+                  //   if (ITEMSlist[Fci]['masterID'].toString() == itemss) {
+                  //     // print(ITEMSlist[Fci]);
+                  //     if (ITEMSlist[Fci]['ITEMs']
+                  //         .toString()
+                  //         .toUpperCase()
+                  //         .contains("HARDNESS")) {
+                  //       desinal = 1;
+                  //     }
+
+                  //     if (ITEMSlist[Fci]['ITEMs'].toString().contains("trid")) {
+                  //       desinal = 1;
+                  //     }
+                  //   }
+                  // }
+                  // for (var B = 0; B < ITEMSlist.length; B++) {
+                  //   for (var d = 0; d < DESIMALlist.length; d++) {
+                  //     if (DESIMALlist[d]['ITEMs'].toString() ==
+                  //         ITEMSlist[B]['masterID'].toString()) {
+                  //       desinal =
+                  //           int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
+                  //     } else {
+                  //       desinal = 1;
+                  //     }
+                  //   }
+                  // }
+                  for (var d = 0; d < DESIMALlist.length; d++) {
+                    if (DESIMALlist[d]['ITEMs'].toString() == itemss) {
+                      desinal =
+                          int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
+                      break;
+                    } else {
+                      desinal = 4;
+                    }
+                  }
+                  // print(ITEMname);
+
+                  List<datainlist> listdataset = [];
+                  for (var i = 0; i < 20; i++) {
+                    if (FINALdata[MACHINElist[mi]]
+                                [PATTERNlist['FINAL'][fi]['ITEMs']]
+                            ['PSC${i + 1}'] !=
+                        null) {
+                      //
+                      // print(FINALdata[MACHINElist[mi]]
+                      //         [PATTERNlist['FINAL'][fi]['ITEMs']]['PSC${i + 1}']
+                      //     .length);
+                      var datainside = FINALdata[MACHINElist[mi]]
+                          [PATTERNlist['FINAL'][fi]['ITEMs']]['PSC${i + 1}'];
+                      datainlist datainpcsi = datainlist();
+                      int pcsi = 0;
+                      // print(PATTERNlist['FINAL'][fi]);
+                      // print(ITEMSlist);
+                      print(PATTERNlist['FINAL'][fi]['CONVERSEDATA']);
+                      String conves = PATTERNlist['FINAL'][fi]
+                                  ['CONVERSEDATA'] !=
+                              null
+                          ? PATTERNlist['FINAL'][fi]['CONVERSEDATA'].toString()
+                          : '';
+
+                      String ConvesData = 'PO3';
+                      if (conves == 'yes') {
+                        ConvesData = 'PO5';
+                        // ConvesData = 'PO3';
+                      }
+
+                      datainpcsi.DATAAVG =
+                          datainside[pcsi][ConvesData].toString();
+                      datainpcsi.dimensionX = pcsi;
+
+                      datainpcsi.TYPE = 'Number';
+
+                      listdataset.add(datainpcsi);
+                    } else {
+                      break;
+                    }
+                  }
+
+                  // double avgall = 0;
+                  // for (var ig = 0; ig < listdataset.length; ig++) {
+                  //   // print(ConverstStr(listdataset[ig].DATAAVG));
+                  //   avgall = avgall +
+                  //       double.parse(ConverstStr(listdataset[ig].DATAAVG));
+                  // }
+                  double resultdata = double.parse(
+                      ConverstStr(FINALANSdata[itemss].toString()));
+                  // print(avgall);
+                  ITEMlist.add(FINALCHECKlistCommonClass(
+                    TYPE: "Number",
+                    ITEM: itemss,
+                    ITEMname: ITEMname,
+                    METHOD: METHODss,
+                    METHODname: METHODname,
+                    SCMARK: SCmasks,
+                    SPECIFICATION: SPECIFICATION,
+                    NO: NO_NUMBER,
+                    FREQ: FREQ,
+                    datapackset: listdataset,
+                    RESULT: (resultdata).toStringAsFixed(desinal),
                     LOAD: LOAD,
                     Remark: remark,
                   ));

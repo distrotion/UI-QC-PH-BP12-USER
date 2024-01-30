@@ -2,11 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/global.dart';
 import '../../model/model.dart';
 import '../../page/P10REPORT/REPORTtable.dart';
 import '../../widget/common/Loading.dart';
 
 //-------------------------------------------------
+
+String server = GLOserver;
 
 abstract class REPORT_Event {}
 
@@ -22,7 +25,7 @@ class REPORT_Bloc extends Bloc<REPORT_Event, List<dataset>> {
       List<dataset> toAdd, Emitter<List<dataset>> emit) async {
     FreeLoading(REPORTuiMAINcontext);
     final response = await Dio().post(
-      "http://172.23.10.73:2160/" + 'gas12report',
+      server + 'PHBP12report',
       data: {},
     );
 
