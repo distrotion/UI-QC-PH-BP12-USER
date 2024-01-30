@@ -4,19 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/global.dart';
 import '../../model/model.dart';
 
-import '../../page/P4SER-THI-002/SERTHI002var.dart';
+import '../../page/P3SUR-BAL-013/SURBAL013var.dart';
+
 import '../../widget/QCWIDGET/consolelayout.dart';
 
 //-------------------------------------------------
 String server = GLOserver;
 
-abstract class SERTHI002_Event {}
+abstract class SURBAL013_Event {}
 
-class SERTHI002_READ extends SERTHI002_Event {}
+class SURBAL013_READ extends SURBAL013_Event {}
 
-class SERTHI002_Bloc extends Bloc<SERTHI002_Event, SERTHI002SCHEMA> {
-  SERTHI002_Bloc()
-      : super(SERTHI002SCHEMA(
+class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
+  SURBAL013_Bloc()
+      : super(SURBAL013SCHEMA(
           ItemPick: [''],
           ItemPickcode: [ITEMSET()],
           preview: [],
@@ -25,9 +26,9 @@ class SERTHI002_Bloc extends Bloc<SERTHI002_Event, SERTHI002SCHEMA> {
           ITEMleftVALUE: [],
           GAPnameList: [],
         )) {
-    on<SERTHI002_READ>((event, emit) {
-      return _SERTHI002_READ(
-          SERTHI002SCHEMA(
+    on<SURBAL013_READ>((event, emit) {
+      return _SURBAL013_READ(
+          SURBAL013SCHEMA(
             ItemPick: [''],
             ItemPickcode: [ITEMSET()],
             preview: [],
@@ -39,14 +40,14 @@ class SERTHI002_Bloc extends Bloc<SERTHI002_Event, SERTHI002SCHEMA> {
           emit);
     });
   }
-  Future<void> _SERTHI002_READ(
-      SERTHI002SCHEMA toAdd, Emitter<SERTHI002SCHEMA> emit) async {
+  Future<void> _SURBAL013_READ(
+      SURBAL013SCHEMA toAdd, Emitter<SURBAL013SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "SERTHI002db",
+      server + "SURBAL013db",
       data: {},
     );
-    SERTHI002SCHEMA output = SERTHI002SCHEMA(
+    SURBAL013SCHEMA output = SURBAL013SCHEMA(
       ItemPick: [''],
       ItemPickcode: [ITEMSET()],
       preview: [],
@@ -165,7 +166,7 @@ class SERTHI002_Bloc extends Bloc<SERTHI002_Event, SERTHI002SCHEMA> {
         }
       }
 
-      output = SERTHI002SCHEMA(
+      output = SURBAL013SCHEMA(
         UPDATE: 'OK',
         //---- Left
         PO: databuff['PO'] == null ? '' : databuff['PO'].toString(),
@@ -202,6 +203,23 @@ class SERTHI002_Bloc extends Bloc<SERTHI002_Event, SERTHI002SCHEMA> {
         GAP: databuff['GAP'] == null ? '' : databuff['GAP'].toString(),
         GAPname:
             databuff['GAPname'] == null ? '' : databuff['GAPname'].toString(),
+
+        Area: databuff['K1v'] == null ? '' : databuff['K1v'].toString(),
+        VAL1: databuff['confirmdataCW'] == null
+            ? ''
+            : databuff['confirmdataCW']['VAL1'].toString(),
+        VAL2: databuff['confirmdataCW'] == null
+            ? ''
+            : databuff['confirmdataCW']['VAL2'].toString(),
+        AearI: databuff['confirmdataCW'] == null
+            ? ''
+            : databuff['confirmdataCW']['Area'].toString(),
+        FORMULAI: databuff['confirmdataCW'] == null
+            ? ''
+            : databuff['confirmdataCW']['FORMULA'].toString(),
+
+        FORMULA:
+            databuff['FORMULA'] == null ? '' : databuff['FORMULA'].toString(),
         GAPnameList: GAPnamePickBUFFER,
         //---- BOTTOM
         preview: previewBUFFER,

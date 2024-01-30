@@ -24,33 +24,39 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
   Future<void> _CLEARroom_READ(
       CLEARroomENV toAdd, Emitter<CLEARroomENV> emit) async {
     final resPO1 = await Dio().post(
-      server + "APPGASHESdb",
+      server + "APPPHBP12db",
       data: {},
     );
     final resPO2 = await Dio().post(
-      server + "HGHMV001db",
+      server + "SURBAL013db",
       data: {},
     );
     final resPO3 = await Dio().post(
-      server + "HGHMV002db",
+      server + "SURTHI002db",
       data: {},
     );
     final resPO4 = await Dio().post(
-      server + "HGHMV003db",
+      server + "SURRGH001db",
       data: {},
     );
     final resPO5 = await Dio().post(
-      server + "HGHRC002db",
+      server + "SURMIC001db",
       data: {},
     );
     final resPO6 = await Dio().post(
-      server + "HGMSC001db",
+      server + "SURMCS001db",
       data: {},
     );
-    final resPO7 = await Dio().post(
-      server + "HGVHT001db",
-      data: {},
-    );
+    // print(resPO1.data['PO']);
+    // print(resPO2.data['PO']);
+    // print(resPO3.data['PO']);
+    // print(resPO4.data['PO']);
+    // print(resPO5.data['PO']);
+    // print(resPO6.data['PO']);
+    // final resPO7 = await Dio().post(
+    //   server + "HGVHT001db",
+    //   data: {},
+    // );
     // final resPO7 = await Dio().post(
     //   server + "APPGASGWdb",
     //   data: {},
@@ -59,19 +65,21 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
     CLEARroomENV output = CLEARroomENV();
 
     if (resPO1.statusCode == 200 &&
-        resPO2.statusCode == 200 &&
-        resPO3.statusCode == 200 &&
-        resPO4.statusCode == 200 &&
-        resPO5.statusCode == 200 &&
-        resPO6.statusCode == 200 &&
-        resPO7.statusCode == 200) {
+            resPO2.statusCode == 200 &&
+            resPO3.statusCode == 200 &&
+            resPO4.statusCode == 200 &&
+            resPO5.statusCode == 200 &&
+            resPO6.statusCode == 200
+        // &&
+        // resPO7.statusCode == 200
+        ) {
       output.PO1 = resPO1.data['PO'] ?? '';
       output.PO2 = resPO2.data['PO'] ?? '';
       output.PO3 = resPO3.data['PO'] ?? '';
       output.PO4 = resPO4.data['PO'] ?? '';
       output.PO5 = resPO5.data['PO'] ?? '';
       output.PO6 = resPO6.data['PO'] ?? '';
-      output.PO7 = resPO7.data['PO'] ?? '';
+      // output.PO7 = resPO7.data['PO'] ?? '';
     }
 
     emit(output);
@@ -87,83 +95,87 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
       );
     } else if (CLEARroomdata.room == 'PO2') {
       final response = await Dio().post(
-        server + 'HGHMV001-SETZERO',
+        server + 'SURBAL013-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO3') {
       final response = await Dio().post(
-        server + 'HGHMV002-SETZERO',
+        server + 'SURTHI002-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO4') {
       final response = await Dio().post(
-        server + 'HGHMV003-SETZERO',
+        server + 'SURRGH001-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO5') {
       final response = await Dio().post(
-        server + 'HGHRC002-SETZERO',
+        server + 'SURMIC001-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO6') {
       final response = await Dio().post(
-        server + 'HGMSC001-SETZERO',
-        data: {},
-      );
-    } else if (CLEARroomdata.room == 'PO7') {
-      final response = await Dio().post(
-        server + 'HGVHT001-SETZERO',
+        server + 'SURMCS001-SETZERO',
         data: {},
       );
     }
+    // else if (CLEARroomdata.room == 'PO7') {
+    //   final response = await Dio().post(
+    //     server + 'HGVHT001-SETZERO',
+    //     data: {},
+    //   );
+    // }
 
     //-============
 
     final resPO1 = await Dio().post(
-      server + "APPGASHESdb",
+      server + "APPPHBP12db",
       data: {},
     );
     final resPO2 = await Dio().post(
-      server + "HGHRC002db",
+      server + "SURBAL013db",
       data: {},
     );
     final resPO3 = await Dio().post(
-      server + "HGHMV001db",
+      server + "SURTHI002db",
       data: {},
     );
     final resPO4 = await Dio().post(
-      server + "HGHMV002db",
+      server + "SURRGH001db",
       data: {},
     );
     final resPO5 = await Dio().post(
-      server + "HGHMV003db",
+      server + "SURMIC001db",
       data: {},
     );
     final resPO6 = await Dio().post(
-      server + "HGHRC002db",
+      server + "SURMCS001db",
       data: {},
     );
-    final resPO7 = await Dio().post(
-      server + "HGVHT001db",
-      data: {},
-    );
+    // final resPO7 = await Dio().post(
+    //   server + "HGVHT001db",
+    //   data: {},
+    // );
 
     CLEARroomENV output = CLEARroomENV();
 
     if (resPO1.statusCode == 200 &&
-        resPO2.statusCode == 200 &&
-        resPO3.statusCode == 200 &&
-        resPO4.statusCode == 200 &&
-        resPO5.statusCode == 200 &&
-        resPO6.statusCode == 200 &&
-        resPO7.statusCode == 200) {
+            resPO2.statusCode == 200 &&
+            resPO3.statusCode == 200 &&
+            resPO4.statusCode == 200 &&
+            resPO5.statusCode == 200 &&
+            resPO6.statusCode == 200
+        // &&
+        // resPO7.statusCode == 200
+
+        ) {
       output.PO1 = resPO1.data['PO'] ?? '';
       output.PO2 = resPO2.data['PO'] ?? '';
       output.PO3 = resPO3.data['PO'] ?? '';
       output.PO4 = resPO4.data['PO'] ?? '';
       output.PO5 = resPO5.data['PO'] ?? '';
       output.PO6 = resPO6.data['PO'] ?? '';
-      output.PO7 = resPO7.data['PO'] ?? '';
+      // output.PO7 = resPO7.data['PO'] ?? '';
     }
 
     emit(output);

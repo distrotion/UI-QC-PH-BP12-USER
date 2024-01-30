@@ -27,7 +27,7 @@ class _ClearRoomBODYState extends State<ClearRoomBODY> {
   // String? PO1;
   void initState() {
     super.initState();
-    // context.read<CLEARroom_Bloc>().add(CLEARroom_READ());
+    context.read<CLEARroom_Bloc>().add(CLEARroom_READ());
   }
 
   @override
@@ -431,7 +431,7 @@ class _ClearRoomBODYState extends State<ClearRoomBODY> {
                         ),
                         child: Center(
                           child: Text(
-                            "SER-MSC-001 : ${widget.data?.PO6 ?? ""}",
+                            "SER-MCS-001 : ${widget.data?.PO6 ?? ""}",
                             style: TxtStyle(
                               fontWeight: FontWeight.bold,
                               color: widget.data!.PO6 == ''

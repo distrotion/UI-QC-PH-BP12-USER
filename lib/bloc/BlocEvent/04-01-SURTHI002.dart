@@ -4,19 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/global.dart';
 import '../../model/model.dart';
 
-import '../../page/P3SER-BAL-013/SERBAL013var.dart';
+import '../../page/P4SUR-THI-002/SURTHI002var.dart';
+
 import '../../widget/QCWIDGET/consolelayout.dart';
 
 //-------------------------------------------------
 String server = GLOserver;
 
-abstract class SERBAL013_Event {}
+abstract class SURTHI002_Event {}
 
-class SERBAL013_READ extends SERBAL013_Event {}
+class SURTHI002_READ extends SURTHI002_Event {}
 
-class SERBAL013_Bloc extends Bloc<SERBAL013_Event, SERBAL013SCHEMA> {
-  SERBAL013_Bloc()
-      : super(SERBAL013SCHEMA(
+class SURTHI002_Bloc extends Bloc<SURTHI002_Event, SURTHI002SCHEMA> {
+  SURTHI002_Bloc()
+      : super(SURTHI002SCHEMA(
           ItemPick: [''],
           ItemPickcode: [ITEMSET()],
           preview: [],
@@ -25,9 +26,9 @@ class SERBAL013_Bloc extends Bloc<SERBAL013_Event, SERBAL013SCHEMA> {
           ITEMleftVALUE: [],
           GAPnameList: [],
         )) {
-    on<SERBAL013_READ>((event, emit) {
-      return _SERBAL013_READ(
-          SERBAL013SCHEMA(
+    on<SURTHI002_READ>((event, emit) {
+      return _SURTHI002_READ(
+          SURTHI002SCHEMA(
             ItemPick: [''],
             ItemPickcode: [ITEMSET()],
             preview: [],
@@ -39,14 +40,14 @@ class SERBAL013_Bloc extends Bloc<SERBAL013_Event, SERBAL013SCHEMA> {
           emit);
     });
   }
-  Future<void> _SERBAL013_READ(
-      SERBAL013SCHEMA toAdd, Emitter<SERBAL013SCHEMA> emit) async {
+  Future<void> _SURTHI002_READ(
+      SURTHI002SCHEMA toAdd, Emitter<SURTHI002SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "SERBAL013db",
+      server + "SURTHI002db",
       data: {},
     );
-    SERBAL013SCHEMA output = SERBAL013SCHEMA(
+    SURTHI002SCHEMA output = SURTHI002SCHEMA(
       ItemPick: [''],
       ItemPickcode: [ITEMSET()],
       preview: [],
@@ -165,7 +166,7 @@ class SERBAL013_Bloc extends Bloc<SERBAL013_Event, SERBAL013SCHEMA> {
         }
       }
 
-      output = SERBAL013SCHEMA(
+      output = SURTHI002SCHEMA(
         UPDATE: 'OK',
         //---- Left
         PO: databuff['PO'] == null ? '' : databuff['PO'].toString(),

@@ -11,19 +11,19 @@ abstract class TRICKERMASTER_Event {}
 
 class TRICKERMASTER_GETINtoAPPPHBP12 extends TRICKERMASTER_Event {}
 
-class TRICKERMASTER_GETINtoHGHMV001 extends TRICKERMASTER_Event {}
+class TRICKERMASTER_GETINtoSURBAL013 extends TRICKERMASTER_Event {}
 
-class TRICKERMASTER_GETINtoHGHMV002 extends TRICKERMASTER_Event {}
+class TRICKERMASTER_GETINtoSURTHI002 extends TRICKERMASTER_Event {}
 
-class TRICKERMASTER_GETINtoHGHMV003 extends TRICKERMASTER_Event {}
+class TRICKERMASTER_GETINtoSURRGH001 extends TRICKERMASTER_Event {}
 
-class TRICKERMASTER_GETINtoHGVHT001 extends TRICKERMASTER_Event {}
+class TRICKERMASTER_GETINtoSURMIC001 extends TRICKERMASTER_Event {}
 
-class TRICKERMASTER_GETINtoHIMICM001 extends TRICKERMASTER_Event {}
+class TRICKERMASTER_GETINtoSURMCS001 extends TRICKERMASTER_Event {}
 
 //
 
-class TRICKERMASTER_GETINtoHGMSC001 extends TRICKERMASTER_Event {}
+class TRICKERMASTER_GETINtoHGMCS001 extends TRICKERMASTER_Event {}
 
 class TRICKERMASTER_GETINtoHGHRC002 extends TRICKERMASTER_Event {}
 
@@ -35,33 +35,33 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       return _TRICKERMASTER_GETINtoAPPPHBP12('', emit);
     });
 
-    on<TRICKERMASTER_GETINtoHGHMV001>((event, emit) {
-      return _TRICKERMASTER_GETINtoHGHMV001('', emit);
+    on<TRICKERMASTER_GETINtoSURBAL013>((event, emit) {
+      return _TRICKERMASTER_GETINtoSURBAL013('', emit);
     });
 
-    on<TRICKERMASTER_GETINtoHGHMV002>((event, emit) {
-      return _TRICKERMASTER_GETINtoHGHMV002('', emit);
+    on<TRICKERMASTER_GETINtoSURTHI002>((event, emit) {
+      return _TRICKERMASTER_GETINtoSURTHI002('', emit);
     });
 
-    on<TRICKERMASTER_GETINtoHGHMV003>((event, emit) {
-      return _TRICKERMASTER_GETINtoHGHMV003('', emit);
+    on<TRICKERMASTER_GETINtoSURRGH001>((event, emit) {
+      return _TRICKERMASTER_GETINtoSURRGH001('', emit);
     });
 
     on<TRICKERMASTER_GETINtoHGHRC002>((event, emit) {
       return _TRICKERMASTER_GETINtoHGHRC002('', emit);
     });
 
-    on<TRICKERMASTER_GETINtoHGMSC001>((event, emit) {
-      return _TRICKERMASTER_GETINtoHGMSC001('', emit);
+    on<TRICKERMASTER_GETINtoHGMCS001>((event, emit) {
+      return _TRICKERMASTER_GETINtoHGMCS001('', emit);
     });
 
-    on<TRICKERMASTER_GETINtoHGVHT001>((event, emit) {
-      return _TRICKERMASTER_GETINtoHGVHT001('', emit);
+    on<TRICKERMASTER_GETINtoSURMIC001>((event, emit) {
+      return _TRICKERMASTER_GETINtoSURMIC001('', emit);
     });
 
-    // on<TRICKERMASTER_GETINtoHIMICM001>((event, emit) {
-    //   return _TRICKERMASTER_GETINtoHIMICM001('', emit);
-    // });
+    on<TRICKERMASTER_GETINtoSURMCS001>((event, emit) {
+      return _TRICKERMASTER_GETINtoSURMCS001('', emit);
+    });
 
     on<TRICKERMASTER_FLUSH>((event, emit) {
       return _TRICKERMASTER_FLUSH('', emit);
@@ -93,10 +93,10 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
     emit(output);
   }
 
-  Future<void> _TRICKERMASTER_GETINtoHGHMV001(
+  Future<void> _TRICKERMASTER_GETINtoSURBAL013(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoHGHMV001',
+      server + 'GETINtoSURBAL013',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -116,10 +116,10 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
     emit(output);
   }
 
-  Future<void> _TRICKERMASTER_GETINtoHGHMV002(
+  Future<void> _TRICKERMASTER_GETINtoSURTHI002(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoHGHMV002',
+      server + 'GETINtoSURTHI002',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -139,10 +139,10 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
     emit(output);
   }
 
-  Future<void> _TRICKERMASTER_GETINtoHGHMV003(
+  Future<void> _TRICKERMASTER_GETINtoSURRGH001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoHGHMV003',
+      server + 'GETINtoSURRGH001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -162,10 +162,10 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
     emit(output);
   }
 
-  Future<void> _TRICKERMASTER_GETINtoHGMSC001(
+  Future<void> _TRICKERMASTER_GETINtoHGMCS001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoHGMSC001',
+      server + 'GETINtoHGMCS001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -208,10 +208,10 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
     emit(output);
   }
 
-  Future<void> _TRICKERMASTER_GETINtoHGVHT001(
+  Future<void> _TRICKERMASTER_GETINtoSURMIC001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoHGVHT001',
+      server + 'GETINtoSURMIC001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -232,10 +232,10 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   }
 
   //
-  Future<void> _TRICKERMASTER_GETINtoHIMICM001(
+  Future<void> _TRICKERMASTER_GETINtoSURMCS001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoHIMICM001',
+      server + 'GETINtoSURMCS001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,

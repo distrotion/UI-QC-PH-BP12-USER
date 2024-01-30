@@ -12,6 +12,11 @@ import '../../../styles/TextStyle.dart';
 import '../../../widget/onlyINqcui/popup.dart';
 import '../../page2.dart';
 
+import '../../page3.dart';
+import '../../page4.dart';
+import '../../page5.dart';
+import '../../page6.dart';
+import '../../page7.dart';
 import '../FIRSTuiMAIN.dart';
 import '../FIRSTuiVAR.dart';
 import 'p1instrument.dart';
@@ -74,20 +79,20 @@ class SELECtINSTRUMENTbody extends StatelessWidget {
         MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
         FIRSTUI.INSnotREADY[0] = 0;
       } else if (FIRSTUI.SECLECTins == 'SUR-BAL-013') {
-        // CuPage = Page3();
-        // MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
+        CuPage = Page3();
+        MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
       } else if (FIRSTUI.SECLECTins == 'SUR-RGH-001') {
-        // CuPage = Page4();
-        // MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
+        CuPage = Page5();
+        MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
       } else if (FIRSTUI.SECLECTins == 'SUR-MIC-001') {
-        // CuPage = Page5();
-        // MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
+        CuPage = Page6();
+        MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
       } else if (FIRSTUI.SECLECTins == 'SUR-THI-002') {
-        // CuPage = Page6();
-        // MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
+        CuPage = Page4();
+        MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
       } else if (FIRSTUI.SECLECTins == 'SUR-MCS-001') {
-        // CuPage = Page7();
-        // MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
+        CuPage = Page7();
+        MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
       }
     } else {
       if (FIRSTUI.SECLECTins != '') {
@@ -226,29 +231,29 @@ class SELECtINSTRUMENTbody extends StatelessWidget {
                               if (_INSlist[i] == 'SUR-BAL-013') {
                                 context
                                     .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoHGHMV001());
+                                    .add(TRICKERMASTER_GETINtoSURBAL013());
                               }
                               if (_INSlist[i] == 'SUR-RGH-001') {
                                 context
                                     .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoHGHMV002());
+                                    .add(TRICKERMASTER_GETINtoSURRGH001());
                               }
                               if (_INSlist[i] == 'SUR-THI-002') {
                                 context
                                     .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoHGHMV003());
+                                    .add(TRICKERMASTER_GETINtoSURTHI002());
+                              }
+
+                              if (_INSlist[i] == 'SUR-MIC-001') {
+                                context
+                                    .read<TRICKERMASTER_Bloc>()
+                                    .add(TRICKERMASTER_GETINtoSURMIC001());
                               }
 
                               if (_INSlist[i] == 'SUR-MCS-001') {
                                 context
                                     .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoHGHRC002());
-                              }
-
-                              if (_INSlist[i] == 'SUR-MCS-001') {
-                                context
-                                    .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoHGVHT001());
+                                    .add(TRICKERMASTER_GETINtoSURMCS001());
                               }
                             },
                             child: INSBOX(

@@ -251,31 +251,31 @@ class SINGLESHOTmain extends StatelessWidget {
         )
       ],
       childRIGHT: [
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: InkWell(
-                  onTap: () {
-                    CLEAR(PO) ?? () {};
-                  },
-                  child: Container(
-                    height: 40,
-                    color: Colors.orange,
-                    child: const Center(
-                      child: Text("CLEAR",
-                          style: TxtStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       flex: 1,
+        //       child: Padding(
+        //         padding: const EdgeInsets.all(2.0),
+        //         child: InkWell(
+        //           onTap: () {
+        //             CLEAR(PO) ?? () {};
+        //           },
+        //           child: Container(
+        //             height: 40,
+        //             color: Colors.orange,
+        //             child: const Center(
+        //               child: Text("CLEAR",
+        //                   style: TxtStyle(
+        //                       color: Colors.white,
+        //                       fontWeight: FontWeight.bold)),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         Row(
           children: [
             Expanded(
@@ -301,31 +301,31 @@ class SINGLESHOTmain extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: InkWell(
-                  onTap: () {
-                    RESETVALUE(PO) ?? () {};
-                  },
-                  child: Container(
-                    height: 40,
-                    color: Colors.red,
-                    child: const Center(
-                      child: Text("RESET VALUE",
-                          style: TxtStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       flex: 1,
+        //       child: Padding(
+        //         padding: const EdgeInsets.all(2.0),
+        //         child: InkWell(
+        //           onTap: () {
+        //             RESETVALUE(PO) ?? () {};
+        //           },
+        //           child: Container(
+        //             height: 40,
+        //             color: Colors.red,
+        //             child: const Center(
+        //               child: Text("RESET VALUE",
+        //                   style: TxtStyle(
+        //                       color: Colors.white,
+        //                       fontWeight: FontWeight.bold)),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         Row(
           children: [
             Expanded(

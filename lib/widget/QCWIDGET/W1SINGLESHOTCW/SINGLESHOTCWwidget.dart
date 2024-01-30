@@ -32,7 +32,7 @@ class SINGLESHOTCWmain extends StatelessWidget {
     this.UNIT,
     this.INTERSEC,
     this.RESULTFORMAT,
-    this.Ghtype,
+    this.Area,
     this.GAP,
     this.GAPname,
     required this.GAPnamePick,
@@ -42,6 +42,11 @@ class SINGLESHOTCWmain extends StatelessWidget {
     required this.FINISH,
     this.preview,
     this.confirmdata,
+    this.VAL1,
+    this.VAL2,
+    this.Aear,
+    this.FORMULA,
+    this.FORMULAI,
     //------- Right
     required this.CLEAR,
     required this.BACKPAGE,
@@ -74,7 +79,7 @@ class SINGLESHOTCWmain extends StatelessWidget {
   String? PCSleft; //ok
   String? POINTs;
   String? UNIT; //ok
-  String? Ghtype;
+  String? Area;
   String? INTERSEC;
   String? RESULTFORMAT;
   String? GAP;
@@ -88,6 +93,12 @@ class SINGLESHOTCWmain extends StatelessWidget {
 
   List<INSDATA>? preview; //ok
   List<INSDATA>? confirmdata; //ok
+
+  String? VAL1;
+  String? VAL2;
+  String? Aear;
+  String? FORMULA;
+  String? FORMULAI;
 
   //Right --------------------------------------------
   Function CLEAR;
@@ -223,7 +234,11 @@ class SINGLESHOTCWmain extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: _tabtableB4(
                       height: 40,
-                      value: confirmdata ?? [INSDATA()],
+                      // value: confirmdata ?? [INSDATA()],
+                      VAL1: VAL1,
+                      VAL2: VAL2,
+                      Aear: Aear,
+                      FORMULA: FORMULAI,
                     ),
                   ),
                 ),
@@ -242,8 +257,8 @@ class SINGLESHOTCWmain extends StatelessWidget {
           PCSleft: PCSleft,
           POINTs: POINTs,
           UNIT: UNIT,
-          Ghtype: Ghtype,
-          INTERSEC: INTERSEC,
+          Area: Area,
+          FORMULA: FORMULA,
           RESULTFORMAT: RESULTFORMAT,
           GAP: GAP,
           GAPname: GAPname,
@@ -252,31 +267,31 @@ class SINGLESHOTCWmain extends StatelessWidget {
         )
       ],
       childRIGHT: [
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: InkWell(
-                  onTap: () {
-                    CLEAR(PO) ?? () {};
-                  },
-                  child: Container(
-                    height: 40,
-                    color: Colors.orange,
-                    child: const Center(
-                      child: Text("CLEAR",
-                          style: TxtStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       flex: 1,
+        //       child: Padding(
+        //         padding: const EdgeInsets.all(2.0),
+        //         child: InkWell(
+        //           onTap: () {
+        //             CLEAR(PO) ?? () {};
+        //           },
+        //           child: Container(
+        //             height: 40,
+        //             color: Colors.orange,
+        //             child: const Center(
+        //               child: Text("CLEAR",
+        //                   style: TxtStyle(
+        //                       color: Colors.white,
+        //                       fontWeight: FontWeight.bold)),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         Row(
           children: [
             Expanded(
@@ -302,31 +317,31 @@ class SINGLESHOTCWmain extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: InkWell(
-                  onTap: () {
-                    RESETVALUE(PO) ?? () {};
-                  },
-                  child: Container(
-                    height: 40,
-                    color: Colors.red,
-                    child: const Center(
-                      child: Text("RESET VALUE",
-                          style: TxtStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       flex: 1,
+        //       child: Padding(
+        //         padding: const EdgeInsets.all(2.0),
+        //         child: InkWell(
+        //           onTap: () {
+        //             RESETVALUE(PO) ?? () {};
+        //           },
+        //           child: Container(
+        //             height: 40,
+        //             color: Colors.red,
+        //             child: const Center(
+        //               child: Text("RESET VALUE",
+        //                   style: TxtStyle(
+        //                       color: Colors.white,
+        //                       fontWeight: FontWeight.bold)),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         Row(
           children: [
             Expanded(
@@ -452,8 +467,8 @@ class _topboxfull extends StatefulWidget {
     this.PCSleft,
     this.POINTs,
     this.UNIT,
-    this.Ghtype,
-    this.INTERSEC,
+    this.Area,
+    this.FORMULA,
     this.RESULTFORMAT,
     this.GAP,
     this.GAPname,
@@ -466,8 +481,8 @@ class _topboxfull extends StatefulWidget {
   String? PCSleft;
   String? POINTs;
   String? UNIT;
-  String? Ghtype;
-  String? INTERSEC;
+  String? Area;
+  String? FORMULA;
   String? RESULTFORMAT;
   String? GAP;
   List<String>? GAPnameList;
@@ -601,24 +616,24 @@ class __topboxfullState extends State<_topboxfull> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 38,
-                width: 50,
-                child: EasyDropDown(
-                  listdropdown: widget.GAPnameList ?? [''],
-                  onChangeinside: (v) {
-                    setState(() {
-                      show2 = v;
-                      _outfn2(v);
-                    });
-                    // print(v);
-                    // widget.GAPnamePick!(v);
-                  },
-                  value: show2,
-                  width: 50,
-                  height: 38,
-                ),
-              ),
+              // SizedBox(
+              //   height: 38,
+              //   width: 50,
+              //   child: EasyDropDown(
+              //     listdropdown: widget.GAPnameList ?? [''],
+              //     onChangeinside: (v) {
+              //       setState(() {
+              //         show2 = v;
+              //         _outfn2(v);
+              //       });
+              //       // print(v);
+              //       // widget.GAPnamePick!(v);
+              //     },
+              //     value: show2,
+              //     width: 50,
+              //     height: 38,
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -653,13 +668,18 @@ class __topboxfullState extends State<_topboxfull> {
                   children: [
                     const Expanded(
                         flex: 2,
-                        child: Text('',
+                        child: Text('Area',
                             style: TxtStyle(
                               color: Colors.black,
                               // fontSize: 12
                               fontWeight: FontWeight.bold,
                             ))),
-                    Expanded(flex: 1, child: Text(widget.Ghtype ?? '')),
+                    Expanded(
+                        flex: 1,
+                        child: Text(
+                          widget.Area ?? '',
+                          style: TextStyle(fontSize: 10),
+                        )),
                   ],
                 ),
               ),
@@ -673,33 +693,38 @@ class __topboxfullState extends State<_topboxfull> {
                   children: [
                     const Expanded(
                         flex: 2,
-                        child: Text('',
+                        child: Text('FORMULA',
                             style: TxtStyle(
                               color: Colors.black,
                               // fontSize: 12
                               fontWeight: FontWeight.bold,
                             ))),
-                    Expanded(flex: 1, child: Text(widget.INTERSEC ?? '')),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 38,
-                width: 100,
-                child: Row(
-                  children: [
-                    const Expanded(
+                    Expanded(
                         flex: 1,
-                        child: Text('',
-                            style: TxtStyle(
-                              color: Colors.black,
-                              // fontSize: 12
-                              fontWeight: FontWeight.bold,
-                            ))),
-                    Expanded(flex: 1, child: Text(widget.GAP ?? '')),
+                        child: Text(
+                          widget.FORMULA ?? '',
+                          style: TextStyle(fontSize: 10),
+                        )),
                   ],
                 ),
               ),
+              // SizedBox(
+              //   height: 38,
+              //   width: 100,
+              //   child: Row(
+              //     children: [
+              //       const Expanded(
+              //           flex: 1,
+              //           child: Text('',
+              //               style: TxtStyle(
+              //                 color: Colors.black,
+              //                 // fontSize: 12
+              //                 fontWeight: FontWeight.bold,
+              //               ))),
+              //       Expanded(flex: 1, child: Text(widget.GAP ?? '')),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -908,28 +933,82 @@ class _tabtableB3 extends StatelessWidget {
   }
 }
 
-class _tabtableB4 extends StatelessWidget {
+class _tabtableB4 extends StatefulWidget {
   _tabtableB4({
     Key? key,
     this.value,
     this.txtsize,
     this.txtcolor,
     this.height,
+    this.VAL1,
+    this.VAL2,
+    this.Aear,
+    this.FORMULA,
   }) : super(key: key);
   List<INSDATA>? value;
   double? txtsize;
   Color? txtcolor;
   double? height;
 
+  String? VAL1;
+  String? VAL2;
+  String? Aear;
+  String? FORMULA;
+
+  @override
+  State<_tabtableB4> createState() => _tabtableB4State();
+}
+
+class _tabtableB4State extends State<_tabtableB4> {
   @override
   Widget build(BuildContext context) {
-    List<INSDATA> _value = value ?? [];
+    List<INSDATA> _value = widget.value ?? [];
     return SizedBox(
         child: Row(children: [
       Column(
         children: [
           const SizedBox(
             height: 15,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 250,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 40,
+                        width: 80,
+                        color: Colors.green,
+                        child: const Center(
+                          child: Text("FORMULA"),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 40,
+                      width: 125,
+                      color: Colors.blue,
+                      child: Center(
+                        child: Text(widget.FORMULA ?? ''),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
           ),
           Row(
             children: [
@@ -956,7 +1035,9 @@ class _tabtableB4 extends StatelessWidget {
                       height: 40,
                       width: 95,
                       color: Colors.blue,
-                      child: Center(child: Text("")),
+                      child: Center(
+                        child: Text(widget.VAL1 ?? ''),
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
@@ -968,7 +1049,7 @@ class _tabtableB4 extends StatelessWidget {
                         width: 60,
                         color: Colors.orange,
                         child: const Center(
-                          child: Text(""),
+                          child: Text(''),
                         ),
                       ),
                     ),
@@ -1005,7 +1086,9 @@ class _tabtableB4 extends StatelessWidget {
                       height: 40,
                       width: 95,
                       color: Colors.blue,
-                      child: Center(child: Text("")),
+                      child: Center(
+                        child: Text(widget.VAL2 ?? ''),
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
@@ -1062,20 +1145,21 @@ class _tabtableB4 extends StatelessWidget {
                           children: [
                             ComInputText(
                               isNumberOnly: true,
-                              isEnabled: true,
+                              isEnabled: false,
                               width: 100,
                               height: 40,
-                              isContr: false,
+                              isContr: true,
                               fnContr: (input) {
                                 // setState(() {
                                 //   P2BALANCEBODYCWVAR
                                 //       .iscontrol = input;
                                 // });
                               },
-                              sValue: "",
+                              sValue: widget.Aear ?? '',
                               returnfunc: (String s) {
-                                // P2BALANCEBODYCWVAR.D01area =
-                                //     s;
+                                if (widget.Aear != null) {
+                                  widget.Aear = s;
+                                }
                               },
                             ),
                             Text("cm2")

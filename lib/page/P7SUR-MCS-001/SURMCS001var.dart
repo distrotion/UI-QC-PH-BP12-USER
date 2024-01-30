@@ -2,8 +2,10 @@ import 'dart:async';
 
 import '../../model/model.dart';
 import '../../widget/QCWIDGET/consolelayout.dart';
+import '../../widget/common/imgset.dart';
 
-class SERRGH001var {
+class SURMCS001var {
+  static bool iscontrol = false;
   static String PO = '';
   static String CP = '';
   static String QTY = '';
@@ -27,6 +29,15 @@ class SERRGH001var {
   static String GAPname = '';
   static String GAPnamePick = '';
   static List<String> GAPnameList = [''];
+  static String APPEARANCE = '';
+  static String base64pic01 = imgw;
+  static String base64pic02 = imgw;
+  static String base64pic03 = imgw;
+  static String base64pic04 = imgw;
+  static String base64pic01data = '';
+  static String base64pic02data = '';
+  static String base64pic03data = '';
+  static String base64pic04data = '';
   static List<INSDATA> preview = [];
   static List<INSDATA> confirmdata = [];
   static List<INSDATA> ITEMleftUNIT = [];
@@ -37,8 +48,8 @@ class SERRGH001var {
   static String ItemPickSELECT = '';
 }
 
-class SERRGH001SCHEMA {
-  SERRGH001SCHEMA({
+class SURMCS001SCHEMA {
+  SURMCS001SCHEMA({
     this.UPDATE = '',
     this.PO = '',
     this.CP = '',
@@ -93,7 +104,6 @@ class SERRGH001SCHEMA {
   String GAP;
   String GAPname;
   String GAPnamePick;
-
   List<String> GAPnameList;
   List<INSDATA> preview;
   List<INSDATA> confirmdata;

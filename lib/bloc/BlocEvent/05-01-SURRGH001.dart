@@ -4,19 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/global.dart';
 import '../../model/model.dart';
 
-import '../../page/P5SER-RGH-001/SERRGH001var.dart';
+import '../../page/P5SUR-RGH-001/SURRGH001var.dart';
+
 import '../../widget/QCWIDGET/consolelayout.dart';
 
 //-------------------------------------------------
 String server = GLOserver;
 
-abstract class SERRGH001_Event {}
+abstract class SURRGH001_Event {}
 
-class SERRGH001_READ extends SERRGH001_Event {}
+class SURRGH001_READ extends SURRGH001_Event {}
 
-class SERRGH001_Bloc extends Bloc<SERRGH001_Event, SERRGH001SCHEMA> {
-  SERRGH001_Bloc()
-      : super(SERRGH001SCHEMA(
+class SURRGH001_Bloc extends Bloc<SURRGH001_Event, SURRGH001SCHEMA> {
+  SURRGH001_Bloc()
+      : super(SURRGH001SCHEMA(
           ItemPick: [''],
           ItemPickcode: [ITEMSET()],
           preview: [],
@@ -25,9 +26,9 @@ class SERRGH001_Bloc extends Bloc<SERRGH001_Event, SERRGH001SCHEMA> {
           ITEMleftVALUE: [],
           GAPnameList: [],
         )) {
-    on<SERRGH001_READ>((event, emit) {
-      return _SERRGH001_READ(
-          SERRGH001SCHEMA(
+    on<SURRGH001_READ>((event, emit) {
+      return _SURRGH001_READ(
+          SURRGH001SCHEMA(
             ItemPick: [''],
             ItemPickcode: [ITEMSET()],
             preview: [],
@@ -39,14 +40,14 @@ class SERRGH001_Bloc extends Bloc<SERRGH001_Event, SERRGH001SCHEMA> {
           emit);
     });
   }
-  Future<void> _SERRGH001_READ(
-      SERRGH001SCHEMA toAdd, Emitter<SERRGH001SCHEMA> emit) async {
+  Future<void> _SURRGH001_READ(
+      SURRGH001SCHEMA toAdd, Emitter<SURRGH001SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "SERRGH001db",
+      server + "SURRGH001db",
       data: {},
     );
-    SERRGH001SCHEMA output = SERRGH001SCHEMA(
+    SURRGH001SCHEMA output = SURRGH001SCHEMA(
       ItemPick: [''],
       ItemPickcode: [ITEMSET()],
       preview: [],
@@ -165,7 +166,7 @@ class SERRGH001_Bloc extends Bloc<SERRGH001_Event, SERRGH001SCHEMA> {
         }
       }
 
-      output = SERRGH001SCHEMA(
+      output = SURRGH001SCHEMA(
         UPDATE: 'OK',
         //---- Left
         PO: databuff['PO'] == null ? '' : databuff['PO'].toString(),

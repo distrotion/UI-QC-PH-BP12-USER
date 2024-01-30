@@ -3,7 +3,7 @@ import 'dart:async';
 import '../../model/model.dart';
 import '../../widget/QCWIDGET/consolelayout.dart';
 
-class SERBAL013var {
+class SURTHI002var {
   static String PO = '';
   static String CP = '';
   static String QTY = '';
@@ -37,8 +37,8 @@ class SERBAL013var {
   static String ItemPickSELECT = '';
 }
 
-class SERBAL013SCHEMA {
-  SERBAL013SCHEMA({
+class SURTHI002SCHEMA {
+  SURTHI002SCHEMA({
     this.UPDATE = '',
     this.PO = '',
     this.CP = '',

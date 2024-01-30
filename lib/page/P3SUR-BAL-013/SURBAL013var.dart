@@ -3,7 +3,7 @@ import 'dart:async';
 import '../../model/model.dart';
 import '../../widget/QCWIDGET/consolelayout.dart';
 
-class SERMIC001var {
+class SURBAL013var {
   static String PO = '';
   static String CP = '';
   static String QTY = '';
@@ -22,7 +22,7 @@ class SERMIC001var {
   static String UNIT = '';
   static String INTERSEC = '';
   static String RESULTFORMAT = '';
-  static String GRAPHTYPE = '';
+  static String Area = '';
   static String GAP = '';
   static String GAPname = '';
   static String GAPnamePick = '';
@@ -33,12 +33,19 @@ class SERMIC001var {
   static List<INSDATA> ITEMleftVALUE = [];
   static late Timer DHtimer;
 
+  static String VAL1 = '';
+  static String VAL2 = '';
+  static String AearI = '';
+
+  static String FORMULA = '';
+  static String FORMULAI = '';
+
   //
   static String ItemPickSELECT = '';
 }
 
-class SERMIC001SCHEMA {
-  SERMIC001SCHEMA({
+class SURBAL013SCHEMA {
+  SURBAL013SCHEMA({
     this.UPDATE = '',
     this.PO = '',
     this.CP = '',
@@ -63,6 +70,12 @@ class SERMIC001SCHEMA {
     this.GAP = '',
     this.GAPname = '',
     this.GAPnamePick = '',
+    this.Area = '',
+    this.VAL1 = '',
+    this.VAL2 = '',
+    this.AearI = '',
+    this.FORMULAI = '',
+    this.FORMULA = '',
     required this.GAPnameList,
     required this.preview,
     required this.confirmdata,
@@ -93,6 +106,13 @@ class SERMIC001SCHEMA {
   String GAP;
   String GAPname;
   String GAPnamePick;
+  String Area;
+
+  String VAL1;
+  String VAL2;
+  String AearI;
+  String FORMULAI;
+  String FORMULA;
 
   List<String> GAPnameList;
   List<INSDATA> preview;

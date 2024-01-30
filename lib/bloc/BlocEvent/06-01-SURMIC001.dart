@@ -4,20 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/global.dart';
 import '../../model/model.dart';
 
-import '../../page/P7SER-MSC-001/SERMSC001var.dart';
+import '../../page/P6SUR-MIC-001/SURMIC001var.dart';
 
 import '../../widget/QCWIDGET/consolelayout.dart';
 
 //-------------------------------------------------
 String server = GLOserver;
 
-abstract class SERMSC001_Event {}
+abstract class SURMIC001_Event {}
 
-class SERMSC001_READ extends SERMSC001_Event {}
+class SURMIC001_READ extends SURMIC001_Event {}
 
-class SERMSC001_Bloc extends Bloc<SERMSC001_Event, SERMSC001SCHEMA> {
-  SERMSC001_Bloc()
-      : super(SERMSC001SCHEMA(
+class SURMIC001_Bloc extends Bloc<SURMIC001_Event, SURMIC001SCHEMA> {
+  SURMIC001_Bloc()
+      : super(SURMIC001SCHEMA(
           ItemPick: [''],
           ItemPickcode: [ITEMSET()],
           preview: [],
@@ -26,9 +26,9 @@ class SERMSC001_Bloc extends Bloc<SERMSC001_Event, SERMSC001SCHEMA> {
           ITEMleftVALUE: [],
           GAPnameList: [],
         )) {
-    on<SERMSC001_READ>((event, emit) {
-      return _SERMSC001_READ(
-          SERMSC001SCHEMA(
+    on<SURMIC001_READ>((event, emit) {
+      return _SURMIC001_READ(
+          SURMIC001SCHEMA(
             ItemPick: [''],
             ItemPickcode: [ITEMSET()],
             preview: [],
@@ -40,14 +40,14 @@ class SERMSC001_Bloc extends Bloc<SERMSC001_Event, SERMSC001SCHEMA> {
           emit);
     });
   }
-  Future<void> _SERMSC001_READ(
-      SERMSC001SCHEMA toAdd, Emitter<SERMSC001SCHEMA> emit) async {
+  Future<void> _SURMIC001_READ(
+      SURMIC001SCHEMA toAdd, Emitter<SURMIC001SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "SERMSC001db",
+      server + "SURMIC001db",
       data: {},
     );
-    SERMSC001SCHEMA output = SERMSC001SCHEMA(
+    SURMIC001SCHEMA output = SURMIC001SCHEMA(
       ItemPick: [''],
       ItemPickcode: [ITEMSET()],
       preview: [],
@@ -102,6 +102,12 @@ class SERMSC001_Bloc extends Bloc<SERMSC001_Event, SERMSC001SCHEMA> {
             V3: databuff['preview'][i]['V3'] == null
                 ? ''
                 : databuff['preview'][i]['V3'].toString(),
+            V4: databuff['preview'][i]['V4'] == null
+                ? ''
+                : databuff['preview'][i]['V4'].toString(),
+            V5: databuff['preview'][i]['V5'] == null
+                ? ''
+                : databuff['preview'][i]['V5'].toString(),
           ));
         }
       }
@@ -118,6 +124,12 @@ class SERMSC001_Bloc extends Bloc<SERMSC001_Event, SERMSC001SCHEMA> {
             V3: databuff['confirmdata'][i]['V3'] == null
                 ? ''
                 : databuff['confirmdata'][i]['V3'].toString(),
+            V4: databuff['confirmdata'][i]['V4'] == null
+                ? ''
+                : databuff['confirmdata'][i]['V4'].toString(),
+            V5: databuff['confirmdata'][i]['V5'] == null
+                ? ''
+                : databuff['confirmdata'][i]['V5'].toString(),
           ));
         }
       }
@@ -154,7 +166,7 @@ class SERMSC001_Bloc extends Bloc<SERMSC001_Event, SERMSC001SCHEMA> {
         }
       }
 
-      output = SERMSC001SCHEMA(
+      output = SURMIC001SCHEMA(
         UPDATE: 'OK',
         //---- Left
         PO: databuff['PO'] == null ? '' : databuff['PO'].toString(),
@@ -189,7 +201,8 @@ class SERMSC001_Bloc extends Bloc<SERMSC001_Event, SERMSC001SCHEMA> {
             ? ''
             : databuff['GRAPHTYPE'].toString(),
         GAP: databuff['GAP'] == null ? '' : databuff['GAP'].toString(),
-        GAPname: databuff['GAP'] == null ? '' : databuff['GAP'].toString(),
+        GAPname:
+            databuff['GAPname'] == null ? '' : databuff['GAPname'].toString(),
         GAPnameList: GAPnamePickBUFFER,
         //---- BOTTOM
         preview: previewBUFFER,

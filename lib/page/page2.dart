@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/BlocEvent/02-01-APPPHBP12.dart';
 
-import 'P2APP-INSHES/APPINSHESmain.dart';
-import 'P2APP-INSHES/APPINSHESvar.dart';
+import 'P2APP-PHBP12/APPPHBP12main.dart';
+import 'P2APP-PHBP12/APPPHBP12var.dart';
 
 class Page2 extends StatelessWidget {
   const Page2({Key? key}) : super(key: key);

@@ -2,10 +2,8 @@ import 'dart:async';
 
 import '../../model/model.dart';
 import '../../widget/QCWIDGET/consolelayout.dart';
-import '../../widget/common/imgset.dart';
 
-class SERMSC001var {
-  static bool iscontrol = false;
+class SURMIC001var {
   static String PO = '';
   static String CP = '';
   static String QTY = '';
@@ -29,15 +27,6 @@ class SERMSC001var {
   static String GAPname = '';
   static String GAPnamePick = '';
   static List<String> GAPnameList = [''];
-  static String APPEARANCE = '';
-  static String base64pic01 = imgw;
-  static String base64pic02 = imgw;
-  static String base64pic03 = imgw;
-  static String base64pic04 = imgw;
-  static String base64pic01data = '';
-  static String base64pic02data = '';
-  static String base64pic03data = '';
-  static String base64pic04data = '';
   static List<INSDATA> preview = [];
   static List<INSDATA> confirmdata = [];
   static List<INSDATA> ITEMleftUNIT = [];
@@ -48,8 +37,8 @@ class SERMSC001var {
   static String ItemPickSELECT = '';
 }
 
-class SERMSC001SCHEMA {
-  SERMSC001SCHEMA({
+class SURMIC001SCHEMA {
+  SURMIC001SCHEMA({
     this.UPDATE = '',
     this.PO = '',
     this.CP = '',
@@ -104,6 +93,7 @@ class SERMSC001SCHEMA {
   String GAP;
   String GAPname;
   String GAPnamePick;
+
   List<String> GAPnameList;
   List<INSDATA> preview;
   List<INSDATA> confirmdata;

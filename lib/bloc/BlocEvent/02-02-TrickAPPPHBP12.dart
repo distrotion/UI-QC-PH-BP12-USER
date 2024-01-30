@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/global.dart';
 import '../../page/P1FIRSTUI/FIRSTuiVAR.dart';
 
-import '../../page/P2APP-INSHES/APPINSHESvar.dart';
+import '../../page/P2APP-PHBP12/APPPHBP12var.dart';
 
 //-------------------------------------------------
 String server = GLOserver;

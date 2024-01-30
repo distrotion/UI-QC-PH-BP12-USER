@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/global.dart';
 import '../../page/P1FIRSTUI/FIRSTuiVAR.dart';
-import '../../page/P3SER-BAL-013/SERBAL013var.dart';
+import '../../page/P4SUR-THI-002/SURTHI002var.dart';
 
 //-------------------------------------------------
 String server = GLOserver;
@@ -12,67 +12,67 @@ abstract class TRICKER_Event {}
 
 //--------------------------------
 
-class TRICKER_GETINtoSERBAL013 extends TRICKER_Event {}
+class TRICKER_GETINtoSURTHI002 extends TRICKER_Event {}
 
 //-------------------------------- non returnfunction
 
-class TRICKER_SERBAL013geteachITEM extends TRICKER_Event {}
+class TRICKER_SURTHI002geteachITEM extends TRICKER_Event {}
 
-class TRICKER_SERBAL013geteachGRAPH extends TRICKER_Event {}
+class TRICKER_SURTHI002geteachGRAPH extends TRICKER_Event {}
 
-class TRICKER_SERBAL013confirmdata extends TRICKER_Event {}
+class TRICKER_SURTHI002confirmdata extends TRICKER_Event {}
 
-class TRICKER_SERBAL013CLEAR extends TRICKER_Event {}
+class TRICKER_SURTHI002CLEAR extends TRICKER_Event {}
 
-class TRICKER_SERBAL013RESETVALUE extends TRICKER_Event {}
+class TRICKER_SURTHI002RESETVALUE extends TRICKER_Event {}
 
-class TRICKER_SERBAL013SETZERO extends TRICKER_Event {}
+class TRICKER_SURTHI002SETZERO extends TRICKER_Event {}
 
 //-------------------------------- FINISH
 
-class TRICKER_SERBAL013FINISH extends TRICKER_Event {}
+class TRICKER_SURTHI002FINISH extends TRICKER_Event {}
 
 //-------------------------------- no request
 
 class TRICKER_FLUSH extends TRICKER_Event {}
 
-class TRICKER_SERBAL013_Bloc extends Bloc<TRICKER_Event, String> {
-  TRICKER_SERBAL013_Bloc() : super('') {
+class TRICKER_SURTHI002_Bloc extends Bloc<TRICKER_Event, String> {
+  TRICKER_SURTHI002_Bloc() : super('') {
     //--------------------------------
-    on<TRICKER_GETINtoSERBAL013>((event, emit) {
-      return _TRICKER_GETINtoSERBAL013('', emit);
+    on<TRICKER_GETINtoSURTHI002>((event, emit) {
+      return _TRICKER_GETINtoSURTHI002('', emit);
     });
 
     //-------------------------------- non returnfunction
 
-    on<TRICKER_SERBAL013geteachITEM>((event, emit) {
-      return _TRICKER_SERBAL013geteachITEM('', emit);
+    on<TRICKER_SURTHI002geteachITEM>((event, emit) {
+      return _TRICKER_SURTHI002geteachITEM('', emit);
     });
 
-    on<TRICKER_SERBAL013geteachGRAPH>((event, emit) {
-      return _TRICKER_SERBAL013geteachGRAPH('', emit);
+    on<TRICKER_SURTHI002geteachGRAPH>((event, emit) {
+      return _TRICKER_SURTHI002geteachGRAPH('', emit);
     });
 
-    on<TRICKER_SERBAL013confirmdata>((event, emit) {
-      return _TRICKER_SERBAL013confirmdata('', emit);
+    on<TRICKER_SURTHI002confirmdata>((event, emit) {
+      return _TRICKER_SURTHI002confirmdata('', emit);
     });
 
-    on<TRICKER_SERBAL013CLEAR>((event, emit) {
-      return _TRICKER_SERBAL013CLEAR('', emit);
+    on<TRICKER_SURTHI002CLEAR>((event, emit) {
+      return _TRICKER_SURTHI002CLEAR('', emit);
     });
 
-    on<TRICKER_SERBAL013RESETVALUE>((event, emit) {
-      return _TRICKER_SERBAL013RESETVALUE('', emit);
+    on<TRICKER_SURTHI002RESETVALUE>((event, emit) {
+      return _TRICKER_SURTHI002RESETVALUE('', emit);
     });
 
-    on<TRICKER_SERBAL013SETZERO>((event, emit) {
-      return _TRICKER_SERBAL013SETZERO('', emit);
+    on<TRICKER_SURTHI002SETZERO>((event, emit) {
+      return _TRICKER_SURTHI002SETZERO('', emit);
     });
 
     //-------------------------------- FINISH
 
-    on<TRICKER_SERBAL013FINISH>((event, emit) {
-      return _TRICKER_SERBAL013FINISH('', emit);
+    on<TRICKER_SURTHI002FINISH>((event, emit) {
+      return _TRICKER_SURTHI002FINISH('', emit);
     });
 
     //-------------------------------- no request
@@ -82,10 +82,10 @@ class TRICKER_SERBAL013_Bloc extends Bloc<TRICKER_Event, String> {
     });
   }
 
-  Future<void> _TRICKER_GETINtoSERBAL013(
+  Future<void> _TRICKER_GETINtoSURTHI002(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoSERBAL013',
+      server + 'GETINtoSURTHI002',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -105,71 +105,71 @@ class TRICKER_SERBAL013_Bloc extends Bloc<TRICKER_Event, String> {
     emit(output);
   }
 
-  Future<void> _TRICKER_SERBAL013geteachITEM(
+  Future<void> _TRICKER_SURTHI002geteachITEM(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SERBAL013-geteachITEM',
+      server + 'SURTHI002-geteachITEM',
       data: {
-        "ITEMs": SERBAL013var.ItemPickSELECT,
+        "ITEMs": SURTHI002var.ItemPickSELECT,
       },
     );
     emit('');
   }
 
-  Future<void> _TRICKER_SERBAL013geteachGRAPH(
+  Future<void> _TRICKER_SURTHI002geteachGRAPH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SERBAL013-geteachGRAPH',
+      server + 'SURTHI002-geteachGRAPH',
       data: {
-        "GAPname": SERBAL013var.GAPname,
+        "GAPname": SURTHI002var.GAPname,
       },
     );
     emit('');
   }
 
-  Future<void> _TRICKER_SERBAL013confirmdata(
+  Future<void> _TRICKER_SURTHI002confirmdata(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SERBAL013-confirmdata',
+      server + 'SURTHI002-confirmdata',
       data: {},
     );
     emit('');
   }
 
-  Future<void> _TRICKER_SERBAL013CLEAR(
+  Future<void> _TRICKER_SURTHI002CLEAR(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SERBAL013-CLEAR',
+      server + 'SURTHI002-CLEAR',
       data: {},
     );
     emit('');
   }
 
-  Future<void> _TRICKER_SERBAL013RESETVALUE(
+  Future<void> _TRICKER_SURTHI002RESETVALUE(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SERBAL013-RESETVALUE',
+      server + 'SURTHI002-RESETVALUE',
       data: {},
     );
     emit('');
   }
 
-  Future<void> _TRICKER_SERBAL013SETZERO(
+  Future<void> _TRICKER_SURTHI002SETZERO(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SERBAL013-SETZERO',
+      server + 'SURTHI002-SETZERO',
       data: {},
     );
     emit('');
   }
 
   //-------------------------------- FINISH
-  //TRICKER_SERBAL013FINISH
+  //TRICKER_SURTHI002FINISH
 
-  Future<void> _TRICKER_SERBAL013FINISH(
+  Future<void> _TRICKER_SURTHI002FINISH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SERBAL013-FINISH',
+      server + 'SURTHI002-FINISH',
       data: {},
     );
     emit('');

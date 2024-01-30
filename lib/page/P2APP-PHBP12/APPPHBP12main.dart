@@ -17,7 +17,7 @@ import '../../widget/common/Loading.dart';
 import '../../widget/onlyINqcui/popup.dart';
 import '../P1FIRSTUI/FIRSTuiVAR.dart';
 import '../page1.dart';
-import 'APPINSHESvar.dart';
+import 'APPPHBP12var.dart';
 
 class APPEARANCE_APPPHBP12main extends StatelessWidget {
   APPEARANCE_APPPHBP12main({Key? key, this.data}) : super(key: key);
