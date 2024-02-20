@@ -44,41 +44,40 @@ class LoginPageWidget extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  // SizedBox(
-                  //   height: 40,
-
-                  //   child: ComInputText(
-                  //     height: 40,
-                  //     width: 240,
-                  //     isContr: logindata.isControl,
-                  //     fnContr: (input) {
-                  //       logindata.isControl = input;
-                  //     },
-                  //     sValue: logindata.userID,
-                  //     returnfunc: (String s) {
-                  //       logindata.userID = s;
-                  //     },
-                  //   ),
-                  // ),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
-                  // SizedBox(
-                  //   height: 40,
-                  //   child: ComInputText(
-                  //     height: 40,
-                  //     width: 240,
-                  //     isPassword: true,
-                  //     isContr: logindata.isControl,
-                  //     fnContr: (input) {
-                  //       logindata.isControl = input;
-                  //     },
-                  //     sValue: logindata.userPASS,
-                  //     returnfunc: (String s) {
-                  //       logindata.userPASS = s;
-                  //     },
-                  //   ),
-                  // ),
+                  SizedBox(
+                    height: 40,
+                    child: ComInputText(
+                      height: 40,
+                      width: 240,
+                      isContr: logindata.isControl,
+                      fnContr: (input) {
+                        logindata.isControl = input;
+                      },
+                      sValue: logindata.userID,
+                      returnfunc: (String s) {
+                        logindata.userID = s;
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    child: ComInputText(
+                      height: 40,
+                      width: 240,
+                      isPassword: true,
+                      isContr: logindata.isControl,
+                      fnContr: (input) {
+                        logindata.isControl = input;
+                      },
+                      sValue: logindata.userPASS,
+                      returnfunc: (String s) {
+                        logindata.userPASS = s;
+                      },
+                    ),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),

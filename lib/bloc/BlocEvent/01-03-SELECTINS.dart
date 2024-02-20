@@ -75,6 +75,8 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';
@@ -100,6 +102,8 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';
@@ -123,6 +127,8 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';
@@ -146,6 +152,8 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';
@@ -169,6 +177,8 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';
@@ -192,6 +202,8 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';
@@ -215,6 +227,8 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';
@@ -239,6 +253,8 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';
@@ -262,6 +278,8 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';

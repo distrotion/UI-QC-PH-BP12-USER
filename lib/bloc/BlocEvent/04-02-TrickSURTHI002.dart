@@ -89,6 +89,8 @@ class TRICKER_SURTHI002_Bloc extends Bloc<TRICKER_Event, String> {
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
       },
     );
     String output = '';

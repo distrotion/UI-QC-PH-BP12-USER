@@ -981,6 +981,7 @@ class HEAD10SLOT extends StatelessWidget {
     this.widget08,
     this.widget09,
     this.widget10,
+    this.widget11,
   }) : super(key: key);
   List<int>? ListFlex;
   Widget? widget01;
@@ -993,6 +994,7 @@ class HEAD10SLOT extends StatelessWidget {
   Widget? widget08;
   Widget? widget09;
   Widget? widget10;
+  Widget? widget11;
 
   @override
   Widget build(BuildContext context) {
@@ -1150,6 +1152,23 @@ class HEAD10SLOT extends StatelessWidget {
             flex: _ListFlex[9],
             child: Container(
               child: widget10 ?? const SizedBox(),
+              height: 55,
+              decoration: const BoxDecoration(
+                border: Border(
+                  left: BorderSide(
+                      color: Colors.black, width: 3, style: BorderStyle.solid),
+                  top: BorderSide(
+                      color: Colors.black, width: 3, style: BorderStyle.solid),
+                  bottom: BorderSide(
+                      color: Colors.black, width: 3, style: BorderStyle.solid),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: _ListFlex[10],
+            child: Container(
+              child: widget11 ?? const SizedBox(),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black, width: 3),
               ),
@@ -1176,6 +1195,7 @@ class BODY10SLOT extends StatelessWidget {
     this.widget08,
     this.widget09,
     this.widget10,
+    this.widget11,
   }) : super(key: key);
   List<int>? ListFlex;
   Widget? widget01;
@@ -1188,6 +1208,7 @@ class BODY10SLOT extends StatelessWidget {
   Widget? widget08;
   Widget? widget09;
   Widget? widget10;
+  Widget? widget11;
 
   @override
   Widget build(BuildContext context) {
@@ -1368,6 +1389,25 @@ class BODY10SLOT extends StatelessWidget {
             flex: _ListFlex[9],
             child: Container(
               child: widget10 ?? const SizedBox(),
+              height: 47,
+              decoration: const BoxDecoration(
+                border: Border(
+                  left: BorderSide(
+                      color: Colors.black, width: 3, style: BorderStyle.solid),
+                  // top: BorderSide(
+                  //     color: Colors.black,
+                  //     width: 3,
+                  //     style: BorderStyle.solid),
+                  bottom: BorderSide(
+                      color: Colors.black, width: 3, style: BorderStyle.solid),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: _ListFlex[10],
+            child: Container(
+              child: widget11 ?? const SizedBox(),
               height: 47,
               decoration: const BoxDecoration(
                 border: Border(

@@ -1,10 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
+import '../../data/global.dart';
 
 import '../../data/global.dart';
 import '../cubit/NotificationEvent.dart';
 
 //-------------------------------------------------
+// String server = 'http://127.0.0.1:15000/';
+String server = GLOserver;
 
 Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 late Future<String> tokenSP;
@@ -33,8 +41,38 @@ class Login_Bloc extends Bloc<LoginEvent, String> {
   Future<void> _LoginPage_Function(String toAdd, Emitter<String> emit) async {
     final SharedPreferences prefs = await _prefs;
     // token = (prefs.getString('token') ?? '');
-    token = 'test';
-    USERDATA.UserLV = 2;
+    final response = await Dio().post(
+      server + "login",
+      data: {
+        "ID": logindata.userID,
+        "PASS": logindata.userPASS,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var databuff = response.data;
+      if (databuff['return'] == 'OK') {
+        token =
+            '{"ID":"${databuff['ID'].toString()}","NAME":"${databuff['NAME'].toString()}","LV":"${databuff['LV'].toString()}","Section":"${databuff['Section'].toString()}","Def":"${databuff['Def'].toString()}"  ,"LOCATION":"${databuff['LOCATION'].toString()}"}';
+        USERDATA.ID = databuff['ID'].toString();
+        USERDATA.NAME = databuff['NAME'].toString();
+        USERDATA.UserLV = int.parse(databuff['LV'].toString());
+        USERDATA.Section = databuff['Section'].toString();
+        USERDATA.Def = databuff['Def'].toString();
+        USERDATA.LOCATION = databuff['LOCATION'].toString();
+      } else {
+        token = (prefs.getString('tokenSP') ?? '');
+        USERDATA.UserLV = 0;
+      }
+    } else {
+      token = (prefs.getString('tokenSP') ?? '');
+      USERDATA.ID = '';
+      USERDATA.UserLV = 0;
+      USERDATA.NAME = '';
+      USERDATA.Section = '';
+      USERDATA.Def = '';
+      USERDATA.LOCATION = '';
+    }
 
     tokenSP = prefs.setString("tokenSP", token).then((bool success) {
       return state;
@@ -57,7 +95,24 @@ class Login_Bloc extends Bloc<LoginEvent, String> {
   Future<void> _ReLogin_Function(String toAdd, Emitter<String> emit) async {
     final SharedPreferences prefs = await _prefs;
     token = (prefs.getString('tokenSP') ?? '');
-    USERDATA.UserLV = 2;
+
+    if (token != '') {
+      var databuff = jsonDecode(token);
+      USERDATA.ID = databuff['ID'].toString();
+      USERDATA.UserLV = int.parse(databuff['LV'].toString());
+      USERDATA.NAME = databuff['NAME'].toString();
+      USERDATA.Section = databuff['Section'].toString();
+      USERDATA.Def = databuff['Def'].toString();
+      USERDATA.LOCATION = databuff['LOCATION'].toString();
+    } else {
+      USERDATA.ID = '';
+      USERDATA.UserLV = 0;
+      USERDATA.NAME = '';
+      USERDATA.Section = '';
+      USERDATA.Def = '';
+      USERDATA.LOCATION = '';
+    }
+
     emit(token);
   }
 
@@ -65,6 +120,7 @@ class Login_Bloc extends Bloc<LoginEvent, String> {
     final SharedPreferences prefs = await _prefs;
     token = '';
     USERDATA.UserLV = 0;
+    USERDATA.NAME = '';
 
     tokenSP = prefs.setString("tokenSP", token).then((bool success) {
       return state;

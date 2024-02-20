@@ -29,6 +29,10 @@ class ReportPDFCommonvar {
   static List<rawlist> rawlistRoughness = [];
   static List<rawlist> rawlistCORE = [];
 
+  static String INSBY = '';
+  static String CHECKBY = '';
+  static String APPBY = '';
+
   //rawlistCORE
 
   static List<rawlist> rawlistGraph = [];
@@ -131,6 +135,10 @@ ReportPDFACTclear() {
   ReportPDFCommonvar.PICstd = '';
   ReportPDFCommonvar.PIC01 = '';
   ReportPDFCommonvar.PIC02 = '';
+
+  ReportPDFCommonvar.INSBY = '';
+  ReportPDFCommonvar.CHECKBY = '';
+  ReportPDFCommonvar.APPBY = '';
 
   ReportPDFCommonvar.SignInsBy = '';
   ReportPDFCommonvar.datalist = [

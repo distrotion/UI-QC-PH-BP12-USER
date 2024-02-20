@@ -50,6 +50,15 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
         var UNITlist = databuff['UNIT'] ?? [];
         var DESIMALlist = databuff['DESIMAL'] ?? [];
 
+        var INSBY = databuff['DATA']?[0]['USER'] ?? '';
+        var INSBYID = databuff['DATA']?[0]['USERID'] ?? '';
+
+        var CHECKBY = databuff['DATA']?[0]['CHECKBY'] ?? '';
+        // var CHECKBYID = databuff['DATA']?[0]['CHECKBYID'] ?? '';
+
+        var APPBY = databuff['DATA']?[0]['APPBY'] ?? '';
+        // var APPBYID = databuff['DATA']?[0]['APPBYID'] ?? '';
+
         int NO_NUMBER = 0;
 
         var BasicDATAr = databuff['DATA']?[0];
@@ -108,6 +117,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
           // PICstd: BasicDATAr['PIC'] != null
           //     ? BasicDATAr['PIC'].toString().split(',')[1]
           //     : '',
+          INSBY: INSBY,
+          CHECKBY: CHECKBY,
+          APPBY: APPBY,
         );
 
         if (BasicDATAr['ReferFrom'].toString() != PO) {
@@ -2372,6 +2384,9 @@ class BasicCommonDATA {
     this.PASS = '',
     this.INC01 = '',
     this.INC02 = '',
+    this.INSBY = '',
+    this.CHECKBY = '',
+    this.APPBY = '',
   });
 
   String PO;
@@ -2397,6 +2412,10 @@ class BasicCommonDATA {
 
   String INC01;
   String INC02;
+
+  String INSBY;
+  String CHECKBY;
+  String APPBY;
 }
 
 class CommonReportOutput {

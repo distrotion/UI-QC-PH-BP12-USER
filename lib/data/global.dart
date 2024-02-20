@@ -12,6 +12,10 @@ class USERDATA {
   static int UserLV = 0;
   static String NAME = '';
   static String ID = '';
+  static String LV = '';
+  static String Section = '';
+  static String Def = '';
+  static String LOCATION = '';
 }
 
 // class PageLevel {
