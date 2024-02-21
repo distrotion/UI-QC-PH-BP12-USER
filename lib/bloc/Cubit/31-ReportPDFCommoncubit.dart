@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/global.dart';
 import '../../widget/common/Safty.dart';
 
 String server = 'http://172.23.10.40:16700/';
@@ -274,27 +275,44 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   double maxdata = 0;
                   double mindata = 0;
 
-                  String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
+                  String remark = '';
 
-                  print('>>${remark}');
+                  final rest2 = await Dio().post(
+                    serverGBW + "GET_FINAL_COMMENT",
+                    data: {
+                      "masterID": PATTERNlist['FINAL'][fi]['REMARK'] != null
+                          ? PATTERNlist['FINAL'][fi]['REMARK'].toString()
+                          : '',
+                    },
+                  );
 
-                  String convss =
-                      PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
+                  if (rest2.statusCode == 200) {
+                    var databuff = rest2.data;
 
-                  if (convss != '' && convss != '-') {
-                    for (var ih = 0; ih < UNITlist.length; ih++) {
-                      // print(UNITlist[ih]['masterID'].toString());
-                      if (convss == UNITlist[ih]['masterID'].toString()) {
-                        // print(UNITlist[ih]);
-                        String Unitss = "${UNITlist[ih]['UNIT']}";
-                        if (Unitss.contains("-") == false) {
-                          remark = "From ${UNITlist[ih]['UNIT']}";
-                        }
-
-                        break;
-                      }
-                    }
+                    remark = databuff['COMMENT'] != null
+                        ? databuff['COMMENT'].toString()
+                        : "";
                   }
+
+                  // print('>>${remark}');
+
+                  // String convss =
+                  //     PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
+
+                  // if (convss != '' && convss != '-') {
+                  //   for (var ih = 0; ih < UNITlist.length; ih++) {
+                  //     // print(UNITlist[ih]['masterID'].toString());
+                  //     if (convss == UNITlist[ih]['masterID'].toString()) {
+                  //       // print(UNITlist[ih]);
+                  //       String Unitss = "${UNITlist[ih]['UNIT']}";
+                  //       if (Unitss.contains("-") == false) {
+                  //         remark = "From ${UNITlist[ih]['UNIT']}";
+                  //       }
+
+                  //       break;
+                  //     }
+                  //   }
+                  // }
 
                   try {
                     String SPECIFICATIONbuff2 =
@@ -1251,9 +1269,29 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String METHODname = '';
                   String FREQ =
                       '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
-                  // print(FREQ);
+
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
+
+                  // String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
+                  String remark = '';
+
+                  final rest2 = await Dio().post(
+                    serverGBW + "GET_FINAL_COMMENT",
+                    data: {
+                      "masterID": PATTERNlist['FINAL'][fi]['REMARK'] != null
+                          ? PATTERNlist['FINAL'][fi]['REMARK'].toString()
+                          : '',
+                    },
+                  );
+
+                  if (rest2.statusCode == 200) {
+                    var databuff = rest2.data;
+
+                    remark = databuff['COMMENT'] != null
+                        ? databuff['COMMENT'].toString()
+                        : "";
+                  }
 
                   for (var Fci = 0; Fci < METHODlist.length; Fci++) {
                     if (METHODlist[Fci]['masterID'].toString() == METHODss) {
@@ -1275,6 +1313,19 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       break;
                     }
                   }
+                  //SPECIFICATIONbuff
+
+                  for (var SPi = 0; SPi < SPECIFICATIONlist.length; SPi++) {
+                    if (SPECIFICATIONlist[SPi]['ITEMs'].toString() ==
+                        itemss.toString()) {
+                      //
+                      // print(SPECIFICATIONlist[SPi]['SPECIFICATION'].toString());
+                      SPECIFICATION =
+                          SPECIFICATIONlist[SPi]['SPECIFICATION'].toString();
+                    }
+                  }
+                  print(itemss);
+                  print(SPECIFICATION);
 
                   int desinal = 1;
                   // print(itemss);
@@ -1542,6 +1593,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     avgall = avgall +
                         double.parse(ConverstStr(listdataset[ig].DATAAVG));
                   }
+                  //GET_FINAL_COMMENT
 
                   ITEMlist.add(FINALCHECKlistCommonClass(
                     TYPE: "Picture",
@@ -1550,13 +1602,14 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     METHOD: METHODss,
                     METHODname: METHODname,
                     SCMARK: SCmasks,
-                    SPECIFICATION: "TP STD",
+                    SPECIFICATION: SPECIFICATION,
                     NO: NO_NUMBER,
                     FREQ: FREQ,
                     datapackset: listdataset,
-                    RESULT: "Good",
+                    RESULT: SPECIFICATION,
                     LOAD: LOAD,
                     SRAWDATA: "",
+                    Remark: remark,
                   ));
                 }
               }
@@ -1591,22 +1644,40 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
 
-                  String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
+                  // String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
 
-                  print('>>${remark}');
+                  // print('>>${remark}');
 
-                  String convss =
-                      PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
+                  // String convss =
+                  //     PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
 
-                  if (convss != '') {
-                    for (var ih = 0; ih < UNITlist.length; ih++) {
-                      // print(UNITlist[ih]['masterID'].toString());
-                      if (convss == UNITlist[ih]['masterID'].toString()) {
-                        // print(UNITlist[ih]);
-                        remark = "${UNITlist[ih]['UNIT']}";
-                        break;
-                      }
-                    }
+                  // if (convss != '') {
+                  //   for (var ih = 0; ih < UNITlist.length; ih++) {
+                  //     // print(UNITlist[ih]['masterID'].toString());
+                  //     if (convss == UNITlist[ih]['masterID'].toString()) {
+                  //       // print(UNITlist[ih]);
+                  //       remark = "${UNITlist[ih]['UNIT']}";
+                  //       break;
+                  //     }
+                  //   }
+                  // }
+                  String remark = '';
+
+                  final rest2 = await Dio().post(
+                    serverGBW + "GET_FINAL_COMMENT",
+                    data: {
+                      "masterID": PATTERNlist['FINAL'][fi]['REMARK'] != null
+                          ? PATTERNlist['FINAL'][fi]['REMARK'].toString()
+                          : '',
+                    },
+                  );
+
+                  if (rest2.statusCode == 200) {
+                    var databuff = rest2.data;
+
+                    remark = databuff['COMMENT'] != null
+                        ? databuff['COMMENT'].toString()
+                        : "";
                   }
 
                   for (var Fci = 0; Fci < METHODlist.length; Fci++) {
@@ -1950,30 +2021,48 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   double maxdata = 0;
                   double mindata = 0;
 
-                  String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
+                  // String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
+                  String remark = '';
+
+                  final rest2 = await Dio().post(
+                    serverGBW + "GET_FINAL_COMMENT",
+                    data: {
+                      "masterID": PATTERNlist['FINAL'][fi]['REMARK'] != null
+                          ? PATTERNlist['FINAL'][fi]['REMARK'].toString()
+                          : '',
+                    },
+                  );
+
+                  if (rest2.statusCode == 200) {
+                    var databuff = rest2.data;
+
+                    remark = databuff['COMMENT'] != null
+                        ? databuff['COMMENT'].toString()
+                        : "";
+                  }
 
                   String SRAWDATA =
                       PATTERNlist['FINAL'][fi]['SRAWDATA'].toString();
 
-                  print('>>${remark}');
+                  // print('>>${remark}');
 
-                  String convss =
-                      PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
+                  // String convss =
+                  //     PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
 
-                  if (convss != '' && convss != '-') {
-                    for (var ih = 0; ih < UNITlist.length; ih++) {
-                      // print(UNITlist[ih]['masterID'].toString());
-                      if (convss == UNITlist[ih]['masterID'].toString()) {
-                        // print(UNITlist[ih]);
-                        String Unitss = "${UNITlist[ih]['UNIT']}";
-                        if (Unitss.contains("-") == false) {
-                          remark = "From ${UNITlist[ih]['UNIT']}";
-                        }
+                  // if (convss != '' && convss != '-') {
+                  //   for (var ih = 0; ih < UNITlist.length; ih++) {
+                  //     // print(UNITlist[ih]['masterID'].toString());
+                  //     if (convss == UNITlist[ih]['masterID'].toString()) {
+                  //       // print(UNITlist[ih]);
+                  //       String Unitss = "${UNITlist[ih]['UNIT']}";
+                  //       if (Unitss.contains("-") == false) {
+                  //         remark = "From ${UNITlist[ih]['UNIT']}";
+                  //       }
 
-                        break;
-                      }
-                    }
-                  }
+                  //       break;
+                  //     }
+                  //   }
+                  // }
 
                   try {
                     String SPECIFICATIONbuff2 =
