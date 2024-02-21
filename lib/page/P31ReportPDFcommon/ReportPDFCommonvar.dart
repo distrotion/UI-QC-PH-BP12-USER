@@ -29,6 +29,8 @@ class ReportPDFCommonvar {
   static List<rawlist> rawlistRoughness = [];
   static List<rawlist> rawlistCORE = [];
 
+  static List<List<rawlist>> rawlistDATA = [];
+
   static String INSBY = '';
   static String CHECKBY = '';
   static String APPBY = '';
@@ -70,6 +72,8 @@ class ReportPDFCommonvar {
   static List<FlSpot> graphdata3 = [];
   static List<FlSpot> graphdata4 = [];
   static List<FlSpot> graphunder = [];
+
+  static List<String> Listitemname = [];
 }
 
 class ReportPDFCommonlist {
@@ -131,6 +135,7 @@ ReportPDFACTclear() {
   ReportPDFCommonvar.TPKLOT = '';
   ReportPDFCommonvar.MATERIAL = '';
   ReportPDFCommonvar.QTY = '';
+  ReportPDFCommonvar.rawlistDATA = [];
 
   ReportPDFCommonvar.PICstd = '';
   ReportPDFCommonvar.PIC01 = '';
@@ -156,4 +161,6 @@ ReportPDFACTclear() {
     ReportPDFCommonlist(),
     ReportPDFCommonlist(),
   ];
+
+  ReportPDFCommonvar.Listitemname = [];
 }

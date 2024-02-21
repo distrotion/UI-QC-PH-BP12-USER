@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../widget/common/Safty.dart';
 
-// String server = 'http://172.23.10.40:16700/';
-String server = 'http://127.0.0.1:16700/';
+String server = 'http://172.23.10.40:16700/';
+// String server = 'http://127.0.0.1:16700/';
 
 class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
   ReportPDFCommon_Cubit()
@@ -232,6 +232,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     SPECIFICATION: SPECIFICATION,
                     RESULT: SPECIFICATION,
                     LOAD: LOAD,
+                    SRAWDATA: "",
                   ));
                 }
               }
@@ -265,6 +266,10 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
+
+                  String SRAWDATA =
+                      PATTERNlist['FINAL'][fi]['SRAWDATA'].toString();
+                  //   "SRAWDATA": "NO"
 
                   double maxdata = 0;
                   double mindata = 0;
@@ -667,6 +672,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                         double.parse(ConverstStr(listdataset[ig].DATAAVG));
                   }
                   // print(avgall);
+
                   ITEMlist.add(FINALCHECKlistCommonClass(
                     TYPE: "Number",
                     ITEM: itemss,
@@ -682,6 +688,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                         (avgall / listdataset.length).toStringAsFixed(desinal),
                     LOAD: LOAD,
                     Remark: remark,
+                    SRAWDATA: SRAWDATA,
                   ));
                 }
               }
@@ -1214,6 +1221,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                         .toStringAsFixed(desinal),
                     LOAD: LOAD,
                     Cross: reslpCross,
+                    SRAWDATA: "",
                   ));
                 }
               }
@@ -1548,6 +1556,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     datapackset: listdataset,
                     RESULT: "Good",
                     LOAD: LOAD,
+                    SRAWDATA: "",
                   ));
                 }
               }
@@ -1902,6 +1911,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     RESULT: avgall.toStringAsFixed(desinal),
                     LOAD: LOAD,
                     Remark: remark,
+                    SRAWDATA: "",
                   ));
                 }
               }
@@ -1941,6 +1951,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   double mindata = 0;
 
                   String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
+
+                  String SRAWDATA =
+                      PATTERNlist['FINAL'][fi]['SRAWDATA'].toString();
 
                   print('>>${remark}');
 
@@ -2131,8 +2144,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   double resultdata = double.parse(
                       ConverstStr(FINALANSdata[itemss].toString()));
                   // print(avgall);
+
                   ITEMlist.add(FINALCHECKlistCommonClass(
-                    TYPE: "Number",
+                    TYPE: "CAL1",
                     ITEM: itemss,
                     ITEMname: ITEMname,
                     METHOD: METHODss,
@@ -2145,6 +2159,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     RESULT: (resultdata).toStringAsFixed(desinal),
                     LOAD: LOAD,
                     Remark: remark,
+                    SRAWDATA: SRAWDATA,
                   ));
                 }
               }
@@ -2195,6 +2210,7 @@ class FINALCHECKlistCommonClass {
     this.LOAD = '',
     this.Cross = '',
     this.Remark = '',
+    this.SRAWDATA = '',
   });
   int NO;
   String TYPE;
@@ -2213,6 +2229,7 @@ class FINALCHECKlistCommonClass {
   String LOAD;
   String Cross;
   String Remark;
+  String SRAWDATA;
 }
 
 // class datainlist {
