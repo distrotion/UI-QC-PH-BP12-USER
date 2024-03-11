@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/global.dart';
 import '../../widget/common/Safty.dart';
+import '../../widget/common/imgset.dart';
 
 String server = 'http://172.23.10.40:16700/';
 // String server = 'http://127.0.0.1:16700/';
@@ -30,15 +31,17 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
       var databuff = response.data;
       // var databuff = test01;
 
-      print(databuff['DESIMAL']);
+      // print(databuff['DESIMAL']);
       //commontest04
       // var databuff = ACTtestdata01;
 
       if (databuff['DATA'] != null && (databuff['DATA']?.length ?? 0) != 0) {
         var FINALANSdata = databuff['DATA']?[0]['FINAL_ANS'] ?? {};
         var FINALdata = databuff['DATA']?[0]['FINAL'] ?? {};
-        var PATTERNlist = databuff['PATTERN']?[0] ?? {};
 
+//--------------------------------------------------------------
+        var PATTERNlist = databuff['PATTERN']?[0] ?? {};
+//--------------------------------------------------------------
         var FINALCHECKlist = databuff['DATA']?[0]['CHECKlist'] ?? [];
         var TYPElist = databuff['TYPE'] ?? [];
         var ITEMSlist = databuff['ITEMS'] ?? [];
@@ -50,6 +53,20 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
         var SPECIFICATIONlist = databuff['SPECIFICATION'] ?? [];
         var UNITlist = databuff['UNIT'] ?? [];
         var DESIMALlist = databuff['DESIMAL'] ?? [];
+//--------------------------------------------------------------
+        var INCOMMINGCHECKlist = databuff['DATA']?[0]['CHECKlist_IC'] ?? [];
+        var TYPElist_IC = databuff['TYPE_IC'] ?? [];
+        var ITEMSlist_IC = databuff['ITEMS_IC'] ?? [];
+        var METHODlist_IC = databuff['METHOD_IC'] ?? [];
+        var RESULTFORMATlist_IC = databuff['RESULTFORMAT_IC'] ?? [];
+        var GRAPHTYPElist_IC = databuff['GRAPHTYPE_IC'] ?? [];
+        var INSTRUMENTSlist_IC = databuff['INSTRUMENTS_IC'] ?? [];
+        var CALCULATElist_IC = databuff['INSTRUMENTS_IC'] ?? [];
+        var SPECIFICATIONlist_IC = databuff['SPECIFICATION_IC'] ?? [];
+        var UNITlist_IC = databuff['UNIT_IC'] ?? [];
+        var DESIMALlist_IC = databuff['DESIMAL_IC'] ?? [];
+
+//--------------------------------------------------------------
 
         var INSBY = databuff['DATA']?[0]['USER'] ?? '';
         var INSBYID = databuff['DATA']?[0]['USERID'] ?? '';
@@ -64,6 +81,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
         var BasicDATAr = databuff['DATA']?[0];
         List<FINALCHECKlistCommonClass> ITEMlist = [];
+        List<INCOMMINGCHECKlistCommonClass> ITEMlist_IC = [];
 
         List<String> MACHINElist = [];
         FINALdata.forEach((key, value) {
@@ -74,14 +92,271 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
         String inc01 = "";
         String inc02 = "";
+        String nadata = '';
+
+        // print(databuff["PATTERN"][0]['INCOMMING']);
+
+        // print(">>>>>>>>>${databuff["PATTERN"][0]['INCOMMING'].length}");
 
         if (databuff["PATTERN"][0]['INCOMMING'] != null) {
-          for (var i = 0; i < databuff["PATTERN"][0]['INCOMMING'].length; i++) {
-            if (i == 0) {
-              inc01 = databuff["PATTERN"][0]['INCOMMING'][0]["ITEMs"];
+          for (var fi = 0;
+              fi < databuff["PATTERN"][0]['INCOMMING'].length;
+              fi++) {
+            // print(databuff["PATTERN"][0]['INCOMMING'][fi]);
+            if (PATTERNlist['INCOMMING'][fi]['RESULTFORMAT'] == 'Text') {
+              // for (var mi = 0; mi < MACHINElist.length; mi++) {
+              // if (INCOMMINGdata[MACHINElist[mi]] != null) {
+              //   if (INCOMMINGdata[MACHINElist[mi]]
+              //           [PATTERNlist['INCOMMING'][fi]['ITEMs']] !=
+              //       null) {
+              if (true) {
+                if (true) {
+                  //
+                  // print(PATTERNlist['INCOMMING'][fi]);
+                  // print(INCOMMINGdata[MACHINElist[mi]]
+                  //     [PATTERNlist['INCOMMING'][fi]['ITEMs']]);
+
+                  String POINTs = (double.parse(ConverstStrOne(
+                          PATTERNlist['INCOMMING'][fi]['PCS'].toString())))
+                      .toString();
+
+                  String itemss =
+                      PATTERNlist['INCOMMING'][fi]['ITEMs'].toString();
+                  String SCmasks =
+                      PATTERNlist['INCOMMING'][fi]['SCMARK'].toString();
+                  String ITEMname = '';
+                  String METHODss =
+                      PATTERNlist['INCOMMING'][fi]['METHOD'].toString();
+                  String METHODname = '';
+                  String FREQ =
+                      '${POINTs} ${PATTERNlist['INCOMMING'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                  print(double.parse(POINTs));
+                  if (double.parse(POINTs) < 1) {
+                    FREQ = "${POINTs} AQL";
+                  }
+
+                  String SPECIFICATION = '';
+                  String LOAD = PATTERNlist['INCOMMING'][fi]['LOAD'].toString();
+
+                  String AQL = PATTERNlist['FINAL'][fi]['AQL'].toString();
+
+                  // for (var Fci = 0; Fci < INCOMMINGCHECKlist.length; Fci++) {
+                  //   print(INCOMMINGCHECKlist[Fci]);
+                  //   if (INCOMMINGCHECKlist[Fci]['key'].toString() == itemss) {
+                  //     ITEMname = INCOMMINGCHECKlist[Fci]['value'].toString();
+                  //     METHODss = INCOMMINGCHECKlist[Fci]['METHOD'].toString();
+                  //   }
+                  // }
+                  for (var Fci = 0; Fci < ITEMSlist_IC.length; Fci++) {
+                    // print(ITEMSlist_IC[Fci]);
+                    if (ITEMSlist_IC[Fci]['masterID'].toString() == itemss) {
+                      ITEMname = ITEMSlist_IC[Fci]['ITEMs'].toString();
+                      // METHODss = ITEMSlist_IC[Fci]['METHOD'].toString();
+                    }
+                  }
+
+                  // for (var Fci = 0; Fci < METHODlist_IC.length; Fci++) {
+                  //   if (METHODlist_IC[Fci]['masterID'].toString() == METHODss) {
+                  //     METHODname = METHODlist_IC[Fci]['METHOD'].toString();
+                  //     break;
+                  //   }
+                  // }
+
+                  for (var Fci = 0; Fci < METHODlist_IC.length; Fci++) {
+                    print(METHODlist_IC[Fci]['masterID']);
+                    if (METHODlist_IC[Fci]['masterID'].toString() == METHODss) {
+                      METHODname = METHODlist_IC[Fci]['METHOD'].toString();
+                      break;
+                    }
+                  }
+
+                  // print(SPECIFICATIONlist);
+
+                  for (var SPi = 0; SPi < SPECIFICATIONlist_IC.length; SPi++) {
+                    if (SPECIFICATIONlist_IC[SPi]['masterID'].toString() ==
+                        PATTERNlist['INCOMMING'][fi]['SPECIFICATIONve']
+                            .toString()) {
+                      //
+                      // print(SPECIFICATIONlist[SPi]['SPECIFICATION'].toString());
+                      SPECIFICATION =
+                          SPECIFICATIONlist_IC[SPi]['SPECIFICATION'].toString();
+                    }
+                  }
+
+                  ITEMlist_IC.add(INCOMMINGCHECKlistCommonClass(
+                    TYPE: "Text",
+                    ITEM: itemss,
+                    ITEMname: ITEMname,
+                    METHOD: METHODss,
+                    METHODname: METHODname,
+                    SCMARK: SCmasks,
+                    FREQ: FREQ,
+                    SPECIFICATION: SPECIFICATION,
+                    RESULT: SPECIFICATION,
+                    LOAD: LOAD,
+                    SRAWDATA: "",
+                  ));
+                }
+              }
             }
-            if (i == 1) {
-              inc02 = databuff["PATTERN"][0]['INCOMMING'][1]["ITEMs"];
+            if (PATTERNlist['INCOMMING'][fi]['RESULTFORMAT'] == 'Number') {
+              // for (var mi = 0; mi < MACHINElist.length; mi++) {
+              // if (INCOMMINGdata[MACHINElist[mi]] != null) {
+              //   if (INCOMMINGdata[MACHINElist[mi]]
+              //           [PATTERNlist['INCOMMING'][fi]['ITEMs']] !=
+              //       null) {
+              if (true) {
+                if (true) {
+                  //
+                  // print(PATTERNlist['INCOMMING'][fi]);
+                  // print(INCOMMINGdata[MACHINElist[mi]]
+                  //     [PATTERNlist['INCOMMING'][fi]['ITEMs']]);
+
+                  String POINTs = (double.parse(ConverstStrOne(
+                          PATTERNlist['INCOMMING'][fi]['PCS'].toString())))
+                      .toString();
+
+                  String itemss =
+                      PATTERNlist['INCOMMING'][fi]['ITEMs'].toString();
+                  String SCmasks =
+                      PATTERNlist['INCOMMING'][fi]['SCMARK'].toString();
+                  String ITEMname = '';
+                  String METHODss =
+                      PATTERNlist['INCOMMING'][fi]['METHOD'].toString();
+                  String METHODname = '';
+                  String FREQ =
+                      '${POINTs} ${PATTERNlist['INCOMMING'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+
+                  if (double.parse(POINTs) < 1) {
+                    FREQ = "${POINTs} AQL";
+                  }
+
+                  String SPECIFICATION = '';
+                  String LOAD = PATTERNlist['INCOMMING'][fi]['LOAD'].toString();
+
+                  // for (var Fci = 0; Fci < INCOMMINGCHECKlist.length; Fci++) {
+                  //   print(INCOMMINGCHECKlist[Fci]);
+                  //   if (INCOMMINGCHECKlist[Fci]['key'].toString() == itemss) {
+                  //     ITEMname = INCOMMINGCHECKlist[Fci]['value'].toString();
+                  //     METHODss = INCOMMINGCHECKlist[Fci]['METHOD'].toString();
+                  //   }
+                  // }
+
+                  for (var Fci = 0; Fci < ITEMSlist_IC.length; Fci++) {
+                    // print(ITEMSlist_IC[Fci]);
+                    if (ITEMSlist_IC[Fci]['masterID'].toString() == itemss) {
+                      ITEMname = ITEMSlist_IC[Fci]['ITEMs'].toString();
+                      // METHODss = ITEMSlist_IC[Fci]['METHOD'].toString();
+                    }
+                  }
+
+                  // for (var Fci = 0; Fci < METHODlist_IC.length; Fci++) {
+                  //   if (METHODlist_IC[Fci]['masterID'].toString() == METHODss) {
+                  //     METHODname = METHODlist_IC[Fci]['METHOD'].toString();
+                  //     break;
+                  //   }
+                  // }
+
+                  for (var Fci = 0; Fci < METHODlist_IC.length; Fci++) {
+                    print(METHODlist_IC[Fci]['masterID']);
+                    if (METHODlist_IC[Fci]['masterID'].toString() == METHODss) {
+                      METHODname = METHODlist_IC[Fci]['METHOD'].toString();
+                      break;
+                    }
+                  }
+
+                  // print(SPECIFICATIONlist);
+
+                  String SPECIFICATIONbuff =
+                      PATTERNlist['FINAL'][fi]['SPECIFICATIONve'].toString();
+
+                  try {
+                    String SPECIFICATIONbuff2 =
+                        SPECIFICATIONbuff.replaceAll('{', '{"');
+                    String SPECIFICATIONbuff3 =
+                        SPECIFICATIONbuff2.replaceAll('}', '"}');
+                    String SPECIFICATIONbuff4 =
+                        SPECIFICATIONbuff3.replaceAll(':', '":"');
+                    String SPECIFICATIONbuff5 =
+                        SPECIFICATIONbuff4.replaceAll(',', '","');
+                    // print(SPECIFICATIONbuff5);
+                    var SPECIFICATIONdata =
+                        json.decode(SPECIFICATIONbuff5.replaceAll(' ', ''));
+                    if (SPECIFICATIONdata['condition'] != null) {
+                      // print(SPECIFICATIONdata['condition']);
+                      String condition =
+                          SPECIFICATIONdata['condition'].toString();
+
+                      // print(condition.contains("LOL(<)"));
+                      // print(condition.contains("HIM(>)"));
+                      // Actual
+                      // print(SPECIFICATIONdata);
+
+                      String dataUNIT =
+                          PATTERNlist['FINAL'][fi]['UNIT'].toString();
+
+                      String unitP = '';
+
+                      for (var ih = 0; ih < UNITlist.length; ih++) {
+                        // print(UNITlist[ih]['masterID'].toString());
+                        if (dataUNIT == UNITlist[ih]['masterID'].toString()) {
+                          // print(UNITlist[ih]);
+                          unitP = UNITlist[ih]['UNIT'].toString();
+                          break;
+                        }
+                      }
+
+                      double maxdata = 0;
+                      double mindata = 0;
+
+                      if (condition.contains("BTW")) {
+                        // print(SPECIFICATIONdata['BTW_LOW']);
+                        // print(SPECIFICATIONdata['BTW_HI']);
+                        SPECIFICATION =
+                            '${SPECIFICATIONdata['BTW_LOW'].toString()}-${SPECIFICATIONdata['BTW_HI'].toString()} ${unitP.replaceAll('?', 'µ')}';
+
+                        maxdata = double.parse(ConverstStr(
+                            SPECIFICATIONdata['BTW_HI'].toString()));
+                        mindata = double.parse(ConverstStr(
+                            SPECIFICATIONdata['BTW_LOW'].toString()));
+                      } else if (condition.contains("LOL(<)")) {
+                        // print(SPECIFICATIONdata['LOL_H']);
+                        SPECIFICATION =
+                            '≤ ${SPECIFICATIONdata['LOL_H'].toString()} ${unitP.replaceAll('?', 'µ')}';
+                        maxdata = double.parse(
+                            ConverstStr(SPECIFICATIONdata['LOL_H'].toString()));
+                      } else if (condition.contains("HIM(>)")) {
+                        // print(SPECIFICATIONdata['HIM_L']);
+                        SPECIFICATION =
+                            '≥ ${SPECIFICATIONdata['HIM_L'].toString()} ${unitP.replaceAll('?', 'µ')}';
+                        mindata = double.parse(
+                            ConverstStr(SPECIFICATIONdata['HIM_L'].toString()));
+                      } else if (condition.contains("Actual")) {
+                        // print(SPECIFICATIONdata['TARGET']);
+                        SPECIFICATION = 'Actual';
+                      }
+                    }
+                  } catch (er) {
+                    print(er);
+                  }
+
+                  ITEMlist_IC.add(INCOMMINGCHECKlistCommonClass(
+                    TYPE: "Number",
+                    ITEM: itemss,
+                    ITEMname: ITEMname,
+                    METHOD: METHODss,
+                    METHODname: METHODname,
+                    SCMARK: SCmasks,
+                    FREQ: FREQ,
+                    SPECIFICATION: SPECIFICATION,
+                    RESULT: "",
+                    LOAD: LOAD,
+                    SRAWDATA: "",
+                    RESULTDSW: "",
+                  ));
+                }
+              }
+              // }
             }
           }
         }
@@ -126,7 +401,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
         if (BasicDATAr['ReferFrom'].toString() != PO) {
           if (BasicDATAr['ReferFrom'] != null) {
             final response02 = await Dio().post(
-              server + "INS_Report_PDF",
+              server + "BP12PH_Report_PDF",
               data: {
                 "PO": BasicDATAr['ReferFrom'].toString(),
               },
@@ -160,7 +435,6 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
         // print(PATTERNlist['FINAL'].length);
 
         for (var fi = 0; fi < PATTERNlist['FINAL'].length; fi++) {
-          //
           // print(PATTERNlist['FINAL'][fi]['ITEMs']);
           // print(PATTERNlist['FINAL'][fi]['RESULTFORMAT']);
           if (PATTERNlist['FINAL'][fi]['RESULTFORMAT'] == 'Text') {
@@ -173,7 +447,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   // print(FINALdata[MACHINElist[mi]]
                   //     [PATTERNlist['FINAL'][fi]['ITEMs']]);
 
-                  String POINTs = (int.parse(ConverstStrOne(
+                  String POINTs = (double.parse(ConverstStrOne(
                           PATTERNlist['FINAL'][fi]['PCS'].toString())))
                       .toString();
 
@@ -185,6 +459,16 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String METHODname = '';
                   String FREQ =
                       '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                  print(double.parse(POINTs));
+                  if (double.parse(POINTs) < 1) {
+                    FREQ = "${POINTs} AQL";
+                  }
+                  String AQL = PATTERNlist['FINAL'][fi]['AQL'].toString();
+                  String AQLV = PATTERNlist['FINAL'][fi]['AQLV'].toString();
+                  if (AQL == 'YES') {
+                    FREQ = "${AQLV}% AQL/Lot";
+                  }
+
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
 
@@ -272,6 +556,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       PATTERNlist['FINAL'][fi]['SRAWDATA'].toString();
                   //   "SRAWDATA": "NO"
 
+                  String RESULTDSW =
+                      PATTERNlist['FINAL'][fi]['RESULTDSW'].toString();
+
                   double maxdata = 0;
                   double mindata = 0;
 
@@ -351,8 +638,8 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       }
 
                       if (condition.contains("BTW")) {
-                        print(SPECIFICATIONdata['BTW_LOW']);
-                        print(SPECIFICATIONdata['BTW_HI']);
+                        // print(SPECIFICATIONdata['BTW_LOW']);
+                        // print(SPECIFICATIONdata['BTW_HI']);
                         SPECIFICATION =
                             '${SPECIFICATIONdata['BTW_LOW'].toString()}-${SPECIFICATIONdata['BTW_HI'].toString()} ${unitP.replaceAll('?', 'µ')}';
 
@@ -690,6 +977,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                         double.parse(ConverstStr(listdataset[ig].DATAAVG));
                   }
                   // print(avgall);
+                  if ((avgall / listdataset.length) == 0) {
+                    nadata = "N/A";
+                  }
 
                   ITEMlist.add(FINALCHECKlistCommonClass(
                     TYPE: "Number",
@@ -702,11 +992,13 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     NO: NO_NUMBER,
                     FREQ: FREQ,
                     datapackset: listdataset,
-                    RESULT:
-                        (avgall / listdataset.length).toStringAsFixed(desinal),
+                    RESULT: RESULTDSW != 'YES'
+                        ? (avgall / listdataset.length).toStringAsFixed(desinal)
+                        : "See at table",
                     LOAD: LOAD,
                     Remark: remark,
                     SRAWDATA: SRAWDATA,
+                    RESULTDSW: RESULTDSW,
                   ));
                 }
               }
@@ -1220,9 +1512,11 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                         FINALANSdata[itemss + "_point"]['y'].toString();
                   }
 
-                  print("<<<<<<<<<<<<<<<");
                   print((double.parse(ConverstStr(reslp))).toStringAsFixed(2));
-                  print("<<<<<<<<<<<<<<<");
+
+                  if ((double.parse(ConverstStr(reslp))) == 0) {
+                    nadata = "N/A";
+                  }
 
                   ITEMlist.add(FINALCHECKlistCommonClass(
                     TYPE: "Graph",
@@ -1248,6 +1542,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
           if (PATTERNlist['FINAL'][fi]['RESULTFORMAT'] == 'Picture') {
             for (var mi = 0; mi < MACHINElist.length; mi++) {
               // print("----${PATTERNlist['FINAL'][fi]['ITEMs']}");
+
               if (FINALdata[MACHINElist[mi]] != null) {
                 if (FINALdata[MACHINElist[mi]]
                         [PATTERNlist['FINAL'][fi]['ITEMs']] !=
@@ -1324,8 +1619,8 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                           SPECIFICATIONlist[SPi]['SPECIFICATION'].toString();
                     }
                   }
-                  print(itemss);
-                  print(SPECIFICATION);
+                  // print(itemss);
+                  // print(SPECIFICATION);
 
                   int desinal = 1;
                   // print(itemss);
@@ -1559,17 +1854,26 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                           if (BasicCommonDATAs.PIC01 == '') {
                             BasicCommonDATAs.PIC01 =
                                 datainside[pcsi]['PIC1'].toString();
+                            if (BasicCommonDATAs.PIC01 != NOPIC) {
+                              BasicCommonDATAs.ITEMPIC01 = ITEMname;
+                            }
                           }
                           if (BasicCommonDATAs.PIC02 == '') {
                             BasicCommonDATAs.PIC02 =
                                 datainside[pcsi]['PIC2'].toString();
+                            if (BasicCommonDATAs.PIC02 != NOPIC) {
+                              BasicCommonDATAs.ITEMPIC02 = ITEMname;
+                            }
                           }
                         }
-//3310275880
+
                         if (pcsi == 1) {
                           if (BasicCommonDATAs.PIC02 == '') {
                             BasicCommonDATAs.PIC02 =
                                 datainside[pcsi]['PIC2'].toString();
+                            if (BasicCommonDATAs.PIC02 != NOPIC) {
+                              BasicCommonDATAs.ITEMPIC02 = ITEMname;
+                            }
                           }
                         }
                       }
@@ -1933,10 +2237,16 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                           if (BasicCommonDATAs.PIC01 == '') {
                             BasicCommonDATAs.PIC01 =
                                 datainside[pcsi]['PIC1'].toString();
+                            if (BasicCommonDATAs.PIC01 != NOPIC) {
+                              BasicCommonDATAs.ITEMPIC01 = ITEMname;
+                            }
                           }
                           if (BasicCommonDATAs.PIC02 == '') {
                             BasicCommonDATAs.PIC02 =
                                 datainside[pcsi]['PIC2'].toString();
+                            if (BasicCommonDATAs.PIC02 != NOPIC) {
+                              BasicCommonDATAs.ITEMPIC02 = ITEMname;
+                            }
                           }
                         }
 //3310275880
@@ -1944,6 +2254,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                           if (BasicCommonDATAs.PIC02 == '') {
                             BasicCommonDATAs.PIC02 =
                                 datainside[pcsi]['PIC2'].toString();
+                            if (BasicCommonDATAs.PIC02 != NOPIC) {
+                              BasicCommonDATAs.ITEMPIC02 = ITEMname;
+                            }
                           }
                         }
                       }
@@ -2256,15 +2569,19 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
           }
         }
         // print('>>${ITEMlist.length}');
-
-        if (passlist.contains("false")) {
-          BasicCommonDATAs.PASS = 'NO PASSED';
+        if (nadata == '') {
+          if (passlist.contains("false")) {
+            BasicCommonDATAs.PASS = 'NO PASSED';
+          } else {
+            BasicCommonDATAs.PASS = 'PASSED';
+          }
         } else {
-          BasicCommonDATAs.PASS = 'PASSED';
+          BasicCommonDATAs.PASS = 'N/A';
         }
 
         output.databasic = BasicCommonDATAs;
         output.datain = ITEMlist;
+        output.datain_IC = ITEMlist_IC;
       }
     }
     print(passlist);
@@ -2300,6 +2617,7 @@ class FINALCHECKlistCommonClass {
     this.Cross = '',
     this.Remark = '',
     this.SRAWDATA = '',
+    this.RESULTDSW = '',
   });
   int NO;
   String TYPE;
@@ -2319,6 +2637,50 @@ class FINALCHECKlistCommonClass {
   String Cross;
   String Remark;
   String SRAWDATA;
+  String RESULTDSW;
+}
+
+class INCOMMINGCHECKlistCommonClass {
+  INCOMMINGCHECKlistCommonClass({
+    this.NO = 0,
+    this.TYPE = '',
+    this.ITEM = '',
+    this.ITEMname = '',
+    this.METHOD = '',
+    this.METHODname = '',
+    this.SCMARK = '',
+    this.FREQ = '',
+    this.SPECIFICATION = '',
+    this.SPECIFICATIONname = '',
+    this.SPECIFICATIONve = '',
+    this.RESULT = '',
+    this.CONTROLlimmit = '',
+    this.datapackset = const [],
+    this.LOAD = '',
+    this.Cross = '',
+    this.Remark = '',
+    this.SRAWDATA = '',
+    this.RESULTDSW = '',
+  });
+  int NO;
+  String TYPE;
+  String ITEM;
+  String ITEMname;
+  String METHOD;
+  String METHODname;
+  String SCMARK;
+  String FREQ;
+  String SPECIFICATION;
+  String SPECIFICATIONname;
+  String SPECIFICATIONve;
+  String RESULT;
+  String CONTROLlimmit;
+  List<datainlist> datapackset;
+  String LOAD;
+  String Cross;
+  String Remark;
+  String SRAWDATA;
+  String RESULTDSW;
 }
 
 // class datainlist {
@@ -2483,8 +2845,11 @@ class BasicCommonDATA {
     this.UNITSAP = '',
     this.PICstd = '',
     this.PIC01 = '',
+    this.ITEMPIC01 = '',
     this.PIC02 = '',
+    this.ITEMPIC02 = '',
     this.PIC03 = '',
+    this.ITEMPIC03 = '',
     this.PARTNAMEref = '',
     this.PARTref = '',
     this.PASS = '',
@@ -2508,8 +2873,11 @@ class BasicCommonDATA {
   String PICstd;
   String UNITSAP;
   String PIC01;
+  String ITEMPIC01;
   String PIC02;
+  String ITEMPIC02;
   String PIC03;
+  String ITEMPIC03;
 
   String PARTNAMEref;
   String PARTref;
@@ -2527,10 +2895,12 @@ class BasicCommonDATA {
 class CommonReportOutput {
   CommonReportOutput({
     this.datain = const [],
+    this.datain_IC = const [],
     required this.databasic,
   });
 
   List<FINALCHECKlistCommonClass> datain;
+  List<INCOMMINGCHECKlistCommonClass> datain_IC;
   BasicCommonDATA databasic;
 }
 

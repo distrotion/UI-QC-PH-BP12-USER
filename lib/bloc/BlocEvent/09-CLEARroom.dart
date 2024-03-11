@@ -47,6 +47,10 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
       server + "SURMCS001db",
       data: {},
     );
+    final resPO7 = await Dio().post(
+      server + "CTCSEM001db",
+      data: {},
+    );
     // print(resPO1.data['PO']);
     // print(resPO2.data['PO']);
     // print(resPO3.data['PO']);
@@ -69,7 +73,8 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
             resPO3.statusCode == 200 &&
             resPO4.statusCode == 200 &&
             resPO5.statusCode == 200 &&
-            resPO6.statusCode == 200
+            resPO6.statusCode == 200 &&
+            resPO7.statusCode == 200
         // &&
         // resPO7.statusCode == 200
         ) {
@@ -79,6 +84,7 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
       output.PO4 = resPO4.data['PO'] ?? '';
       output.PO5 = resPO5.data['PO'] ?? '';
       output.PO6 = resPO6.data['PO'] ?? '';
+      output.PO7 = resPO7.data['PO'] ?? '';
       // output.PO7 = resPO7.data['PO'] ?? '';
     }
 
@@ -90,7 +96,7 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
     print(CLEARroomdata.room);
     if (CLEARroomdata.room == 'PO1') {
       final response = await Dio().post(
-        server + 'APPGASHES-SETZERO',
+        server + 'APPPHBP12-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO2') {
@@ -116,6 +122,11 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
     } else if (CLEARroomdata.room == 'PO6') {
       final response = await Dio().post(
         server + 'SURMCS001-SETZERO',
+        data: {},
+      );
+    } else if (CLEARroomdata.room == 'PO7') {
+      final response = await Dio().post(
+        server + 'CTCSEM001-SETZERO',
         data: {},
       );
     }
@@ -152,10 +163,10 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
       server + "SURMCS001db",
       data: {},
     );
-    // final resPO7 = await Dio().post(
-    //   server + "HGVHT001db",
-    //   data: {},
-    // );
+    final resPO7 = await Dio().post(
+      server + "CTCSEM001db",
+      data: {},
+    );
 
     CLEARroomENV output = CLEARroomENV();
 
@@ -164,7 +175,8 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
             resPO3.statusCode == 200 &&
             resPO4.statusCode == 200 &&
             resPO5.statusCode == 200 &&
-            resPO6.statusCode == 200
+            resPO6.statusCode == 200 &&
+            resPO7.statusCode == 200
         // &&
         // resPO7.statusCode == 200
 
@@ -175,6 +187,7 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
       output.PO4 = resPO4.data['PO'] ?? '';
       output.PO5 = resPO5.data['PO'] ?? '';
       output.PO6 = resPO6.data['PO'] ?? '';
+      output.PO7 = resPO7.data['PO'] ?? '';
       // output.PO7 = resPO7.data['PO'] ?? '';
     }
 

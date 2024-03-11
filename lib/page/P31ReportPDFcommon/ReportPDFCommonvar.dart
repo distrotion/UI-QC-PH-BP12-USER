@@ -51,7 +51,25 @@ class ReportPDFCommonvar {
 
   static String SignInsBy = '';
 
+  static String QTYEDIT = '';
+  static String INCresult = '';
+
   static List<ReportPDFCommonlist> datalist = [
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+    ReportPDFCommonlist(),
+  ];
+  static List<ReportPDFCommonlist> datalist_ic = [
     ReportPDFCommonlist(),
     ReportPDFCommonlist(),
     ReportPDFCommonlist(),

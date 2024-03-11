@@ -51,6 +51,7 @@ class SINGLESHOTKEYmain extends StatelessWidget {
     this.iscon01,
     this.input,
     this.inputFN,
+    this.NATAP,
     //-------
   }) : super(key: key);
 
@@ -91,6 +92,7 @@ class SINGLESHOTKEYmain extends StatelessWidget {
   Function ACCEPT;
   Function FINISH;
   Function READ;
+  Function(String)? NATAP;
 
   List<INSDATA>? preview; //ok
   List<INSDATA>? confirmdata; //ok
@@ -206,7 +208,7 @@ class SINGLESHOTKEYmain extends StatelessWidget {
                         height: 40,
                         width: 300,
                         isNumberOnly: true,
-                        isEnabled: false,
+                        // isEnabled: false,
                         isContr: iscon01,
                         fnContr: (input) {
                           iscon01 = input;
@@ -216,6 +218,24 @@ class SINGLESHOTKEYmain extends StatelessWidget {
                           // input = s;
                           inputFN!(s);
                         },
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        if (NATAP != null) {
+                          NATAP!("NATAP");
+                        }
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 80,
+                        color: Colors.blue,
+                        child: const Center(
+                          child: Text(
+                            "N/A",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
                       ),
                     ),
                     // const SizedBox(
@@ -878,7 +898,9 @@ class _tabtableB3 extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        value?[i].V2 ?? '',
+                        (value?[i].V2 ?? '') == '0'
+                            ? "N/A"
+                            : (value?[i].V2 ?? ''),
                         style: TxtStyle(
                             color: txtcolor ?? Colors.black,
                             fontSize: txtsize ?? 12

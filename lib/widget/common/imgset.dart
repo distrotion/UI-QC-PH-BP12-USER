@@ -54,6 +54,7 @@ class PicShowActState extends State<PicShowAct> {
           angle: 0,
           child: Image.memory(
             bytes,
+            fit: BoxFit.fitHeight,
           )),
     );
   }
@@ -84,7 +85,7 @@ class _IMGbuttonState extends State<IMGbutton> {
         if (picked != null) {
           imageByte = picked.files.first.bytes;
           IMG.Image? img = IMG.decodeImage(imageByte!);
-          IMG.Image? img2 = IMG.copyResize(img!, width: 300);
+          IMG.Image? img2 = IMG.copyResize(img!, width: 800);
           resizedData = IMG.encodeJpg(img2) as Uint8List?;
           setState(() {
             widget.setimg(base64.encode(resizedData!));

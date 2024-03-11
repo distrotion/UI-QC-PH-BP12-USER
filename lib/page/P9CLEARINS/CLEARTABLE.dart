@@ -466,6 +466,72 @@ class _ClearRoomBODYState extends State<ClearRoomBODY> {
                                 child: Text(
                                   "CLEAR",
                                   style: TxtStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: const BorderRadius.all(Radius.circular(0)),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(0)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "CTC-SEM-001: ${widget.data?.PO7 ?? ""}",
+                            style: TxtStyle(
+                              fontWeight: FontWeight.bold,
+                              color: widget.data!.PO7 == ''
+                                  ? Colors.black
+                                  : Colors.red,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(0)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.all(5),
+                          child: InkWell(
+                            onTap: () {
+                              //
+                              CLEARroomdata.room = 'PO7';
+                              context
+                                  .read<CLEARroom_Bloc>()
+                                  .add(CLEARroom_CLEAR());
+                            },
+                            child: Container(
+                              color: Colors.blue,
+                              child: const Center(
+                                child: Text(
+                                  "CLEAR",
+                                  style: TxtStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
                                 ),
@@ -478,71 +544,6 @@ class _ClearRoomBODYState extends State<ClearRoomBODY> {
                   ],
                 ),
               ),
-              // Container(
-              //   height: 50,
-              //   decoration: BoxDecoration(
-              //     border: Border.all(color: Colors.black),
-              //     borderRadius: const BorderRadius.all(Radius.circular(0)),
-              //   ),
-              //   child: Row(
-              //     children: [
-              //       Expanded(
-              //         flex: 1,
-              //         child: Container(
-              //           decoration: BoxDecoration(
-              //             border: Border.all(color: Colors.black),
-              //             borderRadius:
-              //                 const BorderRadius.all(Radius.circular(0)),
-              //           ),
-              //           child: Center(
-              //             child: Text(
-              //               "HG-VHT-001: ${widget.data?.PO7 ?? ""}",
-              //               style: TxtStyle(
-              //                 fontWeight: FontWeight.bold,
-              //                 color: widget.data!.PO7 == ''
-              //                     ? Colors.black
-              //                     : Colors.red,
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //       Expanded(
-              //         flex: 1,
-              //         child: Container(
-              //           decoration: BoxDecoration(
-              //             border: Border.all(color: Colors.black),
-              //             borderRadius:
-              //                 const BorderRadius.all(Radius.circular(0)),
-              //           ),
-              //           child: Padding(
-              //             padding: const EdgeInsetsDirectional.all(5),
-              //             child: InkWell(
-              //               onTap: () {
-              //                 //
-              //                 CLEARroomdata.room = 'PO7';
-              //                 context
-              //                     .read<CLEARroom_Bloc>()
-              //                     .add(CLEARroom_CLEAR());
-              //               },
-              //               child: Container(
-              //                 color: Colors.blue,
-              //                 child: const Center(
-              //                   child: Text(
-              //                     "CLEAR",
-              //                     style: TxtStyle(
-              //                         fontWeight: FontWeight.bold,
-              //                         color: Colors.white),
-              //                   ),
-              //                 ),
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
               // Container(
               //   height: 50,
               //   decoration: BoxDecoration(

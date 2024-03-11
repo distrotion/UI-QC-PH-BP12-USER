@@ -274,13 +274,17 @@ class PICSLO2NORMAL extends StatelessWidget {
   PICSLO2NORMAL({
     Key? key,
     this.PIC01,
+    this.ITEMPIC01,
     this.PIC02,
+    this.ITEMPIC02,
     this.widget01,
     this.widget02,
     this.HIs,
   }) : super(key: key);
   String? PIC01;
+  String? ITEMPIC01;
   String? PIC02;
+  String? ITEMPIC02;
   Widget? widget01;
   Widget? widget02;
   double? HIs;
@@ -311,7 +315,7 @@ class PICSLO2NORMAL extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5),
                   child: SizedBox(
-                    height: 450,
+                    height: 470,
                     // decoration: BoxDecoration(
                     //   border: Border.all(color: Colors.black, width: 3),
                     // ),
@@ -348,8 +352,8 @@ class PICSLO2NORMAL extends StatelessWidget {
                                         color: Colors.black, width: 3),
                                   ),
                                   child: PicShowAct(
-                                      width: 306,
-                                      height: 230,
+                                      width: 700 * 0.7,
+                                      height: 500 * 0.7,
                                       base64: PIC01 ?? ''),
                                 ),
                               ),
@@ -365,9 +369,65 @@ class PICSLO2NORMAL extends StatelessWidget {
                                         color: Colors.black, width: 3),
                                   ),
                                   child: PicShowAct(
-                                      width: 306,
-                                      height: 230,
+                                      width: 304,
+                                      height: 250,
                                       base64: PIC02 ?? ''),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 2),
+                                child: Container(
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      left: BorderSide(
+                                          color: Colors.black,
+                                          width: 3,
+                                          style: BorderStyle.solid),
+                                      right: BorderSide(
+                                          color: Colors.black,
+                                          width: 3,
+                                          style: BorderStyle.solid),
+                                      bottom: BorderSide(
+                                          color: Colors.black,
+                                          width: 3,
+                                          style: BorderStyle.solid),
+                                    ),
+                                  ),
+                                  child: Center(child: Text(ITEMPIC01 ?? '')),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 2),
+                                child: Container(
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      left: BorderSide(
+                                          color: Colors.black,
+                                          width: 3,
+                                          style: BorderStyle.solid),
+                                      right: BorderSide(
+                                          color: Colors.black,
+                                          width: 3,
+                                          style: BorderStyle.solid),
+                                      bottom: BorderSide(
+                                          color: Colors.black,
+                                          width: 3,
+                                          style: BorderStyle.solid),
+                                    ),
+                                  ),
+                                  child: Center(child: Text(ITEMPIC02 ?? '')),
                                 ),
                               ),
                             ),

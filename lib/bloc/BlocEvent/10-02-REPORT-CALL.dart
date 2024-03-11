@@ -96,7 +96,7 @@ class REPORT_CALL_Bloc extends Bloc<REPORT_CALL_Event, String> {
 
     if (response.statusCode == 200) {
       var databuff = response.data;
-      print(databuff);
+      // print(databuff);
       if (databuff.toString() == "OK") {
         output = 'R_OK';
         BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
@@ -113,17 +113,17 @@ class REPORT_CALL_Bloc extends Bloc<REPORT_CALL_Event, String> {
 
   Future<void> _DATA_RECAL(String toAdd, Emitter<String> emit) async {
     String output = 'C_NOK';
-    final response = await Dio().post(
-      "http://172.23.10.40:1880/" + 'ISN_DATA_RECAL',
-      data: {"PO": REPORTvar.recall},
-    );
-    if (response.statusCode == 200) {
-      var databuff = response.data;
-      // print(databuff);
-      if (databuff.length > 0) {
-        output = 'C_OK';
-      }
-    }
+    // final response = await Dio().post(
+    //   "http://172.23.10.40:1880/" + 'ISN_DATA_RECAL',
+    //   data: {"PO": REPORTvar.recall},
+    // );
+    // if (response.statusCode == 200) {
+    //   var databuff = response.data;
+    //   // print(databuff);
+    //   if (databuff.length > 0) {
+    //     output = 'C_OK';
+    //   }
+    // }
     emit(output);
   }
 

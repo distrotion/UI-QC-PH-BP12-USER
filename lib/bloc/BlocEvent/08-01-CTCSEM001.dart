@@ -4,20 +4,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/global.dart';
 import '../../model/model.dart';
 
-import '../../page/P3SUR-BAL-013/SURBAL013var.dart';
-
+import '../../page/P8CTC-SEM-001/CTCSEM001var.dart';
 import '../../widget/QCWIDGET/consolelayout.dart';
 
 //-------------------------------------------------
 String server = GLOserver;
 
-abstract class SURBAL013_Event {}
+abstract class CTCSEM001_Event {}
 
-class SURBAL013_READ extends SURBAL013_Event {}
+class CTCSEM001_READ extends CTCSEM001_Event {}
 
-class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
-  SURBAL013_Bloc()
-      : super(SURBAL013SCHEMA(
+class CTCSEM001_Bloc extends Bloc<CTCSEM001_Event, CTCSEM001SCHEMA> {
+  CTCSEM001_Bloc()
+      : super(CTCSEM001SCHEMA(
           ItemPick: [''],
           ItemPickcode: [ITEMSET()],
           preview: [],
@@ -26,9 +25,9 @@ class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
           ITEMleftVALUE: [],
           GAPnameList: [],
         )) {
-    on<SURBAL013_READ>((event, emit) {
-      return _SURBAL013_READ(
-          SURBAL013SCHEMA(
+    on<CTCSEM001_READ>((event, emit) {
+      return _CTCSEM001_READ(
+          CTCSEM001SCHEMA(
             ItemPick: [''],
             ItemPickcode: [ITEMSET()],
             preview: [],
@@ -40,14 +39,14 @@ class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
           emit);
     });
   }
-  Future<void> _SURBAL013_READ(
-      SURBAL013SCHEMA toAdd, Emitter<SURBAL013SCHEMA> emit) async {
+  Future<void> _CTCSEM001_READ(
+      CTCSEM001SCHEMA toAdd, Emitter<CTCSEM001SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "SURBAL013db",
+      server + "CTCSEM001db",
       data: {},
     );
-    SURBAL013SCHEMA output = SURBAL013SCHEMA(
+    CTCSEM001SCHEMA output = CTCSEM001SCHEMA(
       ItemPick: [''],
       ItemPickcode: [ITEMSET()],
       preview: [],
@@ -166,7 +165,7 @@ class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
         }
       }
 
-      output = SURBAL013SCHEMA(
+      output = CTCSEM001SCHEMA(
         UPDATE: 'OK',
         //---- Left
         PO: databuff['PO'] == null ? '' : databuff['PO'].toString(),
@@ -203,23 +202,6 @@ class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
         GAP: databuff['GAP'] == null ? '' : databuff['GAP'].toString(),
         GAPname:
             databuff['GAPname'] == null ? '' : databuff['GAPname'].toString(),
-
-        Area: databuff['K1v'] == null ? '' : databuff['K1v'].toString(),
-        VAL1: databuff['confirmdataCW'][0] == null
-            ? ''
-            : databuff['confirmdataCW'][0]['VAL1'].toString(),
-        VAL2: databuff['confirmdataCW'][0] == null
-            ? ''
-            : databuff['confirmdataCW'][0]['VAL2'].toString(),
-        AearI: databuff['confirmdataCW'][0] == null
-            ? ''
-            : databuff['confirmdataCW'][0]['Area'].toString(),
-        FORMULAI: databuff['confirmdataCW'][0] == null
-            ? ''
-            : databuff['confirmdataCW'][0]['FORMULA'].toString(),
-
-        FORMULA:
-            databuff['FORMULA'] == null ? '' : databuff['FORMULA'].toString(),
         GAPnameList: GAPnamePickBUFFER,
         //---- BOTTOM
         preview: previewBUFFER,

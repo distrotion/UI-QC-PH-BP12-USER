@@ -21,6 +21,8 @@ class TRICKERMASTER_GETINtoSURMIC001 extends TRICKERMASTER_Event {}
 
 class TRICKERMASTER_GETINtoSURMCS001 extends TRICKERMASTER_Event {}
 
+class TRICKERMASTER_GETINtoCTCSEM001 extends TRICKERMASTER_Event {}
+
 //
 
 class TRICKERMASTER_GETINtoHGMCS001 extends TRICKERMASTER_Event {}
@@ -61,6 +63,10 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
 
     on<TRICKERMASTER_GETINtoSURMCS001>((event, emit) {
       return _TRICKERMASTER_GETINtoSURMCS001('', emit);
+    });
+
+    on<TRICKERMASTER_GETINtoCTCSEM001>((event, emit) {
+      return _TRICKERMASTER_GETINtoCTCSEM001('', emit);
     });
 
     on<TRICKERMASTER_FLUSH>((event, emit) {
@@ -250,6 +256,31 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
       server + 'GETINtoSURMCS001',
+      data: {
+        "PO": FIRSTUI.POACTIVE,
+        "CP": FIRSTUI.CPACTIVE,
+        "USER": USERDATA.NAME,
+        "USERID": USERDATA.ID,
+      },
+    );
+    String output = '';
+    if (response.statusCode == 200) {
+      var databuff = response.data;
+      if (databuff.toString() == 'OK') {
+        output = 'OK';
+      } else {
+        output = 'NOK';
+      }
+    } else {
+      //
+    }
+    emit(output);
+  }
+
+  Future<void> _TRICKERMASTER_GETINtoCTCSEM001(
+      String toAdd, Emitter<String> emit) async {
+    final response = await Dio().post(
+      server + 'GETINtoCTCSEM001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
