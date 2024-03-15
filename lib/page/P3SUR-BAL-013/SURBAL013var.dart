@@ -39,7 +39,8 @@ class SURBAL013var {
 
   static String FORMULA = '';
   static String FORMULAI = '';
-
+  static String PREANS = '';
+  static String ANS = '';
   //
   static String ItemPickSELECT = '';
 }

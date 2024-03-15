@@ -191,7 +191,8 @@ class SURRGH001_Bloc extends Bloc<SURRGH001_Event, SURRGH001SCHEMA> {
         PCS: databuff['PCS'] == null ? '' : databuff['PCS'].toString(),
         PCSleft:
             databuff['PCSleft'] == null ? '' : databuff['PCSleft'].toString(),
-        UNIT: databuff['UNIT'] == null ? '' : databuff['UNIT'].toString(),
+        UNIT:
+            "${databuff['SPEC'] == null ? '' : databuff['SPEC'].toString()} ${databuff['UNIT'] == null ? '' : databuff['UNIT'].toString()}",
         INTERSEC:
             databuff['INTERSEC'] == null ? '' : databuff['INTERSEC'].toString(),
         RESULTFORMAT: databuff['RESULTFORMAT'] == null

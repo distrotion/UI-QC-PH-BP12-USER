@@ -179,15 +179,13 @@ class SURMCS001_Bloc extends Bloc<SURMCS001_Event, SURMCS001SCHEMA> {
         PCS: databuff['PCS'] == null ? '' : databuff['PCS'].toString(),
         PCSleft:
             databuff['PCSleft'] == null ? '' : databuff['PCSleft'].toString(),
-        UNIT: databuff['UNIT'] == null ? '' : databuff['UNIT'].toString(),
-        INTERSEC:
-            databuff['INTERSEC'] == null ? '' : databuff['INTERSEC'].toString(),
+        UNIT:
+            "${databuff['SPEC'] == null ? '' : databuff['SPEC'].toString()} ${databuff['UNIT'] == null ? '' : databuff['UNIT'].toString()}",
+        INTERSEC: databuff['SPEC'] == null ? '' : databuff['SPEC'].toString(),
         RESULTFORMAT: databuff['RESULTFORMAT'] == null
             ? ''
             : databuff['RESULTFORMAT'].toString(),
-        GRAPHTYPE: databuff['GRAPHTYPE'] == null
-            ? ''
-            : databuff['GRAPHTYPE'].toString(),
+        GRAPHTYPE: databuff['SPEC'] == null ? '' : databuff['SPEC'].toString(),
         GAP: databuff['GAP'] == null ? '' : databuff['GAP'].toString(),
         GAPname: databuff['GAP'] == null ? '' : databuff['GAP'].toString(),
         GAPnameList: GAPnamePickBUFFER,

@@ -45,6 +45,7 @@ dependencies:
   pdf: ^3.8.4
   fl_chart: ^0.64.0
   dio: ^5.4.1
+  function_tree: ^0.9.1
 
 dev_dependencies:
   flutter_test:

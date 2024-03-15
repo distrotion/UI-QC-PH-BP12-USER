@@ -191,7 +191,8 @@ class SURMIC001_Bloc extends Bloc<SURMIC001_Event, SURMIC001SCHEMA> {
         PCS: databuff['PCS'] == null ? '' : databuff['PCS'].toString(),
         PCSleft:
             databuff['PCSleft'] == null ? '' : databuff['PCSleft'].toString(),
-        UNIT: databuff['UNIT'] == null ? '' : databuff['UNIT'].toString(),
+        UNIT:
+            "${databuff['SPEC'] == null ? '' : databuff['SPEC'].toString()} ${databuff['UNIT'] == null ? '' : databuff['UNIT'].toString()}",
         INTERSEC:
             databuff['INTERSEC'] == null ? '' : databuff['INTERSEC'].toString(),
         RESULTFORMAT: databuff['RESULTFORMAT'] == null

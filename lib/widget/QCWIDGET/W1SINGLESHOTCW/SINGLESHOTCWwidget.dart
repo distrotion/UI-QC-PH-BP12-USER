@@ -47,6 +47,7 @@ class SINGLESHOTCWmain extends StatelessWidget {
     this.Aear,
     this.FORMULA,
     this.FORMULAI,
+    this.ANS,
     //------- Right
     required this.CLEAR,
     required this.BACKPAGE,
@@ -99,6 +100,7 @@ class SINGLESHOTCWmain extends StatelessWidget {
   String? Aear;
   String? FORMULA;
   String? FORMULAI;
+  String? ANS;
 
   //Right --------------------------------------------
   Function CLEAR;
@@ -239,6 +241,7 @@ class SINGLESHOTCWmain extends StatelessWidget {
                       VAL2: VAL2,
                       Aear: Aear,
                       FORMULA: FORMULAI,
+                      ANS: ANS,
                     ),
                   ),
                 ),
@@ -606,7 +609,7 @@ class __topboxfullState extends State<_topboxfull> {
                   children: [
                     const Expanded(
                         flex: 1,
-                        child: Text('UNIT',
+                        child: Text('SPEC',
                             style: TxtStyle(
                               color: Colors.black,
                               // fontSize: 12
@@ -944,6 +947,7 @@ class _tabtableB4 extends StatefulWidget {
     this.VAL2,
     this.Aear,
     this.FORMULA,
+    this.ANS,
   }) : super(key: key);
   List<INSDATA>? value;
   double? txtsize;
@@ -954,6 +958,7 @@ class _tabtableB4 extends StatefulWidget {
   String? VAL2;
   String? Aear;
   String? FORMULA;
+  String? ANS;
 
   @override
   State<_tabtableB4> createState() => _tabtableB4State();
@@ -969,6 +974,46 @@ class _tabtableB4State extends State<_tabtableB4> {
         children: [
           const SizedBox(
             height: 15,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 250,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 40,
+                        width: 80,
+                        color: Colors.green,
+                        child: const Center(
+                          child: Text("ANS"),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 40,
+                      width: 125,
+                      color: Colors.blue,
+                      child: Center(
+                        child: Text(widget.ANS ?? ''),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
           ),
           Row(
             children: [

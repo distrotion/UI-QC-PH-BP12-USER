@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:function_tree/function_tree.dart';
 
 import '../../bloc/BlocEvent/03-01-SURBAL013.dart';
 import '../../bloc/BlocEvent/03-02-TrickSURBAL013.dart';
@@ -60,6 +61,7 @@ class _ROCKWELL_SURBAL013bodyState extends State<ROCKWELL_SURBAL013body> {
   void initState() {
     super.initState();
     BackButtonInterceptor.add(myInterceptor);
+    SURBAL013var.ANS = '';
     context.read<SURBAL013_Bloc>().add(SURBAL013_READ());
   }
 
@@ -143,6 +145,27 @@ class _ROCKWELL_SURBAL013bodyState extends State<ROCKWELL_SURBAL013body> {
       });
       SURBAL013var.DHtimer = timer;
     }
+
+    if (SURBAL013var.ANS == '') {
+      if (SURBAL013var.PCS != '' &&
+          SURBAL013var.POINTs != '' &&
+          SURBAL013var.ItemPickSELECT != '') {
+        if (SURBAL013var.FORMULAI != '' &&
+            SURBAL013var.VAL1 != '' &&
+            SURBAL013var.VAL2 != '' &&
+            SURBAL013var.AearI != '') {
+          SURBAL013var.PREANS = SURBAL013var.FORMULAI
+              .replaceAll("X", SURBAL013var.VAL1)
+              .replaceAll("Y", SURBAL013var.VAL2)
+              .replaceAll("K1", SURBAL013var.AearI);
+          // print(SURBAL013var.PREANS.interpret().toString());
+          setState(() {
+            SURBAL013var.ANS =
+                SURBAL013var.PREANS.interpret().toStringAsFixed(4);
+          });
+        }
+      }
+    }
     return SINGLESHOTCWmain(
       //------ Left
       LABEL: "SER-BAL-002",
@@ -183,11 +206,9 @@ class _ROCKWELL_SURBAL013bodyState extends State<ROCKWELL_SURBAL013body> {
             .read<TRICKER_SURBAL013_Bloc>()
             .add(TRICKER_SURBAL013geteachGRAPH());
       },
+
       //------- Bottom
       ACCEPT: (v) {
-        // if ((SURBAL013var.RESULTFORMAT == 'Graph' &&
-        //         SURBAL013var.GAPname != '') ||
-        //     SURBAL013var.RESULTFORMAT != 'Graph') {
         if (SURBAL013var.PCS != '' &&
             SURBAL013var.POINTs != '' &&
             SURBAL013var.ItemPickSELECT != '') {
@@ -201,11 +222,11 @@ class _ROCKWELL_SURBAL013bodyState extends State<ROCKWELL_SURBAL013body> {
         } else {
           WORNINGpop(context, "Please select item");
         }
-        // } else {
-        //   WORNINGpop(context, "Please select GRAPH");
-        // }
       },
       FINISH: (v) {
+        // num testou = test.interpret();
+        // print(testou);
+
         if (SURBAL013var.PCS != '' &&
             SURBAL013var.POINTs != '' &&
             SURBAL013var.ItemPickSELECT != '') {
@@ -250,6 +271,7 @@ class _ROCKWELL_SURBAL013bodyState extends State<ROCKWELL_SURBAL013body> {
       Aear: SURBAL013var.AearI,
       FORMULA: SURBAL013var.FORMULA,
       FORMULAI: SURBAL013var.FORMULAI,
+      ANS: SURBAL013var.ANS,
     );
   }
 }

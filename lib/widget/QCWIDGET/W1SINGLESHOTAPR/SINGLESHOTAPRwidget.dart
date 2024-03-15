@@ -519,7 +519,7 @@ class __topboxfullState extends State<_topboxfull> {
                   children: [
                     const Expanded(
                         flex: 1,
-                        child: Text('UNIT',
+                        child: Text('SPEC',
                             style: TxtStyle(
                               color: Colors.black,
                               // fontSize: 12
