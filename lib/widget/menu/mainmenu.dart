@@ -9,6 +9,7 @@ import '../../page/page10.dart';
 import '../../page/page11.dart';
 import '../../page/page13.dart';
 
+import '../../page/page18.dart';
 import '../../page/page9.dart';
 import 'sub_widget.dart';
 
@@ -131,6 +132,12 @@ class Data_Menu_mainmenu extends StatelessWidget {
           name: "EXPORT DATA",
           page: Page13(),
           Lv: 1,
+        ),
+        menu_normal(
+          name: "CHANGE PASSWORD",
+          page: Page18(),
+          Lv: 1,
+          // tapcolor: Colors.white,
         ),
         // menu_normal(
         //   name: " SUMMARY REPORT",

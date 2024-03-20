@@ -414,6 +414,8 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   databuffref['DATA']?[0]['PARTNAME'].toString() ?? '';
               BasicCommonDATAs.PARTref =
                   databuffref['DATA']?[0]['PART'].toString() ?? '';
+              BasicCommonDATAs.TPKLOTref =
+                  databuffref['DATA']?[0]['TPKLOT'].toString() ?? '';
               // print(databuffref['DATA']?[0]['PART']);
               // print(databuffref['DATA']?[0]['PARTNAME']);
             }
@@ -2858,6 +2860,7 @@ class BasicCommonDATA {
     this.INSBY = '',
     this.CHECKBY = '',
     this.APPBY = '',
+    this.TPKLOTref = '',
   });
 
   String PO;
@@ -2890,6 +2893,7 @@ class BasicCommonDATA {
   String INSBY;
   String CHECKBY;
   String APPBY;
+  String TPKLOTref;
 }
 
 class CommonReportOutput {

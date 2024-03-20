@@ -84,8 +84,12 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
       ReportPDFCommonvar.PASS = _dataCOMMON.databasic.PASS;
       ReportPDFCommonvar.remark = '';
       if (_dataCOMMON.databasic.PARTNAMEref != '') {
+        // ReportPDFCommonvar.remark =
+        //     'Reference data from\n${_dataCOMMON.databasic.PARTNAMEref}\n${_dataCOMMON.databasic.PARTref}';
         ReportPDFCommonvar.remark =
-            'Reference data from\n${_dataCOMMON.databasic.PARTNAMEref}\n${_dataCOMMON.databasic.PARTref}';
+            'Reference data from TP LOT NO. ${_dataCOMMON.databasic.TPKLOTref}';
+
+        //TPKLOTref
       }
 
       ReportPDFCommonvar.INC01 = _dataCOMMON.databasic.INC01;
