@@ -77,7 +77,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoAPPPHBP12(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoAPPPHBP12',
+      server + 'FINAL/GETINtoAPPPHBP12',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -104,7 +104,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoSURBAL013(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoSURBAL013',
+      server + 'FINAL/GETINtoSURBAL013',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -113,6 +113,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
       },
     );
     String output = '';
+    //--------------------------------------------->
     if (response.statusCode == 200) {
       var databuff = response.data;
       if (databuff.toString() == 'OK') {
@@ -129,7 +130,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoSURTHI002(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoSURTHI002',
+      server + 'FINAL/GETINtoSURTHI002',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -154,7 +155,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoSURRGH001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoSURRGH001',
+      server + 'FINAL/GETINtoSURRGH001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -179,7 +180,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoHGMCS001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoHGMCS001',
+      server + 'FINAL/GETINtoHGMCS001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -204,7 +205,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoHGHRC002(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoHGHRC002',
+      server + 'FINAL/GETINtoHGHRC002',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -229,7 +230,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoSURMIC001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoSURMIC001',
+      server + 'FINAL/GETINtoSURMIC001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -255,7 +256,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoSURMCS001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoSURMCS001',
+      server + 'FINAL/GETINtoSURMCS001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -280,7 +281,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoCTCSEM001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoCTCSEM001',
+      server + 'FINAL/GETINtoCTCSEM001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -305,7 +306,7 @@ class TRICKERMASTER_Bloc extends Bloc<TRICKERMASTER_Event, String> {
   Future<void> _TRICKERMASTER_GETINtoAPPGASGW(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoAPPGASGW',
+      server + 'FINAL/GETINtoAPPGASGW',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,

@@ -85,7 +85,7 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_GETINtoSURMIC001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoSURMIC001',
+      server + 'FINAL/GETINtoSURMIC001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -110,7 +110,7 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMIC001geteachITEM(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMIC001-geteachITEM',
+      server + 'FINAL/SURMIC001-geteachITEM',
       data: {
         "ITEMs": SURMIC001var.ItemPickSELECT,
       },
@@ -121,7 +121,7 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMIC001geteachGRAPH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMIC001-geteachGRAPH',
+      server + 'FINAL/SURMIC001-geteachGRAPH',
       data: {
         "GAPname": SURMIC001var.GAPname,
       },
@@ -132,7 +132,7 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMIC001confirmdata(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMIC001-confirmdata',
+      server + 'FINAL/SURMIC001-confirmdata',
       data: {},
     );
     emit('');
@@ -141,7 +141,7 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMIC001CLEAR(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMIC001-CLEAR',
+      server + 'FINAL/SURMIC001-CLEAR',
       data: {},
     );
     emit('');
@@ -150,7 +150,7 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMIC001RESETVALUE(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMIC001-RESETVALUE',
+      server + 'FINAL/SURMIC001-RESETVALUE',
       data: {},
     );
     emit('');
@@ -159,7 +159,7 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMIC001SETZERO(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMIC001-SETZERO',
+      server + 'FINAL/SURMIC001-SETZERO',
       data: {},
     );
     emit('');
@@ -171,7 +171,7 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMIC001FINISH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMIC001-FINISH',
+      server + 'FINAL/SURMIC001-FINISH',
       data: {},
     );
     emit('');

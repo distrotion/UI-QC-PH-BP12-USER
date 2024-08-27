@@ -156,7 +156,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
 
         // if (_dataCOMMON.datain[i].TYPE == 'Number') {
         if (_dataCOMMON.datain[i].TYPE == 'Number') {
-          if (_dataCOMMON.datain[i].SRAWDATA == 'YES') {
+          if (_dataCOMMON.datain[i].SRAWDATA != 'NO') {
             ReportPDFCommonvar.Listitemname.add(_dataCOMMON.datain[i].ITEMname);
 
             lengthdata = ReportPDFCommonvar.Listitemname.length - 1;
@@ -167,7 +167,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
           //         .contains('HARDNESS') &&
           //     _dataCOMMON.datain[i].ITEMname.toUpperCase().contains('CORE') ==
           //         false) {
-          if (_dataCOMMON.datain[i].SRAWDATA == 'YES') {
+          if (_dataCOMMON.datain[i].SRAWDATA != 'NO') {
             for (var li = 0;
                 li < _dataCOMMON.datain[i].datapackset.length;
                 li++) {

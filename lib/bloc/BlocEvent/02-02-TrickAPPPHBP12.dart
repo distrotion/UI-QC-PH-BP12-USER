@@ -80,7 +80,7 @@ class TRICKER_APPPHBP12_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_GETINtoAPPPHBP12(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoAPPPHBP12',
+      server + 'FINAL/GETINtoAPPPHBP12',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -105,7 +105,7 @@ class TRICKER_APPPHBP12_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_APPPHBP12geteachITEM(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'APPPHBP12-geteachITEM',
+      server + 'FINAL/APPPHBP12-geteachITEM',
       data: {
         "ITEMs": APPPHBP12var.ItemPickSELECT,
       },
@@ -116,7 +116,7 @@ class TRICKER_APPPHBP12_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_APPPHBP12confirmdata(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'APPPHBP12-confirmdata',
+      server + 'FINAL/APPPHBP12-confirmdata',
       data: {},
     );
     emit('');
@@ -125,7 +125,7 @@ class TRICKER_APPPHBP12_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_APPPHBP12CLEAR(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'APPPHBP12-CLEAR',
+      server + 'FINAL/APPPHBP12-CLEAR',
       data: {},
     );
     emit('');
@@ -134,7 +134,7 @@ class TRICKER_APPPHBP12_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_APPPHBP12RESETVALUE(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'APPPHBP12-RESETVALUE',
+      server + 'FINAL/APPPHBP12-RESETVALUE',
       data: {},
     );
     emit('');
@@ -143,7 +143,7 @@ class TRICKER_APPPHBP12_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_APPPHBP12SETZERO(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'APPPHBP12-SETZERO',
+      server + 'FINAL/APPPHBP12-SETZERO',
       data: {},
     );
     emit('');
@@ -154,8 +154,9 @@ class TRICKER_APPPHBP12_Bloc extends Bloc<TRICKER_Event, String> {
 
   Future<void> _TRICKER_APPPHBP12FINISH(
       String toAdd, Emitter<String> emit) async {
+    print("=============");
     final response = await Dio().post(
-      server + 'APPPHBP12-FINISH-APR',
+      server + 'FINAL/APPPHBP12-FINISH-APR',
       data: {
         "APRitem": APPPHBP12var.ItemPickSELECT,
         "APRre": APPPHBP12var.APPEARANCE,

@@ -9,7 +9,8 @@ import '../cubit/NotificationEvent.dart';
 
 //-------------------------------------------------
 // String server = 'http://127.0.0.1:15000/';
-String server = GLOserver;
+// String server = GLOserver;
+String server = 'http://172.23.10.40:16714/';
 
 abstract class RegisterPOID_Event {}
 

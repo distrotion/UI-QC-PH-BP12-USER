@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/global.dart';
 import '../../model/model.dart';
 
+import '../../page/P3SUR-BAL-013/SURBAL013var.dart';
 import '../../page/P4SUR-THI-002/SURTHI002var.dart';
 
 import '../../widget/QCWIDGET/consolelayout.dart';
@@ -44,7 +45,7 @@ class SURTHI002_Bloc extends Bloc<SURTHI002_Event, SURTHI002SCHEMA> {
       SURTHI002SCHEMA toAdd, Emitter<SURTHI002SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "SURTHI002db",
+      server + "FINAL/SURTHI002db",
       data: {},
     );
     SURTHI002SCHEMA output = SURTHI002SCHEMA(
@@ -204,6 +205,7 @@ class SURTHI002_Bloc extends Bloc<SURTHI002_Event, SURTHI002SCHEMA> {
         GAP: databuff['GAP'] == null ? '' : databuff['GAP'].toString(),
         GAPname:
             databuff['GAPname'] == null ? '' : databuff['GAPname'].toString(),
+
         GAPnameList: GAPnamePickBUFFER,
         //---- BOTTOM
         preview: previewBUFFER,

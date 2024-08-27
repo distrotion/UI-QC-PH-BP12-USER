@@ -44,7 +44,7 @@ class SURMCS001_Bloc extends Bloc<SURMCS001_Event, SURMCS001SCHEMA> {
       SURMCS001SCHEMA toAdd, Emitter<SURMCS001SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "SURMCS001db",
+      server + "FINAL/SURMCS001db",
       data: {},
     );
     SURMCS001SCHEMA output = SURMCS001SCHEMA(

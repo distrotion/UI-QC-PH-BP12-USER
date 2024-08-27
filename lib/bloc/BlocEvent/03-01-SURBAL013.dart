@@ -44,7 +44,7 @@ class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
       SURBAL013SCHEMA toAdd, Emitter<SURBAL013SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "SURBAL013db",
+      server + "FINAL/SURBAL013db",
       data: {},
     );
     SURBAL013SCHEMA output = SURBAL013SCHEMA(
@@ -166,6 +166,23 @@ class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
         }
       }
 
+      // if (databuff['FINAL_ANS'] == null) {
+      print("----");
+      print(databuff['shape']);
+      //   if (databuff['ItemPickcode'] != null) {
+      //     for (var l = 0; l < databuff['CHECKlist'].length; l++) {
+      //       if (databuff['CHECKlist'][l]['value'].toString() ==
+      //           SURBAL013var.ItemPickSELECT) {
+      //         print(databuff['FINAL_ANS']
+      //             [databuff['CHECKlist'][l]['key'].toString()]);
+      //       }
+      //     }
+      //   }
+      //   // if (databuff['FINAL_ANS'][SURBAL013var.ItemPickSELECT] != null) {
+      //   //
+      //   // }
+      // }
+
       output = SURBAL013SCHEMA(
         UPDATE: 'OK',
         //---- Left
@@ -212,15 +229,22 @@ class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
         VAL2: databuff['confirmdataCW'][0] == null
             ? ''
             : databuff['confirmdataCW'][0]['VAL2'].toString(),
+        VAL3: databuff['confirmdataCW'][0] == null
+            ? ''
+            : databuff['confirmdataCW'][0]['VAL3'].toString(),
+        VAL4: databuff['confirmdataCW'][0] == null
+            ? ''
+            : databuff['confirmdataCW'][0]['VAL4'].toString(),
         AearI: databuff['confirmdataCW'][0] == null
             ? ''
             : databuff['confirmdataCW'][0]['Area'].toString(),
         FORMULAI: databuff['confirmdataCW'][0] == null
             ? ''
             : databuff['confirmdataCW'][0]['FORMULA'].toString(),
-
+        ANS: databuff['ANSCAL2'] != null ? databuff['ANSCAL2'].toString() : "",
         FORMULA:
             databuff['FORMULA'] == null ? '' : databuff['FORMULA'].toString(),
+        shape: databuff['shape'] != null ? databuff['shape'].toString() : "",
         GAPnameList: GAPnamePickBUFFER,
         //---- BOTTOM
         preview: previewBUFFER,

@@ -91,7 +91,7 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_GETINtoCTCSEM001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoCTCSEM001',
+      server + 'FINAL/GETINtoCTCSEM001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -114,7 +114,7 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_CTCSEM001geteachITEM(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'CTCSEM001-geteachITEM',
+      server + 'FINAL/CTCSEM001-geteachITEM',
       data: {
         "ITEMs": CTCSEM001var.ItemPickSELECT,
       },
@@ -125,7 +125,7 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_CTCSEM001geteachGRAPH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'CTCSEM001-geteachGRAPH',
+      server + 'FINAL/CTCSEM001-geteachGRAPH',
       data: {
         "GAPname": CTCSEM001var.GAPname,
       },
@@ -136,14 +136,14 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_CTCSEM001preview(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'CTCSEM001-preview',
+      server + 'FINAL/CTCSEM001-preview',
       data: [
         {"V1": "SEM", "V2": CTCSEM001var.SINGLEINPUT}
       ],
     );
     if (response.statusCode == 200) {
       final response = await Dio().post(
-        server + 'CTCSEM001-confirmdata',
+        server + 'FINAL/CTCSEM001-confirmdata',
         data: {},
       );
     }
@@ -154,7 +154,7 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_CTCSEM001confirmdata(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'CTCSEM001-confirmdata',
+      server + 'FINAL/CTCSEM001-confirmdata',
       data: {},
     );
     emit('');
@@ -163,7 +163,7 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_CTCSEM001CLEAR(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'CTCSEM001-CLEAR',
+      server + 'FINAL/CTCSEM001-CLEAR',
       data: {},
     );
     emit('');
@@ -172,7 +172,7 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_CTCSEM001RESETVALUE(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'CTCSEM001-RESETVALUE',
+      server + 'FINAL/CTCSEM001-RESETVALUE',
       data: {},
     );
     emit('');
@@ -181,7 +181,7 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_CTCSEM001SETZERO(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'CTCSEM001-SETZERO',
+      server + 'FINAL/CTCSEM001-SETZERO',
       data: {},
     );
     emit('');
@@ -193,7 +193,7 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_CTCSEM001FINISH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'CTCSEM001-FINISH',
+      server + 'FINAL/CTCSEM001-FINISH',
       data: {},
     );
     emit('');

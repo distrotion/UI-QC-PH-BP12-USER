@@ -24,31 +24,31 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
   Future<void> _CLEARroom_READ(
       CLEARroomENV toAdd, Emitter<CLEARroomENV> emit) async {
     final resPO1 = await Dio().post(
-      server + "APPPHBP12db",
+      server + "FINAL/APPPHBP12db",
       data: {},
     );
     final resPO2 = await Dio().post(
-      server + "SURBAL013db",
+      server + "FINAL/SURBAL013db",
       data: {},
     );
     final resPO3 = await Dio().post(
-      server + "SURTHI002db",
+      server + "FINAL/SURTHI002db",
       data: {},
     );
     final resPO4 = await Dio().post(
-      server + "SURRGH001db",
+      server + "FINAL/SURRGH001db",
       data: {},
     );
     final resPO5 = await Dio().post(
-      server + "SURMIC001db",
+      server + "FINAL/SURMIC001db",
       data: {},
     );
     final resPO6 = await Dio().post(
-      server + "SURMCS001db",
+      server + "FINAL/SURMCS001db",
       data: {},
     );
     final resPO7 = await Dio().post(
-      server + "CTCSEM001db",
+      server + "FINAL/CTCSEM001db",
       data: {},
     );
     // print(resPO1.data['PO']);
@@ -96,43 +96,43 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
     print(CLEARroomdata.room);
     if (CLEARroomdata.room == 'PO1') {
       final response = await Dio().post(
-        server + 'APPPHBP12-SETZERO',
+        server + 'FINAL/APPPHBP12-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO2') {
       final response = await Dio().post(
-        server + 'SURBAL013-SETZERO',
+        server + 'FINAL/SURBAL013-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO3') {
       final response = await Dio().post(
-        server + 'SURTHI002-SETZERO',
+        server + 'FINAL/SURTHI002-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO4') {
       final response = await Dio().post(
-        server + 'SURRGH001-SETZERO',
+        server + 'FINAL/SURRGH001-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO5') {
       final response = await Dio().post(
-        server + 'SURMIC001-SETZERO',
+        server + 'FINAL/SURMIC001-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO6') {
       final response = await Dio().post(
-        server + 'SURMCS001-SETZERO',
+        server + 'FINAL/SURMCS001-SETZERO',
         data: {},
       );
     } else if (CLEARroomdata.room == 'PO7') {
       final response = await Dio().post(
-        server + 'CTCSEM001-SETZERO',
+        server + 'FINAL/CTCSEM001-SETZERO',
         data: {},
       );
     }
     // else if (CLEARroomdata.room == 'PO7') {
     //   final response = await Dio().post(
-    //     server + 'HGVHT001-SETZERO',
+    //     server + 'FINAL/HGVHT001-SETZERO',
     //     data: {},
     //   );
     // }
@@ -140,31 +140,31 @@ class CLEARroom_Bloc extends Bloc<CLEARroom_Event, CLEARroomENV> {
     //-============
 
     final resPO1 = await Dio().post(
-      server + "APPPHBP12db",
+      server + "FINAL/APPPHBP12db",
       data: {},
     );
     final resPO2 = await Dio().post(
-      server + "SURBAL013db",
+      server + "FINAL/SURBAL013db",
       data: {},
     );
     final resPO3 = await Dio().post(
-      server + "SURTHI002db",
+      server + "FINAL/SURTHI002db",
       data: {},
     );
     final resPO4 = await Dio().post(
-      server + "SURRGH001db",
+      server + "FINAL/SURRGH001db",
       data: {},
     );
     final resPO5 = await Dio().post(
-      server + "SURMIC001db",
+      server + "FINAL/SURMIC001db",
       data: {},
     );
     final resPO6 = await Dio().post(
-      server + "SURMCS001db",
+      server + "FINAL/SURMCS001db",
       data: {},
     );
     final resPO7 = await Dio().post(
-      server + "CTCSEM001db",
+      server + "FINAL/CTCSEM001db",
       data: {},
     );
 

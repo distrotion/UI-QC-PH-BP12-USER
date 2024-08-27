@@ -4,6 +4,7 @@ import '../../model/model.dart';
 import '../../widget/QCWIDGET/consolelayout.dart';
 
 class SURBAL013var {
+  static bool iscontrol = false;
   static String PO = '';
   static String CP = '';
   static String QTY = '';
@@ -35,7 +36,11 @@ class SURBAL013var {
 
   static String VAL1 = '';
   static String VAL2 = '';
+  static String VAL3 = '';
+  static String VAL4 = '';
   static String AearI = '';
+
+  static String shape = '';
 
   static String FORMULA = '';
   static String FORMULAI = '';
@@ -43,6 +48,22 @@ class SURBAL013var {
   static String ANS = '';
   //
   static String ItemPickSELECT = '';
+
+  static String SelectAEAR = '';
+  static String test = '';
+
+  static String RS_HI = '';
+  static String RS_L1 = '';
+  static String RS_L2 = '';
+
+  static String CYNH_HI = '';
+  static String CYNH_DI = '';
+
+  static String CYWH_HI = '';
+  static String CYWH_DIOUT = '';
+  static String CYWH_DIIN = '';
+
+  static String ARAE_ANS = '';
 }
 
 class SURBAL013SCHEMA {
@@ -74,9 +95,13 @@ class SURBAL013SCHEMA {
     this.Area = '',
     this.VAL1 = '',
     this.VAL2 = '',
+    this.VAL3 = '',
+    this.VAL4 = '',
     this.AearI = '',
     this.FORMULAI = '',
     this.FORMULA = '',
+    this.ANS = '',
+    this.shape = '',
     required this.GAPnameList,
     required this.preview,
     required this.confirmdata,
@@ -111,9 +136,13 @@ class SURBAL013SCHEMA {
 
   String VAL1;
   String VAL2;
+  String VAL3;
+  String VAL4;
   String AearI;
   String FORMULAI;
   String FORMULA;
+  String ANS;
+  String shape;
 
   List<String> GAPnameList;
   List<INSDATA> preview;

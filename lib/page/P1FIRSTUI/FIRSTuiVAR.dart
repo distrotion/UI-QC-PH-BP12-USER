@@ -5,6 +5,7 @@ class FIRSTUI {
   static String POACTIVE = '';
   static String CPACTIVE = '';
   static String SECLECTins = '';
+  static String MODE_IP_FN = '';
   static int INSint = 0;
   static List<int> INSnotREADY = [
     0,

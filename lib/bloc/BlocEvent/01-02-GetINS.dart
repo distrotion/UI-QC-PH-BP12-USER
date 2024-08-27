@@ -21,7 +21,7 @@ class GetINS_Bloc extends Bloc<GetINS_Event, List<String>> {
   Future<void> _GetINS(List<String> toAdd, Emitter<List<String>> emit) async {
     List<String> output = [];
     final response = await Dio().post(
-      server + 'GETINSset',
+      server + 'GETINSset_IP',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -31,11 +31,31 @@ class GetINS_Bloc extends Bloc<GetINS_Event, List<String>> {
     print("------------>${FIRSTUI.POACTIVE}");
     print("------------>${FIRSTUI.CPACTIVE}");
     print(response);
+    FIRSTUI.MODE_IP_FN = '';
     if (response.statusCode == 200) {
       var databuff = response.data;
-      print(databuff);
+      FIRSTUI.MODE_IP_FN = 'IP';
       for (int i = 0; i < databuff.length; i++) {
         output.add(databuff[i].toString());
+      }
+
+      if (databuff.length == 0) {
+        final responseFN = await Dio().post(
+          server + 'GETINSset',
+          data: {
+            "PO": FIRSTUI.POACTIVE,
+            "CP": FIRSTUI.CPACTIVE,
+          },
+        );
+
+        if (responseFN.statusCode == 200) {
+          var databuffFN = responseFN.data;
+          FIRSTUI.MODE_IP_FN = 'FN';
+
+          for (int i = 0; i < databuffFN.length; i++) {
+            output.add(databuffFN[i].toString());
+          }
+        }
       }
     } else {
       //

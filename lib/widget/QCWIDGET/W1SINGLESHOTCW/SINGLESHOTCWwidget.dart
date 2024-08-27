@@ -23,6 +23,7 @@ class SINGLESHOTCWmain extends StatelessWidget {
     this.PART,
     this.PARTNAME,
     this.MATERIAL,
+
     //------- Top
     required this.ItemPickres,
     this.ItemPick,
@@ -37,6 +38,7 @@ class SINGLESHOTCWmain extends StatelessWidget {
     this.GAPname,
     required this.GAPnamePick,
     this.GAPnameList,
+    this.Areafn,
     //------- Bottom
     required this.ACCEPT,
     required this.FINISH,
@@ -44,10 +46,16 @@ class SINGLESHOTCWmain extends StatelessWidget {
     this.confirmdata,
     this.VAL1,
     this.VAL2,
+    this.VAL3,
+    this.VAL4,
     this.Aear,
     this.FORMULA,
     this.FORMULAI,
     this.ANS,
+    this.AearACCEPT,
+    this.AearACCEPTbool,
+    this.CAL2,
+
     //------- Right
     required this.CLEAR,
     required this.BACKPAGE,
@@ -87,6 +95,8 @@ class SINGLESHOTCWmain extends StatelessWidget {
   List<String>? GAPnameList;
   String? GAPname;
   Function(String) GAPnamePick;
+  bool? AearACCEPTbool;
+  bool? CAL2;
   //Bottom --------------------------------------------
 
   Function ACCEPT;
@@ -97,10 +107,15 @@ class SINGLESHOTCWmain extends StatelessWidget {
 
   String? VAL1;
   String? VAL2;
+  String? VAL3;
+  String? VAL4;
   String? Aear;
   String? FORMULA;
   String? FORMULAI;
   String? ANS;
+  Function(String)? AearACCEPT;
+
+  Function(String)? Areafn;
 
   //Right --------------------------------------------
   Function CLEAR;
@@ -237,11 +252,16 @@ class SINGLESHOTCWmain extends StatelessWidget {
                     child: _tabtableB4(
                       height: 40,
                       // value: confirmdata ?? [INSDATA()],
+                      CAL2: CAL2,
                       VAL1: VAL1,
                       VAL2: VAL2,
+                      VAL3: VAL3,
+                      VAL4: VAL4,
                       Aear: Aear,
                       FORMULA: FORMULAI,
                       ANS: ANS,
+                      AearACCEPT: AearACCEPT,
+                      AearACCEPTbool: AearACCEPTbool,
                     ),
                   ),
                 ),
@@ -267,6 +287,7 @@ class SINGLESHOTCWmain extends StatelessWidget {
           GAPname: GAPname,
           GAPnameList: GAPnameList,
           GAPnamePick: GAPnamePick,
+          Areafn: Areafn,
         )
       ],
       childRIGHT: [
@@ -295,6 +316,7 @@ class SINGLESHOTCWmain extends StatelessWidget {
         //     ),
         //   ],
         // ),
+
         Row(
           children: [
             Expanded(
@@ -476,6 +498,7 @@ class _topboxfull extends StatefulWidget {
     this.GAP,
     this.GAPname,
     this.GAPnameList,
+    this.Areafn,
     required this.GAPnamePick,
   }) : super(key: key);
   Function outfn;
@@ -490,6 +513,7 @@ class _topboxfull extends StatefulWidget {
   String? GAP;
   List<String>? GAPnameList;
   Function(String) GAPnamePick;
+  Function(String)? Areafn;
   String? GAPname;
   @override
   State<_topboxfull> createState() => __topboxfullState();
@@ -664,26 +688,36 @@ class __topboxfullState extends State<_topboxfull> {
               const SizedBox(
                 width: 10,
               ),
-              SizedBox(
-                height: 38,
-                width: 100,
-                child: Row(
-                  children: [
-                    const Expanded(
+              InkWell(
+                onTap: () {
+                  if (widget.Areafn != null) {
+                    widget.Areafn!("Areafn");
+                  }
+                },
+                child: SizedBox(
+                  height: 38,
+                  width: 100,
+                  child: Row(
+                    children: [
+                      const Expanded(
                         flex: 2,
-                        child: Text('Area',
-                            style: TxtStyle(
-                              color: Colors.black,
-                              // fontSize: 12
-                              fontWeight: FontWeight.bold,
-                            ))),
-                    Expanded(
-                        flex: 1,
                         child: Text(
-                          widget.Area ?? '',
-                          style: TextStyle(fontSize: 10),
-                        )),
-                  ],
+                          'Area',
+                          style: TxtStyle(
+                            color: Colors.black,
+                            // fontSize: 12
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                          flex: 1,
+                          child: Text(
+                            widget.Area ?? '',
+                            style: TextStyle(fontSize: 10),
+                          )),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
@@ -945,9 +979,14 @@ class _tabtableB4 extends StatefulWidget {
     this.height,
     this.VAL1,
     this.VAL2,
+    this.VAL3,
+    this.VAL4,
     this.Aear,
     this.FORMULA,
     this.ANS,
+    this.AearACCEPT,
+    this.AearACCEPTbool,
+    this.CAL2,
   }) : super(key: key);
   List<INSDATA>? value;
   double? txtsize;
@@ -956,9 +995,15 @@ class _tabtableB4 extends StatefulWidget {
 
   String? VAL1;
   String? VAL2;
+  String? VAL3;
+  String? VAL4;
   String? Aear;
   String? FORMULA;
   String? ANS;
+  bool? AearACCEPTbool;
+  bool? CAL2;
+
+  Function(String)? AearACCEPT;
 
   @override
   State<_tabtableB4> createState() => _tabtableB4State();
@@ -1015,46 +1060,48 @@ class _tabtableB4State extends State<_tabtableB4> {
           const SizedBox(
             height: 5,
           ),
-          Row(
-            children: [
-              SizedBox(
-                width: 250,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        height: 40,
-                        width: 80,
-                        color: Colors.green,
-                        child: const Center(
-                          child: Text("FORMULA"),
+          if (widget.CAL2 ?? false == false) ...[
+            Row(
+              children: [
+                SizedBox(
+                  width: 250,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: 40,
+                          width: 80,
+                          color: Colors.green,
+                          child: const Center(
+                            child: Text("FORMULA"),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 40,
-                      width: 125,
-                      color: Colors.blue,
-                      child: Center(
-                        child: Text(widget.FORMULA ?? ''),
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                  ],
+                      Container(
+                        height: 40,
+                        width: 125,
+                        color: Colors.blue,
+                        child: Center(
+                          child: Text(widget.FORMULA ?? ''),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+          ],
           Row(
             children: [
               SizedBox(
@@ -1069,7 +1116,7 @@ class _tabtableB4State extends State<_tabtableB4> {
                         width: 80,
                         color: Colors.green,
                         child: const Center(
-                          child: Text("W1 (g)"),
+                          child: Text("X"),
                         ),
                       ),
                     ),
@@ -1120,7 +1167,7 @@ class _tabtableB4State extends State<_tabtableB4> {
                         width: 80,
                         color: Colors.green,
                         child: const Center(
-                          child: Text("W2 (g)"),
+                          child: Text("Y"),
                         ),
                       ),
                     ),
@@ -1162,10 +1209,117 @@ class _tabtableB4State extends State<_tabtableB4> {
               SizedBox(
                 width: 250,
                 child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       onTap: () {},
+                      child: Container(
+                        height: 40,
+                        width: 80,
+                        color: Colors.green,
+                        child: const Center(
+                          child: Text("Z"),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 40,
+                      width: 95,
+                      color: Colors.blue,
+                      child: Center(
+                        child: Text(widget.VAL3 ?? ''),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 40,
+                        width: 60,
+                        color: Colors.orange,
+                        child: const Center(
+                          child: Text(""),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 250,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 40,
+                        width: 80,
+                        color: Colors.green,
+                        child: const Center(
+                          child: Text("I"),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 40,
+                      width: 95,
+                      color: Colors.blue,
+                      child: Center(
+                        child: Text(widget.VAL4 ?? ''),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 40,
+                        width: 60,
+                        color: Colors.orange,
+                        child: const Center(
+                          child: Text(""),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 250,
+                child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        //
+                        if (widget.AearACCEPT == null) {
+                          widget.AearACCEPT!("acc");
+                        }
+                      },
                       child: Container(
                         height: 40,
                         width: 80,
@@ -1190,7 +1344,7 @@ class _tabtableB4State extends State<_tabtableB4> {
                           children: [
                             ComInputText(
                               isNumberOnly: true,
-                              isEnabled: false,
+                              isEnabled: widget.AearACCEPTbool,
                               width: 100,
                               height: 40,
                               isContr: true,

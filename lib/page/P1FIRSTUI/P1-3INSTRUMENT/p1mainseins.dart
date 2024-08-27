@@ -219,60 +219,119 @@ class SELECtINSTRUMENTbody extends StatelessWidget {
                   height: 450,
                   child: Column(
                     children: [
-                      for (int i = 0; i < _INSlist.length; i++)
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: InkWell(
-                            onTap: () {
-                              print(_INSlist[i]);
-                              FIRSTUI.SECLECTins = _INSlist[i];
-                              FIRSTUI.INSint = i;
-                              print(i);
-                              if (_INSlist[i] == 'APP-PHBP12') {
-                                context
-                                    .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoAPPPHBP12());
-                              }
+                      if (FIRSTUI.MODE_IP_FN == 'FN') ...[
+                        for (int i = 0; i < _INSlist.length; i++) ...[
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: InkWell(
+                              onTap: () {
+                                print(_INSlist[i]);
+                                FIRSTUI.SECLECTins = _INSlist[i];
+                                FIRSTUI.INSint = i;
+                                print(i);
+                                if (_INSlist[i] == 'APP-PHBP12') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoAPPPHBP12());
+                                }
 
-                              if (_INSlist[i] == 'SUR-BAL-013') {
-                                context
-                                    .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoSURBAL013());
-                              }
-                              if (_INSlist[i] == 'SUR-RGH-001') {
-                                context
-                                    .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoSURRGH001());
-                              }
-                              if (_INSlist[i] == 'SUR-THI-002') {
-                                context
-                                    .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoSURTHI002());
-                              }
+                                if (_INSlist[i] == 'SUR-BAL-013') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURBAL013());
+                                }
+                                if (_INSlist[i] == 'SUR-RGH-001') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURRGH001());
+                                }
+                                if (_INSlist[i] == 'SUR-THI-002') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURTHI002());
+                                }
 
-                              if (_INSlist[i] == 'SUR-MIC-001') {
-                                context
-                                    .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoSURMIC001());
-                              }
+                                if (_INSlist[i] == 'SUR-MIC-001') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURMIC001());
+                                }
 
-                              if (_INSlist[i] == 'SUR-MCS-001') {
-                                context
-                                    .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoSURMCS001());
-                              }
-                              if (_INSlist[i] == 'CTC-SEM-001') {
-                                context
-                                    .read<TRICKERMASTER_Bloc>()
-                                    .add(TRICKERMASTER_GETINtoCTCSEM001());
-                              }
-                            },
-                            child: INSBOX(
-                              INS: _INSlist[i],
-                              inuse: FIRSTUI.INSnotREADY[i] == 1,
+                                if (_INSlist[i] == 'SUR-MCS-001') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURMCS001());
+                                }
+                                if (_INSlist[i] == 'CTC-SEM-001') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoCTCSEM001());
+                                }
+                              },
+                              child: INSBOX(
+                                INS: _INSlist[i],
+                                inuse: FIRSTUI.INSnotREADY[i] == 1,
+                              ),
                             ),
-                          ),
-                        )
+                          )
+                        ],
+                      ] else if (FIRSTUI.MODE_IP_FN == 'IP') ...[
+                        for (int i = 0; i < _INSlist.length; i++) ...[
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: InkWell(
+                              onTap: () {
+                                print(_INSlist[i]);
+                                FIRSTUI.SECLECTins = _INSlist[i];
+                                FIRSTUI.INSint = i;
+                                print(i);
+                                if (_INSlist[i] == 'APP-PHBP12') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoAPPPHBP12());
+                                }
+
+                                if (_INSlist[i] == 'SUR-BAL-013') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURBAL013());
+                                }
+                                if (_INSlist[i] == 'SUR-RGH-001') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURRGH001());
+                                }
+                                if (_INSlist[i] == 'SUR-THI-002') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURTHI002());
+                                }
+
+                                if (_INSlist[i] == 'SUR-MIC-001') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURMIC001());
+                                }
+
+                                if (_INSlist[i] == 'SUR-MCS-001') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoSURMCS001());
+                                }
+                                if (_INSlist[i] == 'CTC-SEM-001') {
+                                  context
+                                      .read<TRICKERMASTER_Bloc>()
+                                      .add(TRICKERMASTER_GETINtoCTCSEM001());
+                                }
+                              },
+                              child: INSBOXP(
+                                INS: _INSlist[i],
+                                inuse: FIRSTUI.INSnotREADY[i] == 1,
+                              ),
+                            ),
+                          )
+                        ],
+                      ],
                     ],
                   ),
                 ),

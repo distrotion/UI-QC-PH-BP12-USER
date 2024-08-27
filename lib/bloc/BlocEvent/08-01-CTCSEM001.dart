@@ -43,7 +43,7 @@ class CTCSEM001_Bloc extends Bloc<CTCSEM001_Event, CTCSEM001SCHEMA> {
       CTCSEM001SCHEMA toAdd, Emitter<CTCSEM001SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "CTCSEM001db",
+      server + "FINAL/CTCSEM001db",
       data: {},
     );
     CTCSEM001SCHEMA output = CTCSEM001SCHEMA(

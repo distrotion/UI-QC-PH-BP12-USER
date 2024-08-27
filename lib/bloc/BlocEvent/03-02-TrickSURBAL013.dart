@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/global.dart';
 import '../../page/P1FIRSTUI/FIRSTuiVAR.dart';
+import '../../page/P3SUR-BAL-013/SURBAL013main.dart';
 import '../../page/P3SUR-BAL-013/SURBAL013var.dart';
 
 //-------------------------------------------------
@@ -31,6 +33,8 @@ class TRICKER_SURBAL013SETZERO extends TRICKER_Event {}
 //-------------------------------- FINISH
 
 class TRICKER_SURBAL013FINISH extends TRICKER_Event {}
+
+class TRICKER_SURBAL013AEAR extends TRICKER_Event {}
 
 //-------------------------------- no request
 
@@ -69,6 +73,10 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
       return _TRICKER_SURBAL013SETZERO('', emit);
     });
 
+    on<TRICKER_SURBAL013AEAR>((event, emit) {
+      return _TRICKER_SURBAL013AEAR('', emit);
+    });
+
     //-------------------------------- FINISH
 
     on<TRICKER_SURBAL013FINISH>((event, emit) {
@@ -85,7 +93,7 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_GETINtoSURBAL013(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoSURBAL013',
+      server + 'FINAL/GETINtoSURBAL013',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -110,7 +118,7 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURBAL013geteachITEM(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURBAL013-geteachITEM',
+      server + 'FINAL/SURBAL013-geteachITEM',
       data: {
         "ITEMs": SURBAL013var.ItemPickSELECT,
       },
@@ -121,7 +129,7 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURBAL013geteachGRAPH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURBAL013-geteachGRAPH',
+      server + 'FINAL/SURBAL013-geteachGRAPH',
       data: {
         "GAPname": SURBAL013var.GAPname,
       },
@@ -132,7 +140,7 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURBAL013confirmdata(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURBAL013-confirmdata',
+      server + 'FINAL/SURBAL013-confirmdata',
       data: {},
     );
     emit('');
@@ -141,7 +149,7 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURBAL013CLEAR(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURBAL013-CLEAR',
+      server + 'FINAL/SURBAL013-CLEAR',
       data: {},
     );
     emit('');
@@ -150,7 +158,7 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURBAL013RESETVALUE(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURBAL013-RESETVALUE',
+      server + 'FINAL/SURBAL013-RESETVALUE',
       data: {},
     );
     emit('');
@@ -159,7 +167,7 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURBAL013SETZERO(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURBAL013-SETZERO',
+      server + 'FINAL/SURBAL013-SETZERO',
       data: {},
     );
     emit('');
@@ -170,10 +178,30 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
 
   Future<void> _TRICKER_SURBAL013FINISH(
       String toAdd, Emitter<String> emit) async {
+    if (SURBAL013var.RESULTFORMAT == 'CAL1') {
+      final response = await Dio().post(
+        server + 'FINAL/SURBAL013-FINISH-CAL1',
+        data: {},
+      );
+    } else if (SURBAL013var.RESULTFORMAT == 'CAL2') {
+      final response = await Dio().post(
+        server + 'FINAL/SURBAL013-FINISH-CAL2',
+        data: {},
+      );
+    }
+
+    emit('');
+  }
+
+  Future<void> _TRICKER_SURBAL013AEAR(
+      String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURBAL013-FINISH-CAL1',
-      data: {},
+      server + 'FINAL/SURBAL013-preview-aear',
+      data: [
+        {"AEAR": SURBAL013var.ARAE_ANS}
+      ],
     );
+    Navigator.pop(BALANCE_SURBAL013maincontext);
     emit('');
   }
 

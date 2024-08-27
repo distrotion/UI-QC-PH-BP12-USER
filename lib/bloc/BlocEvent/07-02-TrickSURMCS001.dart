@@ -83,7 +83,7 @@ class TRICKER_SURMCS001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_GETINtoSURMCS001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoSURMCS001',
+      server + 'FINAL/GETINtoSURMCS001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -109,7 +109,7 @@ class TRICKER_SURMCS001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMCS001geteachITEM(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMCS001-geteachITEM',
+      server + 'FINAL/SURMCS001-geteachITEM',
       data: {
         "ITEMs": SURMCS001var.ItemPickSELECT,
       },
@@ -121,7 +121,7 @@ class TRICKER_SURMCS001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMCS001confirmdata(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMCS001-confirmdata',
+      server + 'FINAL/SURMCS001-confirmdata',
       data: {},
     );
     MICROSCOPESURMCS001_CONTEXT.read<SURMCS001_Bloc>().add(SURMCS001_READ());
@@ -131,7 +131,7 @@ class TRICKER_SURMCS001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMCS001CLEAR(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMCS001-CLEAR',
+      server + 'FINAL/SURMCS001-CLEAR',
       data: {},
     );
     MICROSCOPESURMCS001_CONTEXT.read<SURMCS001_Bloc>().add(SURMCS001_READ());
@@ -141,7 +141,7 @@ class TRICKER_SURMCS001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMCS001RESETVALUE(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMCS001-RESETVALUE',
+      server + 'FINAL/SURMCS001-RESETVALUE',
       data: {},
     );
     MICROSCOPESURMCS001_CONTEXT.read<SURMCS001_Bloc>().add(SURMCS001_READ());
@@ -151,7 +151,7 @@ class TRICKER_SURMCS001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMCS001SETZERO(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMCS001-SETZERO',
+      server + 'FINAL/SURMCS001-SETZERO',
       data: {},
     );
     emit('');
@@ -163,7 +163,7 @@ class TRICKER_SURMCS001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_SURMCS001FINISH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'SURMCS001-FINISH-IMG',
+      server + 'FINAL/SURMCS001-FINISH-IMG',
       data: {
         "IMG01": SURMCS001var.base64pic01,
         "IMG02": SURMCS001var.base64pic02,
