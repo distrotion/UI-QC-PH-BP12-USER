@@ -43,7 +43,7 @@ class HIMICM001_Bloc extends Bloc<HIMICM001_Event, HIMICM001SCHEMA> {
       HIMICM001SCHEMA toAdd, Emitter<HIMICM001SCHEMA> emit) async {
     //--------------- READ
     final response = await Dio().post(
-      server + "HIMICM001db",
+      server + "FINAL/HIMICM001db",
       data: {},
     );
     HIMICM001SCHEMA output = HIMICM001SCHEMA(

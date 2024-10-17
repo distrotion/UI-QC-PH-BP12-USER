@@ -139,6 +139,18 @@ class tabledetailsearchlist extends StatelessWidget {
 
     for (int i = 0; i < _data.length; i++) {
       if (_data[i].f01.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f02.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f03.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f04.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f05.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f06.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f07.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f08.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f09.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f10.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f11.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f12.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
+          _data[i].f13.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
           _data[i].f19.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
           _data[i].f17.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||
           _data[i].f16.toUpperCase().contains(FIRSTUI.SEARCH.toUpperCase()) ||

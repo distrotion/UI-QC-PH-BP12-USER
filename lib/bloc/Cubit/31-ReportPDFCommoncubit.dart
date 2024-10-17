@@ -12,11 +12,16 @@ String server = 'http://172.23.10.40:16700/';
 
 class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
   ReportPDFCommon_Cubit()
-      : super(CommonReportOutput(databasic: BasicCommonDATA()));
+      : super(CommonReportOutput(
+          databasic: BasicCommonDATA(),
+          CAL2datadata: CAL2data(),
+        ));
 
   Future<void> ReportPDFCommonCubit(String PO) async {
-    CommonReportOutput output =
-        CommonReportOutput(databasic: BasicCommonDATA());
+    CommonReportOutput output = CommonReportOutput(
+      databasic: BasicCommonDATA(),
+      CAL2datadata: CAL2data(),
+    );
     BasicCommonDATA BasicCommonDATAs = BasicCommonDATA();
     List<String> passlist = [];
 
@@ -129,7 +134,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       PATTERNlist['INCOMMING'][fi]['METHOD'].toString();
                   String METHODname = '';
                   String FREQ =
-                      '${POINTs} ${PATTERNlist['INCOMMING'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['INCOMMING'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
                   print(double.parse(POINTs));
                   if (double.parse(POINTs) < 1) {
                     FREQ = "${POINTs} AQL";
@@ -225,7 +230,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       PATTERNlist['INCOMMING'][fi]['METHOD'].toString();
                   String METHODname = '';
                   String FREQ =
-                      '${POINTs} ${PATTERNlist['INCOMMING'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['INCOMMING'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
 
                   if (double.parse(POINTs) < 1) {
                     FREQ = "${POINTs} AQL";
@@ -416,11 +421,92 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   databuffref['DATA']?[0]['PART'].toString() ?? '';
               BasicCommonDATAs.TPKLOTref =
                   databuffref['DATA']?[0]['TPKLOT'].toString() ?? '';
+
               // print(databuffref['DATA']?[0]['PART']);
               // print(databuffref['DATA']?[0]['PARTNAME']);
             }
           }
         }
+
+        // if (BasicDATAr['ReferFrom'].toString() != PO) {
+        // if (BasicDATAr['ReferFrom'] != null) {
+        final response02 = await Dio().post(
+          server + "BP12PH_Report_by_ref",
+          data: {
+            // "PO": BasicDATAr['ReferFrom'].toString(),
+            "PO": BasicDATAr['ReferFrom'] != null
+                ? BasicDATAr['ReferFrom'].toString()
+                : BasicDATAr['PO'].toString(),
+          },
+        );
+
+        if (response02.statusCode == 200) {
+          var databuffref = response02.data;
+
+//DATAlist
+
+          double qty = 0;
+
+          if (databuffref['DATAlist'].length > 0) {
+            // print(databuffref['DATAlist']);
+            if (databuffref['DATA'].length > 0) {
+              BasicCommonDATAs.TPKLOT =
+                  databuffref['DATA']?[0]['TPKLOT'].toString() ?? '';
+
+              BasicCommonDATAs.CUSLOT =
+                  databuffref['DATA']?[0]['CUSLOT'].toString() ?? '';
+
+              qty = double.parse(
+                  ConverstStr(databuffref['DATA']?[0]['QTY'].toString() ?? ''));
+
+              List<String> lotlist = [];
+              for (var p = 0; p < databuffref['DATAlist'].length; p++) {
+                String lastst =
+                    databuffref['DATAlist']?[p]['TPKLOT'].toString() ?? '';
+                // BasicCommonDATAs.TPKLOT = BasicCommonDATAs.TPKLOT +
+                //     ',' +
+                //     ('${lastst.substring(7, 10)}');
+                // lotlist
+                //   .add(int.parse(ConverstStr('${lastst.substring(7, 10)}')));
+                lotlist.add('${lastst.substring(7, 10)}');
+
+                BasicCommonDATAs.CUSLOT = BasicCommonDATAs.CUSLOT +
+                    ',' +
+                    '${databuffref['DATAlist']?[p]['CUSLOT'].toString() ?? ''}';
+
+                qty = qty +
+                    double.parse(ConverstStr(
+                        databuffref['DATAlist']?[p]['QTY'].toString() ?? ''));
+              }
+              lotlist = lotlist..sort();
+              BasicCommonDATAs.TPKLOT = BasicCommonDATAs.TPKLOT +
+                  ',' +
+                  lotlist.toString().replaceAll("]", "").replaceAll("[", "");
+              BasicCommonDATAs.QTY = qty.toString();
+            }
+          }
+          // print(qty);
+          BasicCommonDATAs.CUSLOT =
+              BasicCommonDATAs.CUSLOT.replaceAll(",,", ",");
+          List<String> datalist = BasicCommonDATAs.CUSLOT.split(",");
+          BasicCommonDATAs.CUSLOT = datalist
+              .toSet()
+              .toString()
+              .replaceAll("}", "")
+              .replaceAll("{", "");
+          // BasicCommonDATAs.PARTNAMEref =
+          //     databuffref['DATA']?[0]['PARTNAME'].toString() ?? '';
+          // BasicCommonDATAs.PARTref =
+          //     databuffref['DATA']?[0]['PART'].toString() ?? '';
+          // BasicCommonDATAs.TPKLOTref =
+          //     databuffref['DATA']?[0]['TPKLOT'].toString() ?? '';
+          // BasicCommonDATAs.TPKLOT =
+          //     BasicCommonDATAs.TPKLOT + "," + BasicCommonDATAs.TPKLOTref;
+          // print(databuffref['DATA']?[0]['PART']);
+          // print(databuffref['DATA']?[0]['PARTNAME']);
+        }
+        // }
+        // }
 
         if (PATTERNlist['Pimg'] != null) {
           if (PATTERNlist['Pimg']['P1'] != null) {
@@ -460,7 +546,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String METHODss = '';
                   String METHODname = '';
                   String FREQ =
-                      '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
                   print(double.parse(POINTs));
                   if (double.parse(POINTs) < 1) {
                     FREQ = "${POINTs} AQL";
@@ -550,7 +636,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String METHODss = '';
                   String METHODname = '';
                   String FREQ =
-                      '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
 
@@ -1029,7 +1115,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String METHODss = '';
                   String METHODname = '';
                   String FREQ =
-                      '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
 
@@ -1565,7 +1651,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String METHODss = '';
                   String METHODname = '';
                   String FREQ =
-                      '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
 
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
@@ -1945,7 +2031,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String METHODss = '';
                   String METHODname = '';
                   String FREQ =
-                      '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
                   // print(FREQ);
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
@@ -2329,7 +2415,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String METHODss = '';
                   String METHODname = '';
                   String FREQ =
-                      '${POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
 
@@ -2569,6 +2655,37 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
               }
             }
           }
+          print(PATTERNlist['FINAL'][fi]['RESULTFORMAT']);
+          if (PATTERNlist['FINAL'][fi]['RESULTFORMAT'] == 'CAL2' ||
+              PATTERNlist['FINAL'][fi]['RESULTFORMAT'] == 'CAL1') {
+            String orderpo = PO;
+            if (BasicDATAr['ReferFrom'].toString() != PO) {
+              //
+              if (BasicDATAr['ReferFrom'] != null) {
+                orderpo = BasicDATAr['ReferFrom'].toString();
+              }
+            }
+            final response = await Dio().post(
+              server + "BP12PH_CALDATA",
+              data: {
+                "PO": orderpo,
+              },
+            );
+
+            if (response.statusCode == 200) {
+              var databuff = response.data;
+              // print(databuff);
+              if (databuff['DATAlist'].length > 0) {
+                output.CAL2datadata = CAL2data(
+                  VAL1: databuff['DATAlist'][0]['VAL1'].toString(),
+                  VAL2: databuff['DATAlist'][0]['VAL2'].toString(),
+                  VAL3: databuff['DATAlist'][0]['VAL3'].toString(),
+                  VAL4: databuff['DATAlist'][0]['VAL4'].toString(),
+                  Area: databuff['DATAlist'][0]['Area'].toString(),
+                );
+              }
+            }
+          }
         }
         // print('>>${ITEMlist.length}');
         if (nadata == '') {
@@ -2593,8 +2710,10 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
   }
 
   Future<void> Flush() async {
-    CommonReportOutput output =
-        CommonReportOutput(databasic: BasicCommonDATA());
+    CommonReportOutput output = CommonReportOutput(
+      databasic: BasicCommonDATA(),
+      CAL2datadata: CAL2data(),
+    );
     emit(output);
   }
 }
@@ -2900,12 +3019,14 @@ class CommonReportOutput {
   CommonReportOutput({
     this.datain = const [],
     this.datain_IC = const [],
+    required this.CAL2datadata,
     required this.databasic,
   });
 
   List<FINALCHECKlistCommonClass> datain;
   List<INCOMMINGCHECKlistCommonClass> datain_IC;
   BasicCommonDATA databasic;
+  CAL2data CAL2datadata;
 }
 
 bool checkdata(double maxdata, double mindata, double input) {
@@ -2930,4 +3051,20 @@ bool checkdata(double maxdata, double mindata, double input) {
   } else {
     return true;
   }
+}
+
+class CAL2data {
+  CAL2data({
+    this.VAL1 = '',
+    this.VAL2 = '',
+    this.VAL3 = '',
+    this.VAL4 = '',
+    this.Area = '',
+  });
+
+  String VAL1;
+  String VAL2;
+  String VAL3;
+  String VAL4;
+  String Area;
 }

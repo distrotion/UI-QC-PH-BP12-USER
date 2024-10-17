@@ -69,7 +69,9 @@ class _ROCKWELL_APPPHBP12bodyState extends State<ROCKWELL_APPPHBP12body> {
   @override
   void dispose() {
     BackButtonInterceptor.remove(myInterceptor);
+
     super.dispose();
+    APPPHBP12var.DHtimer.cancel();
   }
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {

@@ -72,7 +72,9 @@ class _ROCKWELL_SURBAL013bodyState extends State<ROCKWELL_SURBAL013body> {
   @override
   void dispose() {
     BackButtonInterceptor.remove(myInterceptor);
+
     super.dispose();
+    SURBAL013var.DHtimer.cancel();
   }
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {

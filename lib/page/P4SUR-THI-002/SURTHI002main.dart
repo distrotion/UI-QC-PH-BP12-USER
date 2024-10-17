@@ -67,6 +67,7 @@ class _ROCKWELL_SURTHI002bodyState extends State<ROCKWELL_SURTHI002body> {
   void dispose() {
     BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
+    SURTHI002var.DHtimer.cancel();
   }
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {

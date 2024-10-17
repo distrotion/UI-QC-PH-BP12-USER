@@ -51,6 +51,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
     CommonReportOutput _dataCOMMON = widget.dataCommon ??
         CommonReportOutput(
           databasic: BasicCommonDATA(),
+          CAL2datadata: CAL2data(),
         );
     int HardnessNO = 1;
     int CoreNO = 1;
@@ -1207,7 +1208,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                   ),
                                                   Padding(
                                                     padding: EdgeInsets.only(
-                                                        top: 15, bottom: 5),
+                                                        top: 7, bottom: 5),
                                                     child: Text(
                                                       "(ใบรายงานผลการตรวจสอบผลิตภัณฑ์สำหรับกระบวนการ Surface treatment)",
                                                       style: TextStyle(
@@ -1853,8 +1854,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget05: Center(
                                   child: Text(
-                                    ReportPDFCommonvar
-                                        .datalist[0].SPECIFICATIONname,
+                                    ReportPDFCommonvar.datalist[0].FREQ ==
+                                            '100% Check'
+                                        ? "100%"
+                                        : ReportPDFCommonvar
+                                            .datalist[0].SPECIFICATIONname,
                                     style: TextStyle(
                                       fontSize: ReportPDFCommonvar.datalist[0]
                                                   .SPECIFICATIONname.length >
@@ -1936,8 +1940,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget05: Center(
                                   child: Text(
-                                    ReportPDFCommonvar
-                                        .datalist[1].SPECIFICATIONname,
+                                    ReportPDFCommonvar.datalist[1].FREQ ==
+                                            '100% Check'
+                                        ? "100%"
+                                        : ReportPDFCommonvar
+                                            .datalist[1].SPECIFICATIONname,
                                     style: TextStyle(
                                       fontSize: ReportPDFCommonvar.datalist[1]
                                                   .SPECIFICATIONname.length >
@@ -2028,8 +2035,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget05: Center(
                                   child: Text(
-                                    ReportPDFCommonvar
-                                        .datalist[2].SPECIFICATIONname,
+                                    ReportPDFCommonvar.datalist[2].FREQ ==
+                                            '100% Check'
+                                        ? "100%"
+                                        : ReportPDFCommonvar
+                                            .datalist[2].SPECIFICATIONname,
                                     style: TextStyle(
                                       fontSize: ReportPDFCommonvar.datalist[2]
                                                   .SPECIFICATIONname.length >
@@ -2120,8 +2130,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget05: Center(
                                   child: Text(
-                                    ReportPDFCommonvar
-                                        .datalist[3].SPECIFICATIONname,
+                                    ReportPDFCommonvar.datalist[3].FREQ ==
+                                            '100% Check'
+                                        ? "100%"
+                                        : ReportPDFCommonvar
+                                            .datalist[3].SPECIFICATIONname,
                                     style: TextStyle(
                                       fontSize: ReportPDFCommonvar.datalist[3]
                                                   .SPECIFICATIONname.length >
@@ -2212,8 +2225,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget05: Center(
                                   child: Text(
-                                    ReportPDFCommonvar
-                                        .datalist[4].SPECIFICATIONname,
+                                    ReportPDFCommonvar.datalist[4].FREQ ==
+                                            '100% Check'
+                                        ? "100%"
+                                        : ReportPDFCommonvar
+                                            .datalist[4].SPECIFICATIONname,
                                     style: TextStyle(
                                       fontSize: ReportPDFCommonvar.datalist[4]
                                                   .SPECIFICATIONname.length >
@@ -2304,8 +2320,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget05: Center(
                                   child: Text(
-                                    ReportPDFCommonvar
-                                        .datalist[5].SPECIFICATIONname,
+                                    ReportPDFCommonvar.datalist[5].FREQ ==
+                                            '100% Check'
+                                        ? "100%"
+                                        : ReportPDFCommonvar
+                                            .datalist[5].SPECIFICATIONname,
                                     style: TextStyle(
                                       fontSize: ReportPDFCommonvar.datalist[5]
                                                   .SPECIFICATIONname.length >
@@ -2396,8 +2415,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget05: Center(
                                   child: Text(
-                                    ReportPDFCommonvar
-                                        .datalist[6].SPECIFICATIONname,
+                                    ReportPDFCommonvar.datalist[6].FREQ ==
+                                            '100% Check'
+                                        ? "100%"
+                                        : ReportPDFCommonvar
+                                            .datalist[6].SPECIFICATIONname,
                                     style: TextStyle(
                                       fontSize: ReportPDFCommonvar.datalist[6]
                                                   .SPECIFICATIONname.length >
@@ -2667,7 +2689,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             1
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[0][0]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -2687,7 +2709,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             2
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[0][1]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -2707,7 +2729,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             3
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[0][2]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -2727,7 +2749,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             4
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[0][3]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -2747,7 +2769,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             5
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[0][4]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -2767,7 +2789,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             6
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[0][5]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -2787,7 +2809,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             7
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[0][6]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -2807,7 +2829,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             8
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[0][7]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -2827,7 +2849,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             9
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[0][8]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -3255,7 +3277,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             1
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[1][0]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -3275,7 +3297,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             2
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[1][1]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -3295,7 +3317,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             3
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[1][2]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -3315,7 +3337,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             4
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[1][3]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -3335,7 +3357,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             5
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[1][4]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -3355,7 +3377,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             6
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[1][5]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -3375,7 +3397,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             7
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[1][6]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -3395,7 +3417,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             8
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[1][7]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(
@@ -3415,7 +3437,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                                             9
                                                         ? ReportPDFCommonvar
                                                             .rawlistDATA[1][8]
-                                                            .DATANO
+                                                            .DATAPCS
                                                         : '')
                                                     : '',
                                                 style: const TextStyle(

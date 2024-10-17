@@ -68,6 +68,7 @@ class _ROCKWELL_CTCSEM001bodyState extends State<ROCKWELL_CTCSEM001body> {
   void dispose() {
     BackButtonInterceptor.remove(myInterceptor);
     super.dispose();
+    CTCSEM001var.DHtimer.cancel();
   }
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {

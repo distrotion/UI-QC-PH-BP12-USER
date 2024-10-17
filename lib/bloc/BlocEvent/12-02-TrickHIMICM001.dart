@@ -85,7 +85,7 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_GETINtoHIMICM001(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'GETINtoHIMICM001',
+      server + 'FINAL/GETINtoHIMICM001',
       data: {
         "PO": FIRSTUI.POACTIVE,
         "CP": FIRSTUI.CPACTIVE,
@@ -108,7 +108,7 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_HIMICM001geteachITEM(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'HIMICM001-geteachITEM',
+      server + 'FINAL/HIMICM001-geteachITEM',
       data: {
         "ITEMs": HIMICM001var.ItemPickSELECT,
       },
@@ -119,7 +119,7 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_HIMICM001geteachGRAPH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'HIMICM001-geteachGRAPH',
+      server + 'FINAL/HIMICM001-geteachGRAPH',
       data: {
         "GAPname": HIMICM001var.GAPname,
       },
@@ -130,7 +130,7 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_HIMICM001confirmdata(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'HIMICM001-confirmdata',
+      server + 'FINAL/HIMICM001-confirmdata',
       data: {},
     );
     emit('');
@@ -139,7 +139,7 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_HIMICM001CLEAR(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'HIMICM001-CLEAR',
+      server + 'FINAL/HIMICM001-CLEAR',
       data: {},
     );
     emit('');
@@ -148,7 +148,7 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_HIMICM001RESETVALUE(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'HIMICM001-RESETVALUE',
+      server + 'FINAL/HIMICM001-RESETVALUE',
       data: {},
     );
     emit('');
@@ -157,7 +157,7 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_HIMICM001SETZERO(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'HIMICM001-SETZERO',
+      server + 'FINAL/HIMICM001-SETZERO',
       data: {},
     );
     emit('');
@@ -169,7 +169,7 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
   Future<void> _TRICKER_HIMICM001FINISH(
       String toAdd, Emitter<String> emit) async {
     final response = await Dio().post(
-      server + 'HIMICM001-FINISH',
+      server + 'FINAL/HIMICM001-FINISH',
       data: {},
     );
     emit('');

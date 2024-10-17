@@ -20,8 +20,12 @@ import '../../widget/common/Loading.dart';
 import '../../widget/onlyINqcui/popup.dart';
 import '../P31ReportPDFcommon/ReportPDFCommonvar.dart';
 
+import '../P32ReportPDFlong/ReportPDFlongvar.dart';
+import '../P50ReportPDFcommonlist/ReportPDFcommonlistvar.dart';
 import '../page31.dart';
 
+import '../page32.dart';
+import '../page50.dart';
 import 'REPORTvar.dart';
 
 late BuildContext REPORTuiMAINcontext;
@@ -419,13 +423,53 @@ class _MyData extends DataTableSource {
                     // REPORTvar.PO = data.f01;
                     // context.read<REPORT_CALL_Bloc>().add(REPORT_CALL());
                     ReportPDFCommonvar.PO = data.f01;
+                    ReportPDFcommonlistvar.PO = data.f01;
+                    ReportPDFlongvar.PO = data.f01;
+                    STD2report(context);
+                  },
+                  child: Container(
+                    color: Colors.orange,
+                    child: const Center(
+                        child: Text(
+                      "REPORT2",
+                      style: TxtStyle(color: Colors.white),
+                    )),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    // onLoadingFAKE(context);
+                    // REPORTvar.reportTYPE = 0;
+                    // REPORTvar.PO = data.f01;
+                    // context.read<REPORT_CALL_Bloc>().add(REPORT_CALL());
+                    ReportPDFCommonvar.PO = data.f01;
+                    ReportPDFcommonlistvar.PO = data.f01;
                     STDreport(context);
                   },
                   child: Container(
                     color: Colors.blue,
                     child: const Center(
                         child: Text(
-                      "REPORT",
+                      "REPORT1",
+                      style: TxtStyle(color: Colors.white),
+                    )),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    // onLoadingFAKE(context);
+                    // REPORTvar.reportTYPE = 0;
+                    // REPORTvar.PO = data.f01;
+                    // context.read<REPORT_CALL_Bloc>().add(REPORT_CALL());
+                    ReportPDFCommonvar.PO = data.f01;
+                    ReportPDFcommonlistvar.PO = data.f01;
+                    STDCOMreport(context);
+                  },
+                  child: Container(
+                    color: Colors.black,
+                    child: const Center(
+                        child: Text(
+                      "RAW",
                       style: TxtStyle(color: Colors.white),
                     )),
                   ),
@@ -458,6 +502,30 @@ class _MyData extends DataTableSource {
 //   );
 // }
 
+void STD2report(
+  BuildContext contextin,
+) {
+  showDialog(
+    context: contextin,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return Dialog(
+        child: SizedBox(
+          height: 1000,
+          width: 1500,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Page32(),
+              // child: Page50(),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
 void STDreport(
   BuildContext contextin,
 ) {
@@ -473,6 +541,31 @@ void STDreport(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
               child: Page31(),
+              // child: Page50(),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+void STDCOMreport(
+  BuildContext contextin,
+) {
+  showDialog(
+    context: contextin,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return Dialog(
+        child: SizedBox(
+          height: 1000,
+          width: 1500,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              // child: Page31(),
+              child: Page50(),
             ),
           ),
         ),

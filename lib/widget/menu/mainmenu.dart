@@ -10,6 +10,7 @@ import '../../page/page11.dart';
 import '../../page/page13.dart';
 
 import '../../page/page18.dart';
+import '../../page/page20.dart';
 import '../../page/page9.dart';
 import 'sub_widget.dart';
 
@@ -80,15 +81,16 @@ class Data_Menu_mainmenu extends StatelessWidget {
           ),
         ),
         menu_normal(
-          name: "DASHBOARD",
+          name: "INPROCESS",
+          page: Page20(),
+          Lv: 1,
+        ),
+        menu_normal(
+          name: "FINAL",
           page: Page1(),
           Lv: 1,
         ),
-        // menu_normal(
-        //   name: "Page2",
-        //   page: Page2(),
-        //   Lv: 1,
-        // ),
+
         // menu_normal(
         //   name: "Page3",
         //   page: Page3(),

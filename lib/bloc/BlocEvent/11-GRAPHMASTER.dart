@@ -27,7 +27,7 @@ class GRAPHMASTER_Bloc extends Bloc<GRAPHMASTER_Event, List<dataset>> {
   Future<void> _GRAPHMASTER_READ(
       List<dataset> toAdd, Emitter<List<dataset>> emit) async {
     final response = await Dio().post(
-      server + 'GRAPH-STD-GET',
+      server + 'FINAL/GRAPH-STD-GET',
       data: {},
     );
     List<dataset> output = [];
@@ -69,7 +69,7 @@ class GRAPHMASTER_Bloc extends Bloc<GRAPHMASTER_Event, List<dataset>> {
   Future<void> _GRAPHMASTER_WRITE(
       List<dataset> toAdd, Emitter<List<dataset>> emit) async {
     final response = await Dio().post(
-      server + 'GRAPH-STD-UPDATE',
+      server + 'FINAL/GRAPH-STD-UPDATE',
       data: {
         "UID": MASTERGRAPHvar.con01,
         "NO": MASTERGRAPHvar.con02,

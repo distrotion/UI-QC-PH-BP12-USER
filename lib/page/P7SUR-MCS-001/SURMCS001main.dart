@@ -143,7 +143,7 @@ class _ROCKWELL_SURMCS001bodyState extends State<ROCKWELL_SURMCS001body> {
         widget.data?.UPDATE = '-';
       });
 
-      // Timer timer = Timer(const Duration(seconds: 1), () {
+      // Timer timer = Timer(const Duration(seconds: 5), () {
       //   context.read<SURMCS001_Bloc>().add(SURMCS001_READ());
       // });
       // SURMCS001var.DHtimer = timer;
