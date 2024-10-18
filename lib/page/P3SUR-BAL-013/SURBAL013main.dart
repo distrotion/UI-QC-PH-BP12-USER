@@ -528,8 +528,7 @@ class _select_metrixState extends State<select_metrix> {
                                 (double.parse(ConverstStr(SURBAL013var.RS_L2)) /
                                     2);
                             double H =
-                                (double.parse(ConverstStr(SURBAL013var.RS_HI)) /
-                                    2);
+                                (double.parse(ConverstStr(SURBAL013var.RS_HI)));
                             SURBAL013var.ARAE_ANS =
                                 "${(L1 * L2 + L1 * L2 + L1 * H * 2 + L2 * H * 2).toStringAsFixed(4)}";
                             BALANCE_SURBAL013maincontext.read<
@@ -553,7 +552,7 @@ class _select_metrixState extends State<select_metrix> {
                     Text("Cylinser"),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("2*PI*(DI/2)*H + PI*(DI/2)^2*H"),
+                      child: Text("2*PI*(DI/2)*H + PI*(DI/2)^2"),
                     ),
                     // Text("R รัศมี , H ความสูง , PI 3.1415"),
                     Text("PI 3.1415"),
@@ -602,10 +601,9 @@ class _select_metrixState extends State<select_metrix> {
                                 2);
 
                             double H = (double.parse(
-                                    ConverstStr(SURBAL013var.CYNH_HI)) /
-                                2);
+                                ConverstStr(SURBAL013var.CYNH_HI)));
                             SURBAL013var.ARAE_ANS =
-                                "${(2 * PI * R * H + (PI * R * R) * 2).toStringAsFixed(4)}";
+                                "${((2 * PI * R * H) + (PI * R * R) * 2).toStringAsFixed(4)}";
                             BALANCE_SURBAL013maincontext.read<
                                     TRICKER_SURBAL013_Bloc>()
                                 .add(TRICKER_SURBAL013AEAR());
