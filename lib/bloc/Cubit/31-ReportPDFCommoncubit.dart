@@ -382,7 +382,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
               BasicDATAr['PART'] != null ? BasicDATAr['PART'].toString() : '',
           CUSLOT: BasicDATAr['CUSLOT'] != null
               ? BasicDATAr['CUSLOT'].toString()
-              : '',
+              : '-',
           TPKLOT: BasicDATAr['FG_CHARG'] != null
               ? BasicDATAr['FG_CHARG'].toString()
               : '',
@@ -392,7 +392,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
           QTY: BasicDATAr['QTY'] != null ? BasicDATAr['QTY'].toString() : '',
           UNITSAP: BasicDATAr['UNITSAP'] != null
               ? BasicDATAr['UNITSAP'].toString()
-              : 'PCS',
+              : '  PCS',
           INC01: inc01,
           INC02: inc02,
           // PICstd: BasicDATAr['PIC'] != null
@@ -807,7 +807,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     }
                   }
                   // print(ITEMname);
-
+                  desinal = 1;
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
                     if (FINALdata[MACHINElist[mi]]
@@ -1244,7 +1244,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   }
 
                   // print(itemss);
-
+                  desinal = 2;
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
                     if (FINALdata[MACHINElist[mi]]
@@ -1744,6 +1744,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       desinal = 1;
                     }
                   }
+                  desinal = 2;
 
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
@@ -2127,7 +2128,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       desinal = 1;
                     }
                   }
-
+                  desinal = 1;
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
                     if (FINALdata[MACHINElist[mi]]
@@ -2390,7 +2391,8 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
             }
           }
 
-          if (PATTERNlist['FINAL'][fi]['RESULTFORMAT'] == 'CAL1') {
+          if (PATTERNlist['FINAL'][fi]['RESULTFORMAT'] == 'CAL1' ||
+              PATTERNlist['FINAL'][fi]['RESULTFORMAT'] == 'CAL2') {
             NO_NUMBER++;
 
             for (var mi = 0; mi < MACHINElist.length; mi++) {
@@ -2583,7 +2585,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     }
                   }
                   // print(ITEMname);
-
+                  desinal = 2;
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
                     if (FINALdata[MACHINElist[mi]]

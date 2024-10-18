@@ -87,7 +87,7 @@ class REPORT_CALL_Bloc extends Bloc<REPORT_CALL_Event, String> {
   Future<void> _REPORT_COPPY(String toAdd, Emitter<String> emit) async {
     String output = 'R_NOK';
     final response = await Dio().post(
-      server + 'CopyReport',
+      server + 'FINAL/CopyReport',
       data: {
         "original": REPORTvar.original,
         "new": REPORTvar.newreport,

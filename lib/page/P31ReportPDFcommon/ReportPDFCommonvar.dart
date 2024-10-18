@@ -4,6 +4,7 @@ import '../../widget/common/imgset.dart';
 
 class ReportPDFCommonvar {
   static bool iscontrol = false;
+  static bool HIDEDATA = false;
   static bool canf = true;
   static String PO = '';
 
@@ -17,6 +18,11 @@ class ReportPDFCommonvar {
   static String TPKLOT = '';
   static String MATERIAL = '';
   static String QTY = '';
+
+  static String TPKLOTEDIT = '';
+
+  static String NAMEEDIT = '';
+  static String REMARKEDIT = '';
 
   static String PICstd = '';
   static String PIC01 = '';

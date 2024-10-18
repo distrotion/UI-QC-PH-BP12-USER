@@ -71,6 +71,7 @@ class TAILSLOT extends StatelessWidget {
                                       "Judgement",
                                       style: TextStyle(
                                         fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
@@ -79,6 +80,7 @@ class TAILSLOT extends StatelessWidget {
                                       "Inspected By",
                                       style: TextStyle(
                                         fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
@@ -87,6 +89,7 @@ class TAILSLOT extends StatelessWidget {
                                       "Checked By",
                                       style: TextStyle(
                                         fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
@@ -95,6 +98,7 @@ class TAILSLOT extends StatelessWidget {
                                       "Approved By",
                                       style: TextStyle(
                                         fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
@@ -118,15 +122,25 @@ class TAILSLOT extends StatelessWidget {
                                         alignment: Alignment.center,
                                         child: Padding(
                                           padding: const EdgeInsets.only(
-                                              bottom: 20, top: 25),
-                                          child: Text(NAME01 ?? ''),
+                                              bottom: 15, top: 25),
+                                          child: Text(
+                                            NAME01 ?? '',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       Align(
-                                        alignment: Alignment.bottomRight,
+                                        alignment: Alignment.bottomCenter,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: Text(formattedDate),
+                                          padding: const EdgeInsets.only(),
+                                          child: Text(
+                                            formattedDate,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -137,15 +151,25 @@ class TAILSLOT extends StatelessWidget {
                                         alignment: Alignment.center,
                                         child: Padding(
                                           padding: const EdgeInsets.only(
-                                              bottom: 20, top: 25),
-                                          child: Text(NAME02 ?? ''),
+                                              bottom: 15, top: 25),
+                                          child: Text(
+                                            NAME02 ?? '',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       Align(
-                                        alignment: Alignment.bottomRight,
+                                        alignment: Alignment.bottomCenter,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: Text(formattedDate),
+                                          padding: const EdgeInsets.only(),
+                                          child: Text(
+                                            formattedDate,
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -156,15 +180,25 @@ class TAILSLOT extends StatelessWidget {
                                         alignment: Alignment.center,
                                         child: Padding(
                                           padding: const EdgeInsets.only(
-                                              bottom: 20, top: 25),
-                                          child: Text(NAME03 ?? ''),
+                                              bottom: 15, top: 25),
+                                          child: Text(
+                                            NAME03 ?? '',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       Align(
-                                        alignment: Alignment.bottomRight,
+                                        alignment: Alignment.bottomCenter,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: Text(formattedDate),
+                                          padding: const EdgeInsets.only(),
+                                          child: Text(
+                                            formattedDate,
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -191,11 +225,17 @@ class TAILSLOT extends StatelessWidget {
                                   alignment: Alignment.topLeft,
                                   child: Padding(
                                     padding: EdgeInsets.all(12.0),
-                                    child: Text("Remark"),
+                                    child: Text(
+                                      "Remark",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 Align(
-                                  alignment: Alignment.center,
+                                  alignment: Alignment.centerLeft,
                                   child: Padding(
                                     padding: EdgeInsets.all(12.0),
                                     child: Text(Remark ?? ''),
@@ -225,7 +265,13 @@ class TAILSLOT extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Padding(
                       padding: EdgeInsets.all(12.0),
-                      child: Text("Details"),
+                      child: Text(
+                        "Details",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                   Padding(

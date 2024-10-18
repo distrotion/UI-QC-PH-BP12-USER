@@ -36,6 +36,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
           .read<ReportPDFCommon_Cubit>()
           .ReportPDFCommonCubit(ReportPDFCommonvar.PO);
 
+      ReportPDFCommonvar.TPKLOTEDIT = '';
       ReportPDFCommonvar.QTYEDIT = '';
       ReportPDFCommonvar.INCresult = '';
     }
@@ -142,6 +143,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
             _dataCOMMON.datain[i].LOAD != '-') {
           Loadin = "( Load ${_dataCOMMON.datain[i].LOAD} )";
         }
+
         ReportPDFCommonvar.datalist[i].ITEMname =
             " ${_dataCOMMON.datain[i].ITEMname} ${Loadin}";
         ReportPDFCommonvar.datalist[i].SCMARK = _dataCOMMON.datain[i].SCMARK;
@@ -872,16 +874,26 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Container(
-                  color: ReportPDFCommonvar.STATUS == 'REPORT READY'
-                      ? Colors.green
-                      : Colors.yellow,
-                  height: 40,
-                  width: 200,
-                  child: Center(
-                    child: Text(ReportPDFCommonvar.STATUS),
+              InkWell(
+                onLongPress: () {
+                  if (ReportPDFCommonvar.HIDEDATA) {
+                    ReportPDFCommonvar.HIDEDATA = false;
+                  } else {
+                    ReportPDFCommonvar.HIDEDATA = true;
+                  }
+                  setState(() {});
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: Container(
+                    color: ReportPDFCommonvar.STATUS == 'REPORT READY'
+                        ? Colors.green
+                        : Colors.yellow,
+                    height: 40,
+                    width: 100,
+                    child: Center(
+                      child: Text(ReportPDFCommonvar.STATUS),
+                    ),
                   ),
                 ),
               ),
@@ -981,6 +993,27 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                   },
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: ComInputText(
+                  height: 40,
+                  width: 150,
+                  isContr: ReportPDFCommonvar.iscontrol,
+                  fnContr: (input) {
+                    setState(() {
+                      ReportPDFCommonvar.iscontrol = input;
+                    });
+                  },
+                  sPlaceholder: "TPK.LOT EDIT",
+                  sValue: ReportPDFCommonvar.TPKLOTEDIT,
+                  returnfunc: (String s) {
+                    setState(() {
+                      ReportPDFCommonvar.TPKLOTEDIT = s;
+                    });
+                  },
+                ),
+              ),
+              //
               // InkWell(
               //   onTap: () {
               //     setState(() {
@@ -1005,11 +1038,31 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                       ReportPDFCommonvar.iscontrol = input;
                     });
                   },
-                  sPlaceholder: "INC result",
-                  sValue: ReportPDFCommonvar.INCresult,
+                  sPlaceholder: "NAME",
+                  sValue: ReportPDFCommonvar.NAMEEDIT,
                   returnfunc: (String s) {
                     setState(() {
-                      ReportPDFCommonvar.INCresult = s;
+                      ReportPDFCommonvar.NAMEEDIT = s;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: ComInputText(
+                  height: 40,
+                  width: 150,
+                  isContr: ReportPDFCommonvar.iscontrol,
+                  fnContr: (input) {
+                    setState(() {
+                      ReportPDFCommonvar.iscontrol = input;
+                    });
+                  },
+                  sPlaceholder: "REMARK",
+                  sValue: ReportPDFCommonvar.REMARKEDIT,
+                  returnfunc: (String s) {
+                    setState(() {
+                      ReportPDFCommonvar.REMARKEDIT = s;
                     });
                   },
                 ),
@@ -1229,7 +1282,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                         height: 60,
                                         child: Center(
                                           child: Text(
-                                            "FR-HQC-03/002-03-18/12/20",
+                                            "FR-HQC-03/020-01-18/10/24",
                                             style: TextStyle(
                                               fontSize: 24,
                                               fontWeight: FontWeight.bold,
@@ -1262,7 +1315,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                             child: Text(
                                               "1/1",
                                               style: TextStyle(
-                                                fontSize: 16,
+                                                fontSize: 22,
                                               ),
                                             ),
                                           ),
@@ -1275,12 +1328,19 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                               HEAD4SLOT(
                                 ListFlex: [4, 8, 3, 5],
                                 widget01: const Center(
-                                  child: Text(
-                                    "Customer",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6),
+                                        child: Text(
+                                          "Customer name",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 widget02: Align(
@@ -1290,7 +1350,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                     child: Text(
                                       ReportPDFCommonvar.CUSTOMER,
                                       style: const TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ),
@@ -1299,7 +1359,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   child: Text(
                                     "Process",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -1308,20 +1368,28 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   child: Text(
                                     ReportPDFCommonvar.PROCESS,
                                     style: const TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ),
                               ),
+
                               BODY4SLOT(
                                 ListFlex: [4, 8, 3, 5],
                                 widget01: const Center(
-                                  child: Text(
-                                    "Part Name",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6),
+                                        child: Text(
+                                          "Part Name",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 widget02: Align(
@@ -1331,7 +1399,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                     child: Text(
                                       ReportPDFCommonvar.PARTNAME,
                                       style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ),
@@ -1340,7 +1408,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   child: Text(
                                     "Part No.",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -1349,7 +1417,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   child: Text(
                                     ReportPDFCommonvar.PARTNO,
                                     style: const TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ),
@@ -1357,12 +1425,19 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                               BODY2SLOT(
                                 ListFlex: [4, 16],
                                 widget01: const Center(
-                                  child: Text(
-                                    "Customer Lot No.",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6),
+                                        child: Text(
+                                          "Customer Lot No.",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 widget02: Align(
@@ -1370,9 +1445,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      ReportPDFCommonvar.CUSLOT,
+                                      ReportPDFCommonvar.CUSLOT == ''
+                                          ? '-'
+                                          : ReportPDFCommonvar.CUSLOT,
                                       style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ),
@@ -1381,12 +1458,19 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                               BODY6SLOT(
                                 ListFlex: const [4, 6, 3, 3, 1, 3],
                                 widget01: const Center(
-                                  child: Text(
-                                    "TPK. Lot No.",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6),
+                                        child: Text(
+                                          "TPK. Lot No.",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 widget02: Align(
@@ -1394,9 +1478,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      ReportPDFCommonvar.TPKLOT,
+                                      ReportPDFCommonvar.TPKLOTEDIT == ''
+                                          ? ReportPDFCommonvar.TPKLOT
+                                          : ReportPDFCommonvar.TPKLOTEDIT,
                                       style: const TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ),
@@ -1405,7 +1491,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   child: Text(
                                     "Material",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -1424,7 +1510,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                     Text(
                                       ReportPDFCommonvar.MATERIAL,
                                       style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ],
@@ -1433,7 +1519,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   child: Text(
                                     "Qty.",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -1444,7 +1530,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                         ? ReportPDFCommonvar.QTY
                                         : ReportPDFCommonvar.QTYEDIT,
                                     style: const TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ),
@@ -1464,7 +1550,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ListFlex: const [40, 10, 20, 20, 20, 30, 30],
                                 widget01: const Center(
                                   child: Text(
-                                    "ITEM",
+                                    "Item",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -1482,7 +1568,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget03: const Center(
                                   child: Text(
-                                    "Check Method",
+                                    "Method",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -1741,11 +1827,12 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   ),
                                 ),
                               ),
+
                               HEAD7SLOT(
                                 ListFlex: [40, 10, 20, 20, 20, 30, 30],
                                 widget01: const Center(
                                   child: Text(
-                                    "ITEM",
+                                    "Item",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -1763,7 +1850,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget03: const Center(
                                   child: Text(
-                                    "Check Method",
+                                    "Method",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -1826,8 +1913,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                               .datalist[0].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFCommonvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -1869,16 +1956,46 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFCommonvar.datalist[0].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFCommonvar
-                                                  .datalist[0].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFCommonvar.datalist[0].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFCommonvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFCommonvar
+                                                  .datalist[0].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[0]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFCommonvar
+                                                          .datalist[0].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[0].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[0].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFCommonvar
+                                                  .datalist[0].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[0]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -1912,8 +2029,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                               .datalist[1].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFCommonvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -1955,25 +2072,46 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFCommonvar.datalist[1].RESULT ==
-                                                '0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[1].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[1].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFCommonvar.datalist[1].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFCommonvar
-                                                  .datalist[1].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFCommonvar.datalist[1].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFCommonvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFCommonvar
+                                                  .datalist[1].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[1]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFCommonvar
+                                                          .datalist[1].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[1].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[1].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFCommonvar
+                                                  .datalist[1].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[1]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2007,8 +2145,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                               .datalist[2].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFCommonvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2050,25 +2188,46 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFCommonvar.datalist[2].RESULT ==
-                                                '0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[2].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[2].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFCommonvar.datalist[2].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFCommonvar
-                                                  .datalist[2].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFCommonvar.datalist[2].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFCommonvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFCommonvar
+                                                  .datalist[2].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[2]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFCommonvar
+                                                          .datalist[2].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[2].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[2].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFCommonvar
+                                                  .datalist[2].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[2]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2102,8 +2261,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                               .datalist[3].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFCommonvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2145,25 +2304,46 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFCommonvar.datalist[3].RESULT ==
-                                                '0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[3].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[3].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFCommonvar.datalist[3].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFCommonvar
-                                                  .datalist[3].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFCommonvar.datalist[3].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFCommonvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFCommonvar
+                                                  .datalist[3].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[3]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFCommonvar
+                                                          .datalist[3].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[3].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[3].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFCommonvar
+                                                  .datalist[3].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[3]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2197,8 +2377,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                               .datalist[4].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFCommonvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2240,25 +2420,46 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFCommonvar.datalist[4].RESULT ==
-                                                '0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[4].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[4].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFCommonvar.datalist[4].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFCommonvar
-                                                  .datalist[4].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFCommonvar.datalist[4].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFCommonvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFCommonvar
+                                                  .datalist[4].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[4]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFCommonvar
+                                                          .datalist[4].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[4].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[4].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFCommonvar
+                                                  .datalist[4].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[4]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2292,8 +2493,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                               .datalist[5].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFCommonvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2335,25 +2536,46 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFCommonvar.datalist[5].RESULT ==
-                                                '0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[5].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[5].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFCommonvar.datalist[5].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFCommonvar
-                                                  .datalist[5].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFCommonvar.datalist[5].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFCommonvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFCommonvar
+                                                  .datalist[5].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[5]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFCommonvar
+                                                          .datalist[5].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[5].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[5].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFCommonvar
+                                                  .datalist[5].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[5]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2387,8 +2609,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                               .datalist[6].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFCommonvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2415,11 +2637,11 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget05: Center(
                                   child: Text(
-                                    ReportPDFCommonvar.datalist[6].FREQ ==
+                                    (ReportPDFCommonvar.datalist[6].FREQ ==
                                             '100% Check'
                                         ? "100%"
                                         : ReportPDFCommonvar
-                                            .datalist[6].SPECIFICATIONname,
+                                            .datalist[6].SPECIFICATIONname),
                                     style: TextStyle(
                                       fontSize: ReportPDFCommonvar.datalist[6]
                                                   .SPECIFICATIONname.length >
@@ -2430,25 +2652,46 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFCommonvar.datalist[6].RESULT ==
-                                                '0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[6].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFCommonvar
-                                                    .datalist[6].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFCommonvar.datalist[6].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFCommonvar
-                                                  .datalist[6].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFCommonvar.datalist[6].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFCommonvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFCommonvar
+                                                  .datalist[6].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[6]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFCommonvar
+                                                          .datalist[6].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[6].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFCommonvar
+                                                          .datalist[6].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFCommonvar
+                                                  .datalist[6].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFCommonvar
+                                                        .datalist[6]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2466,6 +2709,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                               const SizedBox(
                                 height: 6,
                               ),
+
                               // if (ReportPDFCommonvar.rawlistDATA.length ==
                               //     0
                               if (true) ...[
@@ -2478,12 +2722,21 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                           HEAD10SLOT(
                                             ListFlex: S16slot,
                                             widget01: const Center(
-                                              child: Text(
-                                                "SAMPLE NO.",
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 6),
+                                                    child: Text(
+                                                      "Sample No.",
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             widget02: Center(
@@ -2670,12 +2923,21 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                           BODY10SLOT(
                                             ListFlex: S16slot,
                                             widget01: const Center(
-                                              child: Text(
-                                                "POINT NO.",
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 6),
+                                                    child: Text(
+                                                      "Point No.",
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             widget02: Center(
@@ -3066,12 +3328,21 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                           HEAD10SLOT(
                                             ListFlex: S16slot,
                                             widget01: const Center(
-                                              child: Text(
-                                                "SAMPLE NO.",
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 6),
+                                                    child: Text(
+                                                      "Sample No.",
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             widget02: Center(
@@ -3258,12 +3529,21 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                           BODY10SLOT(
                                             ListFlex: S16slot,
                                             widget01: const Center(
-                                              child: Text(
-                                                "POINT NO.",
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 6),
+                                                    child: Text(
+                                                      "Point No.",
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             widget02: Center(
@@ -3650,20 +3930,32 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                   ],
                                 ),
                               ],
-                              SizedBox(
+                              const SizedBox(
                                 height: 6,
                               ),
                               PICSLO2NORMAL(
-                                PIC01: _dataCOMMON.databasic.PIC01,
-                                ITEMPIC01: _dataCOMMON.databasic.ITEMPIC01,
-                                PIC02: _dataCOMMON.databasic.PIC02,
-                                ITEMPIC02: _dataCOMMON.databasic.ITEMPIC02,
+                                PIC01: ReportPDFCommonvar.HIDEDATA
+                                    ? ""
+                                    : _dataCOMMON.databasic.PIC01,
+                                ITEMPIC01: ReportPDFCommonvar.HIDEDATA
+                                    ? ""
+                                    : _dataCOMMON.databasic.ITEMPIC01,
+                                PIC02: ReportPDFCommonvar.HIDEDATA
+                                    ? ""
+                                    : _dataCOMMON.databasic.PIC02,
+                                ITEMPIC02: ReportPDFCommonvar.HIDEDATA
+                                    ? ""
+                                    : _dataCOMMON.databasic.ITEMPIC02,
                               ),
                               TAILSLOT(
                                 PASS: ReportPDFCommonvar.PASS,
                                 PICS: _dataCOMMON.databasic.PICstd,
-                                Remark: ReportPDFCommonvar.remark,
-                                NAME01: ReportPDFCommonvar.INSBY.toUpperCase(),
+                                Remark: ReportPDFCommonvar.REMARKEDIT == ''
+                                    ? ReportPDFCommonvar.remark
+                                    : ReportPDFCommonvar.REMARKEDIT,
+                                NAME01: ReportPDFCommonvar.NAMEEDIT == ''
+                                    ? ReportPDFCommonvar.INSBY.toUpperCase()
+                                    : ReportPDFCommonvar.NAMEEDIT,
                                 NAME02: ReportPDFCommonvar.CHECKBY,
                                 NAME03: ReportPDFCommonvar.APPBY,
                               ),

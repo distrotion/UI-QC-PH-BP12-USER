@@ -72,21 +72,21 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
       _INSTRU = 'CTCROG001_OUT';
     }
     P20INCOMINGVAR_INPROCESSBOX.undercontrol = true;
-    // Dio().post(
-    //   // "http://172.101.32.145:1880/" + "getmicro",
-    //   "http://172.23.10.40:1900/" + _INSTRU,
+    Dio().post(
+      // "http://172.101.32.145:1880/" + "getmicro",
+      "http://172.23.10.40:1900/" + _INSTRU,
 
-    //   data: {},
-    // ).then((value) {
-    //   var databuff = value.data;
+      data: {},
+    ).then((value) {
+      var databuff = value.data;
 
-    //   if (databuff["DATA"] != null) {
-    //     P20INCOMINGVAR_INPROCESSBOX.DATAINPUT = databuff["DATA"].toString();
+      if (databuff["DATA"] != null) {
+        P20INCOMINGVAR_INPROCESSBOX.DATAINPUT = databuff["DATA"].toString();
 
-    //     setState(() {});
-    //     print("-");
-    //   }
-    // });
+        setState(() {});
+        print("-");
+      }
+    });
   }
 
   @override
@@ -130,7 +130,7 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
         DATAINPUTFN: (s) {
           P20INCOMINGVAR_INPROCESSBOX.DATAINPUT = s;
         },
-        Enabled: true,
+        Enabled: false,
         datalistin: P20INCOMINGVAR_INPROCESSBOX.datainlist,
 
         get: (v) {

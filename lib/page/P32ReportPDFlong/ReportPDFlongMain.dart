@@ -36,6 +36,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
           .read<ReportPDFCommon_Cubit>()
           .ReportPDFCommonCubit(ReportPDFlongvar.PO);
 
+      ReportPDFlongvar.TPKLOTEDIT = '';
       ReportPDFlongvar.QTYEDIT = '';
       ReportPDFlongvar.INCresult = '';
     }
@@ -980,6 +981,26 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                   },
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: ComInputText(
+                  height: 40,
+                  width: 150,
+                  isContr: ReportPDFlongvar.iscontrol,
+                  fnContr: (input) {
+                    setState(() {
+                      ReportPDFlongvar.iscontrol = input;
+                    });
+                  },
+                  sPlaceholder: "TPK.LOT EDIT",
+                  sValue: ReportPDFlongvar.TPKLOTEDIT,
+                  returnfunc: (String s) {
+                    setState(() {
+                      ReportPDFlongvar.TPKLOTEDIT = s;
+                    });
+                  },
+                ),
+              ),
               // InkWell(
               //   onTap: () {
               //     setState(() {
@@ -1228,7 +1249,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                         height: 60,
                                         child: Center(
                                           child: Text(
-                                            "FR-HQC-03/020-03-18/12/20",
+                                            "FR-HQC-03/020-01-18/10/24",
                                             style: TextStyle(
                                               fontSize: 24,
                                               fontWeight: FontWeight.bold,
@@ -1261,7 +1282,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                             child: Text(
                                               "1/1",
                                               style: TextStyle(
-                                                fontSize: 16,
+                                                fontSize: 22,
                                               ),
                                             ),
                                           ),
@@ -1274,12 +1295,19 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                               HEAD4SLOT(
                                 ListFlex: [4, 8, 3, 5],
                                 widget01: const Center(
-                                  child: Text(
-                                    "Customer",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6),
+                                        child: Text(
+                                          "Customer name",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 widget02: Align(
@@ -1289,7 +1317,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                     child: Text(
                                       ReportPDFlongvar.CUSTOMER,
                                       style: const TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ),
@@ -1298,7 +1326,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: Text(
                                     "Process",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -1307,20 +1335,28 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: Text(
                                     ReportPDFlongvar.PROCESS,
                                     style: const TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ),
                               ),
+
                               BODY4SLOT(
                                 ListFlex: [4, 8, 3, 5],
                                 widget01: const Center(
-                                  child: Text(
-                                    "Part Name",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6),
+                                        child: Text(
+                                          "Part Name",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 widget02: Align(
@@ -1330,7 +1366,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                     child: Text(
                                       ReportPDFlongvar.PARTNAME,
                                       style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ),
@@ -1339,7 +1375,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: Text(
                                     "Part No.",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -1348,7 +1384,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: Text(
                                     ReportPDFlongvar.PARTNO,
                                     style: const TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ),
@@ -1356,12 +1392,19 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                               BODY2SLOT(
                                 ListFlex: [4, 16],
                                 widget01: const Center(
-                                  child: Text(
-                                    "Customer Lot No.",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6),
+                                        child: Text(
+                                          "Customer Lot No.",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 widget02: Align(
@@ -1369,9 +1412,11 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      ReportPDFlongvar.CUSLOT,
+                                      ReportPDFlongvar.CUSLOT == ''
+                                          ? '-'
+                                          : ReportPDFlongvar.CUSLOT,
                                       style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ),
@@ -1380,12 +1425,19 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                               BODY6SLOT(
                                 ListFlex: const [4, 6, 3, 3, 1, 3],
                                 widget01: const Center(
-                                  child: Text(
-                                    "TPK. Lot No.",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 6),
+                                        child: Text(
+                                          "TPK. Lot No.",
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 widget02: Align(
@@ -1393,9 +1445,11 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 15),
                                     child: Text(
-                                      ReportPDFlongvar.TPKLOT,
+                                      ReportPDFlongvar.TPKLOTEDIT == ''
+                                          ? ReportPDFlongvar.TPKLOT
+                                          : ReportPDFlongvar.TPKLOTEDIT,
                                       style: const TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ),
@@ -1404,7 +1458,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: Text(
                                     "Material",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -1423,7 +1477,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                     Text(
                                       ReportPDFlongvar.MATERIAL,
                                       style: const TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 22,
                                       ),
                                     ),
                                   ],
@@ -1432,7 +1486,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: Text(
                                     "Qty.",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -1443,7 +1497,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                         ? ReportPDFlongvar.QTY
                                         : ReportPDFlongvar.QTYEDIT,
                                     style: const TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 22,
                                     ),
                                   ),
                                 ),
@@ -1463,7 +1517,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 ListFlex: const [40, 10, 20, 20, 20, 30, 30],
                                 widget01: const Center(
                                   child: Text(
-                                    "ITEM",
+                                    "Item",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -1481,7 +1535,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 ),
                                 widget03: const Center(
                                   child: Text(
-                                    "Check Method",
+                                    "Method",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -1733,11 +1787,12 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   ),
                                 ),
                               ),
+
                               HEAD7SLOT(
                                 ListFlex: [40, 10, 20, 20, 20, 30, 30],
                                 widget01: const Center(
                                   child: Text(
-                                    "ITEM",
+                                    "Item",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -1755,7 +1810,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 ),
                                 widget03: const Center(
                                   child: Text(
-                                    "Check Method",
+                                    "Method",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -1817,8 +1872,8 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: ReportPDFlongvar.datalist[0].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFlongvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -1902,8 +1957,8 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: ReportPDFlongvar.datalist[1].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFlongvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -1996,8 +2051,8 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: ReportPDFlongvar.datalist[2].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFlongvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2090,8 +2145,8 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: ReportPDFlongvar.datalist[3].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFlongvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2184,8 +2239,8 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: ReportPDFlongvar.datalist[4].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFlongvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2278,8 +2333,8 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: ReportPDFlongvar.datalist[5].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFlongvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2372,8 +2427,8 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   child: ReportPDFlongvar.datalist[6].SCMARK ==
                                           'YES'
                                       ? PicShow(
-                                          width: 42,
-                                          height: 42,
+                                          width: 38,
+                                          height: 38,
                                           base64: ReportPDFlongvar.SCMASKTYPE)
                                       : const Text(
                                           "",
@@ -2463,12 +2518,21 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                           HEAD20SLOT(
                                             ListFlex: S16slot,
                                             widget01: const Center(
-                                              child: Text(
-                                                "SAMPLE NO.",
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 6),
+                                                    child: Text(
+                                                      "Sample No.",
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             widget02: Center(
@@ -2875,12 +2939,21 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                           BODY20SLOT(
                                             ListFlex: S16slot,
                                             widget01: const Center(
-                                              child: Text(
-                                                "POINT NO.",
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 6),
+                                                    child: Text(
+                                                      "Point No.",
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             widget02: Center(

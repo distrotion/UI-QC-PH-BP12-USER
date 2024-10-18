@@ -18,6 +18,11 @@ class ReportPDFlongvar {
   static String MATERIAL = '';
   static String QTY = '';
 
+  static String TPKLOTEDIT = '';
+
+  static String NAME = '';
+  static String REMARK = '';
+
   static String PICstd = '';
   static String PIC01 = '';
   static String PIC02 = '';

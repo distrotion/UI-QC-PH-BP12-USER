@@ -24,7 +24,7 @@ class ComInputText extends StatefulWidget {
     this.sLabel = "",
     this.sPlaceholder = "",
     this.nFontSize = 16,
-    this.nLimitedChar = 20,
+    this.nLimitedChar = 100,
     this.isNumberOnly = false,
     this.isEmail = false,
     this.isPassword = false,
