@@ -17,6 +17,7 @@ import '../../../widget/box/01-normal.dart';
 
 import '../../../widget/box/05-inputdata.dart';
 import '../../bloc/BlocEvent/20-02-INCOMINGGETLIST.dart';
+import '../../widget/common/Advancedropdown.dart';
 import 'P20INCOMINGMAIN.dart';
 import 'P20INCOMINGVAR.dart';
 
@@ -66,10 +67,15 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
   int _counter = 0;
 
   void _updateCounter(Timer timer) {
+    String _INSTRU = P20INCOMINGVAR_INPROCESSBOX.INSTRU;
+    if (_INSTRU == '') {
+      _INSTRU = 'CTCROG001_OUT';
+    }
     P20INCOMINGVAR_INPROCESSBOX.undercontrol = true;
     Dio().post(
       // "http://172.101.32.145:1880/" + "getmicro",
-      "http://172.23.10.40:1900/" + "CTCROG001_OUT",
+      "http://172.23.10.40:1900/" + _INSTRU,
+
       data: {},
     ).then((value) {
       var databuff = value.data;
@@ -363,6 +369,27 @@ class _ConsoleWidgetState extends State<ConsoleWidget> {
                     //             )),
                     //       ],
                     //     )),
+                    AdvanceDropDown(
+                      // isEnable: P1INPUTRAWDATAMAINVAR.PLANT != '',
+                      // sLabel: "Select Loacation",
+                      imgpath: '',
+                      listdropdown: const [
+                        MapEntry("", ""),
+                        MapEntry("CTCROG001", "CTCROG001_OUT"),
+                        MapEntry("SURMIC001", "SURMIC001_OUT"),
+                      ],
+
+                      //CTCROG001
+                      //SURMIC001
+                      onChangeinside: (d, v) {
+                        P20INCOMINGVAR_INPROCESSBOX.INSTRU = d;
+
+                        setState(() {});
+                      },
+                      value: P20INCOMINGVAR_INPROCESSBOX.INSTRU,
+                      height: 40,
+                      width: 200,
+                    ),
                     SizedBox(
                       height: 150,
                       child: Padding(

@@ -34,4 +34,6 @@ class P20INCOMINGVAR_INPROCESSBOX {
   static List<List<datainwait>> setofdatainlist = [];
 
   static List<INCOMINGGETLISTclass> itemlistbuffer = [];
+
+  static String INSTRU = '';
 }
