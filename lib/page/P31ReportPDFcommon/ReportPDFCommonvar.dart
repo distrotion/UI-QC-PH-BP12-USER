@@ -20,7 +20,6 @@ class ReportPDFCommonvar {
   static String QTY = '';
 
   static String TPKLOTEDIT = '';
-
   static String NAMEEDIT = '';
   static String REMARKEDIT = '';
 

@@ -879,7 +879,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                       ? Colors.green
                       : Colors.yellow,
                   height: 40,
-                  width: 200,
+                  width: 100,
                   child: Center(
                     child: Text(ReportPDFlongvar.STATUS),
                   ),
@@ -1001,6 +1001,47 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                   },
                 ),
               ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: ComInputText(
+                  height: 40,
+                  width: 150,
+                  isContr: ReportPDFlongvar.iscontrol,
+                  fnContr: (input) {
+                    setState(() {
+                      ReportPDFlongvar.iscontrol = input;
+                    });
+                  },
+                  sPlaceholder: "NAME",
+                  sValue: ReportPDFlongvar.NAMEEDIT,
+                  returnfunc: (String s) {
+                    setState(() {
+                      ReportPDFlongvar.NAMEEDIT = s;
+                    });
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: ComInputText(
+                  height: 40,
+                  width: 150,
+                  isContr: ReportPDFlongvar.iscontrol,
+                  fnContr: (input) {
+                    setState(() {
+                      ReportPDFlongvar.iscontrol = input;
+                    });
+                  },
+                  sPlaceholder: "REMARK",
+                  sValue: ReportPDFlongvar.REMARKEDIT,
+                  returnfunc: (String s) {
+                    setState(() {
+                      ReportPDFlongvar.REMARKEDIT = s;
+                    });
+                  },
+                ),
+              ),
               // InkWell(
               //   onTap: () {
               //     setState(() {
@@ -1014,26 +1055,26 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
               //     child: Center(child: Text("SET")),
               //   ),
               // ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: ComInputText(
-                  height: 40,
-                  width: 150,
-                  isContr: ReportPDFlongvar.iscontrol,
-                  fnContr: (input) {
-                    setState(() {
-                      ReportPDFlongvar.iscontrol = input;
-                    });
-                  },
-                  sPlaceholder: "INC result",
-                  sValue: ReportPDFlongvar.INCresult,
-                  returnfunc: (String s) {
-                    setState(() {
-                      ReportPDFlongvar.INCresult = s;
-                    });
-                  },
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 15),
+              //   child: ComInputText(
+              //     height: 40,
+              //     width: 150,
+              //     isContr: ReportPDFlongvar.iscontrol,
+              //     fnContr: (input) {
+              //       setState(() {
+              //         ReportPDFlongvar.iscontrol = input;
+              //       });
+              //     },
+              //     sPlaceholder: "INC result",
+              //     sValue: ReportPDFlongvar.INCresult,
+              //     returnfunc: (String s) {
+              //       setState(() {
+              //         ReportPDFlongvar.INCresult = s;
+              //       });
+              //     },
+              //   ),
+              // ),
               // InkWell(
               //   onTap: () {
               //     setState(() {
@@ -1333,7 +1374,8 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 ),
                                 widget04: Center(
                                   child: Text(
-                                    ReportPDFlongvar.PROCESS,
+                                    // ReportPDFlongvar.PROCESS,
+                                    "-",
                                     style: const TextStyle(
                                       fontSize: 22,
                                     ),

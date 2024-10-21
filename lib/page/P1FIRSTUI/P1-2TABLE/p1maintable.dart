@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,6 +8,7 @@ import '../../../bloc/BlocEvent/01-02-GetINS.dart';
 import '../../../model/model.dart';
 import '../../../widget/common/ComInputText.dart';
 
+import '../../../widget/common/Safty.dart';
 import '../FIRSTuiVAR.dart';
 import 'p1widgettablefield.dart';
 
@@ -60,7 +62,7 @@ class _MAINTABLEP1State extends State<MAINTABLEP1> {
                   },
                   child: Container(
                     height: 40,
-                    width: 150,
+                    width: 100,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
                       color: Colors.orange,
@@ -87,7 +89,41 @@ class _MAINTABLEP1State extends State<MAINTABLEP1> {
                       child: Text("RELOAD"),
                     ),
                   ),
-                )
+                ),
+                InkWell(
+                  onTap: () async {
+                    await Dio().post(
+                      "http://172.23.10.40:16700/" + 'RAWDATA/sapget',
+                      data: {
+                        "ORDER": FIRSTUI.SEARCH,
+                      },
+                    ).then((result) {
+                      //
+                      var buff = result.data;
+                      if (buff.length > 0) {
+                        FIRSTUI.POACTIVE = FIRSTUI.SEARCH;
+                        FIRSTUI.CPACTIVE =
+                            int.parse(ConverstStr(buff[0]['CPMAT'].toString()))
+                                .toString();
+                        context.read<GetINS_Bloc>().add(GETINSset());
+                      }
+                    });
+
+                    // context.read<GetINS_Bloc>().add(GETINSset());
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black),
+                      color: Colors.brown,
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: const Center(
+                      child: Text("Query"),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

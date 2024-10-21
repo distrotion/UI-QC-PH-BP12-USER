@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/Base64Img.dart';
 import '../../data/global.dart';
 import '../../widget/common/Safty.dart';
 import '../../widget/common/imgset.dart';
@@ -524,7 +525,8 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
         for (var fi = 0; fi < PATTERNlist['FINAL'].length; fi++) {
           // print(PATTERNlist['FINAL'][fi]['ITEMs']);
-          // print(PATTERNlist['FINAL'][fi]['RESULTFORMAT']);
+          print(PATTERNlist['FINAL'][fi]['RESULTFORMAT']);
+
           if (PATTERNlist['FINAL'][fi]['RESULTFORMAT'] == 'Text') {
             for (var mi = 0; mi < MACHINElist.length; mi++) {
               if (FINALdata[MACHINElist[mi]] != null) {
@@ -646,6 +648,12 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                   String RESULTDSW =
                       PATTERNlist['FINAL'][fi]['RESULTDSW'].toString();
+
+                  String SUMDATA =
+                      PATTERNlist['FINAL'][fi]['SUMDATA'].toString();
+                  print("--------------------------------------------------");
+                  print(SUMDATA);
+                  print("--------------------------------------------------");
 
                   double maxdata = 0;
                   double mindata = 0;
@@ -807,7 +815,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     }
                   }
                   // print(ITEMname);
-                  desinal = 1;
+                  // desinal = 1;
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
                     if (FINALdata[MACHINElist[mi]]
@@ -1080,9 +1088,10 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     NO: NO_NUMBER,
                     FREQ: FREQ,
                     datapackset: listdataset,
-                    RESULT: RESULTDSW != 'YES'
-                        ? (avgall / listdataset.length).toStringAsFixed(desinal)
-                        : "See at table",
+                    RESULT: SUMDATA == 'NO'
+                        ? "See at table"
+                        : (avgall / listdataset.length)
+                            .toStringAsFixed(desinal),
                     LOAD: LOAD,
                     Remark: remark,
                     SRAWDATA: SRAWDATA,
@@ -1244,7 +1253,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   }
 
                   // print(itemss);
-                  desinal = 2;
+                  // desinal = 2;
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
                     if (FINALdata[MACHINElist[mi]]
@@ -1744,7 +1753,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       desinal = 1;
                     }
                   }
-                  desinal = 2;
+                  // desinal = 2;
 
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
@@ -1988,6 +1997,10 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   }
                   //GET_FINAL_COMMENT
 
+                  if (BasicCommonDATAs.ITEMPIC01 == '') {
+                    nadata = "N/A";
+                  }
+
                   ITEMlist.add(FINALCHECKlistCommonClass(
                     TYPE: "Picture",
                     ITEM: itemss,
@@ -1999,7 +2012,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     NO: NO_NUMBER,
                     FREQ: FREQ,
                     datapackset: listdataset,
-                    RESULT: SPECIFICATION,
+                    RESULT: BasicCommonDATAs.ITEMPIC01 == ''
+                        ? "Please wait data"
+                        : SPECIFICATION,
                     LOAD: LOAD,
                     SRAWDATA: "",
                     Remark: remark,
@@ -2128,7 +2143,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       desinal = 1;
                     }
                   }
-                  desinal = 1;
+                  // desinal = 1;
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
                     if (FINALdata[MACHINElist[mi]]
@@ -2585,7 +2600,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     }
                   }
                   // print(ITEMname);
-                  desinal = 2;
+                  // desinal = 1;
                   List<datainlist> listdataset = [];
                   for (var i = 0; i < 20; i++) {
                     if (FINALdata[MACHINElist[mi]]

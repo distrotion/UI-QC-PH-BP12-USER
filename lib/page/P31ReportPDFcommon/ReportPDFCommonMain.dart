@@ -39,6 +39,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
       ReportPDFCommonvar.TPKLOTEDIT = '';
       ReportPDFCommonvar.QTYEDIT = '';
       ReportPDFCommonvar.INCresult = '';
+      ReportPDFCommonvar.HIDEDATA = false;
     }
     super.initState();
   }
@@ -973,6 +974,20 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
               //     },
               //   ),
               // ),
+              //
+              // InkWell(
+              //   onTap: () {
+              //     setState(() {
+              //       ReportPDFCommonvar.QTY = ReportPDFCommonvar.QTYEDIT;
+              //     });
+              //   },
+              //   child: Container(
+              //     height: 40,
+              //     width: 40,
+              //     color: Colors.blue,
+              //     child: Center(child: Text("SET")),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: ComInputText(
@@ -1013,20 +1028,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                   },
                 ),
               ),
-              //
-              // InkWell(
-              //   onTap: () {
-              //     setState(() {
-              //       ReportPDFCommonvar.QTY = ReportPDFCommonvar.QTYEDIT;
-              //     });
-              //   },
-              //   child: Container(
-              //     height: 40,
-              //     width: 40,
-              //     color: Colors.blue,
-              //     child: Center(child: Text("SET")),
-              //   ),
-              // ),
+
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: ComInputText(
@@ -1366,7 +1368,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                                 widget04: Center(
                                   child: Text(
-                                    ReportPDFCommonvar.PROCESS,
+                                    // ReportPDFCommonvar.PROCESS,
+                                    "-",
                                     style: const TextStyle(
                                       fontSize: 22,
                                     ),
@@ -3952,7 +3955,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 PICS: _dataCOMMON.databasic.PICstd,
                                 Remark: ReportPDFCommonvar.REMARKEDIT == ''
                                     ? ReportPDFCommonvar.remark
-                                    : ReportPDFCommonvar.REMARKEDIT,
+                                    : "Reference data from TP LOT NO." +
+                                        ReportPDFCommonvar.REMARKEDIT,
                                 NAME01: ReportPDFCommonvar.NAMEEDIT == ''
                                     ? ReportPDFCommonvar.INSBY.toUpperCase()
                                     : ReportPDFCommonvar.NAMEEDIT,

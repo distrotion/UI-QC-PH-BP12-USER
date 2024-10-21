@@ -19,6 +19,8 @@ class ReportPDFlongvar {
   static String QTY = '';
 
   static String TPKLOTEDIT = '';
+  static String NAMEEDIT = '';
+  static String REMARKEDIT = '';
 
   static String NAME = '';
   static String REMARK = '';
