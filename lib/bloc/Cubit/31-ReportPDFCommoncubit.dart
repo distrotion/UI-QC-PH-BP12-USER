@@ -1665,6 +1665,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
 
+                  String SUMDATA =
+                      PATTERNlist['FINAL'][fi]['SUMDATA'].toString();
+
                   // String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
                   String remark = '';
 
@@ -1997,7 +2000,10 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   }
                   //GET_FINAL_COMMENT
 
-                  if (BasicCommonDATAs.ITEMPIC01 == '') {
+                  print("==================>>>>>>>>>>>>>>>>>");
+
+                  print(SUMDATA);
+                  if (BasicCommonDATAs.ITEMPIC01 == '' && SUMDATA != 'NO') {
                     nadata = "N/A";
                   }
 
@@ -2012,7 +2018,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     NO: NO_NUMBER,
                     FREQ: FREQ,
                     datapackset: listdataset,
-                    RESULT: BasicCommonDATAs.ITEMPIC01 == ''
+                    RESULT: BasicCommonDATAs.ITEMPIC01 == '' && SUMDATA != 'NO'
                         ? "Please wait data"
                         : SPECIFICATION,
                     LOAD: LOAD,
