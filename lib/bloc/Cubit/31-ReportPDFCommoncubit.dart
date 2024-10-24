@@ -1088,10 +1088,12 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     NO: NO_NUMBER,
                     FREQ: FREQ,
                     datapackset: listdataset,
-                    RESULT: SUMDATA == 'NO'
-                        ? "See at table"
-                        : (avgall / listdataset.length)
-                            .toStringAsFixed(desinal),
+                    RESULT: SPECIFICATION.contains("MMC")
+                        ? "PASSED"
+                        : (SUMDATA == 'NO'
+                            ? "See at table"
+                            : (avgall / listdataset.length)
+                                .toStringAsFixed(desinal)),
                     LOAD: LOAD,
                     Remark: remark,
                     SRAWDATA: SRAWDATA,
@@ -2568,7 +2570,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       break;
                     }
                   }
-                  int desinal = 4;
+                  int desinal = 2;
 
                   // for (var Fci = 0; Fci < ITEMSlist.length; Fci++) {
                   //   if (ITEMSlist[Fci]['masterID'].toString() == itemss) {
@@ -2602,7 +2604,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                           int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
                       break;
                     } else {
-                      desinal = 4;
+                      desinal = 2;
                     }
                   }
                   // print(ITEMname);

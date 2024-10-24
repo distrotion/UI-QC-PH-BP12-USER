@@ -211,6 +211,8 @@ class SURRGH001_Bloc extends Bloc<SURRGH001_Event, SURRGH001SCHEMA> {
         //---- RIGHT
         ITEMleftUNIT: ITEMleftUNITBUFFER,
         ITEMleftVALUE: ITEMleftVALUEBUFFER,
+
+        REFLOT: databuff['REFLOT'] == null ? '' : databuff['REFLOT'].toString(),
       );
     } else {
       //

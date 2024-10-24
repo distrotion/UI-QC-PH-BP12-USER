@@ -30,6 +30,8 @@ class TRICKER_HIMICM001SETZERO extends TRICKER_Event {}
 
 //-------------------------------- FINISH
 
+class TRICKER_HIMICM001REFER extends TRICKER_Event {}
+
 class TRICKER_HIMICM001FINISH extends TRICKER_Event {}
 
 //-------------------------------- no request
@@ -70,6 +72,10 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
     });
 
     //-------------------------------- FINISH
+
+    on<TRICKER_HIMICM001REFER>((event, emit) {
+      return _TRICKER_HIMICM001REFER('', emit);
+    });
 
     on<TRICKER_HIMICM001FINISH>((event, emit) {
       return _TRICKER_HIMICM001FINISH('', emit);
@@ -165,6 +171,15 @@ class TRICKER_HIMICM001_Bloc extends Bloc<TRICKER_Event, String> {
 
   //-------------------------------- FINISH
   //TRICKER_HIMICM001FINISH
+
+  Future<void> _TRICKER_HIMICM001REFER(
+      String toAdd, Emitter<String> emit) async {
+    final response = await Dio().post(
+      server + 'FINAL/HIMICM001-REFLOT',
+      data: {},
+    );
+    emit('');
+  }
 
   Future<void> _TRICKER_HIMICM001FINISH(
       String toAdd, Emitter<String> emit) async {

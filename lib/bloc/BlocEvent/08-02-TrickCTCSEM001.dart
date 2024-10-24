@@ -32,6 +32,8 @@ class TRICKER_CTCSEM001SETZERO extends TRICKER_Event {}
 
 //-------------------------------- FINISH
 
+class TRICKER_CTCSEM001REFER extends TRICKER_Event {}
+
 class TRICKER_CTCSEM001FINISH extends TRICKER_Event {}
 
 //-------------------------------- no request
@@ -76,6 +78,10 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
     });
 
     //-------------------------------- FINISH
+
+    on<TRICKER_CTCSEM001REFER>((event, emit) {
+      return _TRICKER_CTCSEM001REFER('', emit);
+    });
 
     on<TRICKER_CTCSEM001FINISH>((event, emit) {
       return _TRICKER_CTCSEM001FINISH('', emit);
@@ -189,6 +195,15 @@ class TRICKER_CTCSEM001_Bloc extends Bloc<TRICKER_Event, String> {
 
   //-------------------------------- FINISH
   //TRICKER_CTCSEM001FINISH
+
+  Future<void> _TRICKER_CTCSEM001REFER(
+      String toAdd, Emitter<String> emit) async {
+    final response = await Dio().post(
+      server + 'FINAL/CTCSEM001-REFLOT',
+      data: {},
+    );
+    emit('');
+  }
 
   Future<void> _TRICKER_CTCSEM001FINISH(
       String toAdd, Emitter<String> emit) async {

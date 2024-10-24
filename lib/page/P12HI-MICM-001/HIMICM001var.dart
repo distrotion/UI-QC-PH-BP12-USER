@@ -37,6 +37,8 @@ class HIMICM001var {
   static String ItemPickSELECT = '';
   //
   static String PICs = '';
+
+  static String REFLOT = '';
 }
 
 class HIMICM001SCHEMA {
@@ -71,6 +73,7 @@ class HIMICM001SCHEMA {
     required this.confirmdata,
     required this.ITEMleftUNIT,
     required this.ITEMleftVALUE,
+    this.REFLOT = '',
   });
   String UPDATE;
   String PO;
@@ -103,4 +106,6 @@ class HIMICM001SCHEMA {
   List<INSDATA> confirmdata;
   List<INSDATA> ITEMleftUNIT;
   List<INSDATA> ITEMleftVALUE;
+
+  String REFLOT;
 }

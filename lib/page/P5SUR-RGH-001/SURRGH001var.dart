@@ -35,6 +35,7 @@ class SURRGH001var {
 
   //
   static String ItemPickSELECT = '';
+  static String REFLOT = '';
 }
 
 class SURRGH001SCHEMA {
@@ -68,6 +69,7 @@ class SURRGH001SCHEMA {
     required this.confirmdata,
     required this.ITEMleftUNIT,
     required this.ITEMleftVALUE,
+    this.REFLOT = '',
   });
   String UPDATE;
   String PO;
@@ -99,4 +101,6 @@ class SURRGH001SCHEMA {
   List<INSDATA> confirmdata;
   List<INSDATA> ITEMleftUNIT;
   List<INSDATA> ITEMleftVALUE;
+
+  String REFLOT;
 }

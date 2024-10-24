@@ -210,6 +210,8 @@ class HIMICM001_Bloc extends Bloc<HIMICM001_Event, HIMICM001SCHEMA> {
         ITEMleftUNIT: ITEMleftUNITBUFFER,
         ITEMleftVALUE: ITEMleftVALUEBUFFER,
         Pic: databuff['PIC'] != null ? outPIC(databuff['PIC'].toString()) : "",
+
+        REFLOT: databuff['REFLOT'] == null ? '' : databuff['REFLOT'].toString(),
       );
     } else {
       //

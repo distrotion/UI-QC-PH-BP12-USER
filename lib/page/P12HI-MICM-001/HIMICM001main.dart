@@ -130,6 +130,8 @@ class _ROCKWELL_HIMICM001bodyState extends State<ROCKWELL_HIMICM001body> {
 
         HIMICM001var.PICs = widget.data?.Pic ?? '';
 
+        HIMICM001var.REFLOT = widget.data?.REFLOT ?? '';
+
         if (HIMICM001var.PCSleft == '0') {
           BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
               "ITEM STATUS", "COMPLETE DATA", enumNotificationlist.Success);

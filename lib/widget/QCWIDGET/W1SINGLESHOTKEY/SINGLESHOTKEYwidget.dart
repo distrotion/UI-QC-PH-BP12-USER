@@ -53,6 +53,9 @@ class SINGLESHOTKEYmain extends StatelessWidget {
     this.inputFN,
     this.NATAP,
     //-------
+    //--------
+    this.REFLOT,
+    this.REFLOTfn,
   }) : super(key: key);
 
   //Left --------------------------------------------
@@ -105,6 +108,9 @@ class SINGLESHOTKEYmain extends StatelessWidget {
   List<INSDATA>? ITEMleftUNIT; // ok
   List<INSDATA>? ITEMleftVALUE; // ok
 
+  Function(String)? REFLOTfn;
+  String? REFLOT;
+
   @override
   Widget build(BuildContext context) {
     return SINGLESHITLAYOUT(
@@ -127,6 +133,28 @@ class SINGLESHOTKEYmain extends StatelessWidget {
             padding: const EdgeInsets.all(2.0),
             child: Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: InkWell(
+                    onTap: () {
+                      if (REFLOTfn != null) {
+                        REFLOTfn!("S");
+                      }
+                    },
+                    child: Container(
+                      height: 40,
+                      color: (REFLOT ?? '') == ''
+                          ? Colors.grey
+                          : Colors.lightGreen,
+                      child: Center(
+                        child: Text("REFER FORM LOT: ${REFLOT ?? ''}",
+                            style: TxtStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                  ),
+                ),
                 Row(
                   children: [
                     Expanded(

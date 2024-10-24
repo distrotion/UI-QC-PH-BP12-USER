@@ -213,6 +213,8 @@ class SURTHI002_Bloc extends Bloc<SURTHI002_Event, SURTHI002SCHEMA> {
         //---- RIGHT
         ITEMleftUNIT: ITEMleftUNITBUFFER,
         ITEMleftVALUE: ITEMleftVALUEBUFFER,
+
+        REFLOT: databuff['REFLOT'] == null ? '' : databuff['REFLOT'].toString(),
       );
     } else {
       //

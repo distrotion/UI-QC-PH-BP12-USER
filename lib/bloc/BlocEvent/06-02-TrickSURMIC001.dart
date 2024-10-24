@@ -30,6 +30,8 @@ class TRICKER_SURMIC001SETZERO extends TRICKER_Event {}
 
 //-------------------------------- FINISH
 
+class TRICKER_SURMIC001REFER extends TRICKER_Event {}
+
 class TRICKER_SURMIC001FINISH extends TRICKER_Event {}
 
 //-------------------------------- no request
@@ -70,6 +72,9 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
     });
 
     //-------------------------------- FINISH
+    on<TRICKER_SURMIC001REFER>((event, emit) {
+      return _TRICKER_SURMIC001REFER('', emit);
+    });
 
     on<TRICKER_SURMIC001FINISH>((event, emit) {
       return _TRICKER_SURMIC001FINISH('', emit);
@@ -167,6 +172,15 @@ class TRICKER_SURMIC001_Bloc extends Bloc<TRICKER_Event, String> {
 
   //-------------------------------- FINISH
   //TRICKER_SURMIC001FINISH
+
+  Future<void> _TRICKER_SURMIC001REFER(
+      String toAdd, Emitter<String> emit) async {
+    final response = await Dio().post(
+      server + 'FINAL/SURMIC001-REFLOT',
+      data: {},
+    );
+    emit('');
+  }
 
   Future<void> _TRICKER_SURMIC001FINISH(
       String toAdd, Emitter<String> emit) async {

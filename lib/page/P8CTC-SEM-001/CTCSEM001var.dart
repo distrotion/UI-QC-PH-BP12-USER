@@ -37,6 +37,7 @@ class CTCSEM001var {
 
   //
   static String ItemPickSELECT = '';
+  static String REFLOT = '';
 }
 
 class CTCSEM001SCHEMA {
@@ -70,6 +71,7 @@ class CTCSEM001SCHEMA {
     required this.confirmdata,
     required this.ITEMleftUNIT,
     required this.ITEMleftVALUE,
+    this.REFLOT = '',
   });
   String UPDATE;
   String PO;
@@ -100,4 +102,6 @@ class CTCSEM001SCHEMA {
   List<INSDATA> confirmdata;
   List<INSDATA> ITEMleftUNIT;
   List<INSDATA> ITEMleftVALUE;
+
+  String REFLOT;
 }

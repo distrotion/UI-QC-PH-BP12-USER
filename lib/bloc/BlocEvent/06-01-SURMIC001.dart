@@ -211,6 +211,8 @@ class SURMIC001_Bloc extends Bloc<SURMIC001_Event, SURMIC001SCHEMA> {
         //---- RIGHT
         ITEMleftUNIT: ITEMleftUNITBUFFER,
         ITEMleftVALUE: ITEMleftVALUEBUFFER,
+
+        REFLOT: databuff['REFLOT'] == null ? '' : databuff['REFLOT'].toString(),
       );
     } else {
       //

@@ -46,6 +46,7 @@ class SURMCS001var {
 
   //
   static String ItemPickSELECT = '';
+  static String REFLOT = '';
 }
 
 class SURMCS001SCHEMA {
@@ -79,6 +80,7 @@ class SURMCS001SCHEMA {
     required this.confirmdata,
     required this.ITEMleftUNIT,
     required this.ITEMleftVALUE,
+    this.REFLOT = '',
   });
   String UPDATE;
   String PO;
@@ -109,4 +111,6 @@ class SURMCS001SCHEMA {
   List<INSDATA> confirmdata;
   List<INSDATA> ITEMleftUNIT;
   List<INSDATA> ITEMleftVALUE;
+
+  String REFLOT;
 }

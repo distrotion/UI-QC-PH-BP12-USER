@@ -131,6 +131,8 @@ class _ROCKWELL_CTCSEM001bodyState extends State<ROCKWELL_CTCSEM001body> {
         CTCSEM001var.ITEMleftUNIT = widget.data?.ITEMleftUNIT ?? [];
         CTCSEM001var.ITEMleftVALUE = widget.data?.ITEMleftVALUE ?? [];
 
+        CTCSEM001var.REFLOT = widget.data?.REFLOT ?? '';
+
         if (CTCSEM001var.PCSleft == '0') {
           BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
               "ITEM STATUS", "COMPLETE DATA", enumNotificationlist.Success);
@@ -185,6 +187,12 @@ class _ROCKWELL_CTCSEM001bodyState extends State<ROCKWELL_CTCSEM001body> {
             .add(TRICKER_CTCSEM001geteachGRAPH());
       },
       //------- Bottom
+      REFLOT: CTCSEM001var.REFLOT,
+      REFLOTfn: (v) {
+        if (CTCSEM001var.REFLOT != '') {
+          context.read<TRICKER_CTCSEM001_Bloc>().add(TRICKER_CTCSEM001REFER());
+        }
+      },
       ACCEPT: (v) {
         if ((CTCSEM001var.RESULTFORMAT == 'Graph' &&
                 CTCSEM001var.GAPname != '') ||

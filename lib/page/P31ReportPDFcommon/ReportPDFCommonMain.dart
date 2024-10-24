@@ -1369,7 +1369,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 widget04: Center(
                                   child: Text(
                                     // ReportPDFCommonvar.PROCESS,
-                                    "-",
+                                    "Phosphate",
                                     style: const TextStyle(
                                       fontSize: 22,
                                     ),
@@ -1484,8 +1484,12 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                       ReportPDFCommonvar.TPKLOTEDIT == ''
                                           ? ReportPDFCommonvar.TPKLOT
                                           : ReportPDFCommonvar.TPKLOTEDIT,
-                                      style: const TextStyle(
-                                        fontSize: 22,
+                                      style: TextStyle(
+                                        fontSize:
+                                            ReportPDFCommonvar.TPKLOT.length >
+                                                    30
+                                                ? 16
+                                                : 22,
                                       ),
                                     ),
                                   ),

@@ -57,13 +57,15 @@ class SURBAL013var {
   static String RS_L2 = '';
 
   static String CYNH_HI = '';
-  static String CYNH_DI = '';
+  static String CYNH_DI = '1.5';
 
   static String CYWH_HI = '';
-  static String CYWH_DIOUT = '';
-  static String CYWH_DIIN = '';
+  static String CYWH_DIOUT = '3.054';
+  static String CYWH_DIIN = '2.44';
 
   static String ARAE_ANS = '';
+
+  static String REFLOT = '';
 }
 
 class SURBAL013SCHEMA {
@@ -107,6 +109,7 @@ class SURBAL013SCHEMA {
     required this.confirmdata,
     required this.ITEMleftUNIT,
     required this.ITEMleftVALUE,
+    this.REFLOT = '',
   });
   String UPDATE;
   String PO;
@@ -149,4 +152,6 @@ class SURBAL013SCHEMA {
   List<INSDATA> confirmdata;
   List<INSDATA> ITEMleftUNIT;
   List<INSDATA> ITEMleftVALUE;
+
+  String REFLOT;
 }

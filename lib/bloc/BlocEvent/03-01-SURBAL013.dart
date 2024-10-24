@@ -252,6 +252,8 @@ class SURBAL013_Bloc extends Bloc<SURBAL013_Event, SURBAL013SCHEMA> {
         //---- RIGHT
         ITEMleftUNIT: ITEMleftUNITBUFFER,
         ITEMleftVALUE: ITEMleftVALUEBUFFER,
+
+        REFLOT: databuff['REFLOT'] == null ? '' : databuff['REFLOT'].toString(),
       );
     } else {
       //

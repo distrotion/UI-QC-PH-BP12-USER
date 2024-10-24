@@ -135,6 +135,8 @@ class _ROCKWELL_SURMCS001bodyState extends State<ROCKWELL_SURMCS001body> {
         SURMCS001var.ITEMleftUNIT = widget.data?.ITEMleftUNIT ?? [];
         SURMCS001var.ITEMleftVALUE = widget.data?.ITEMleftVALUE ?? [];
 
+        SURMCS001var.REFLOT = widget.data?.REFLOT ?? '';
+
         if (SURMCS001var.PCSleft == '0') {
           BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
               "ITEM STATUS", "COMPLETE DATA", enumNotificationlist.Success);
@@ -191,6 +193,15 @@ class _ROCKWELL_SURMCS001bodyState extends State<ROCKWELL_SURMCS001body> {
       Ghtype: SURMCS001var.GRAPHTYPE,
 
       //------- Bottom
+      REFLOT: SURMCS001var.REFLOT,
+      REFLOTfn: (v) {
+        if (SURMCS001var.REFLOT != '') {
+          context.read<TRICKER_SURMCS001_Bloc>().add(TRICKER_SURMCS001REFER());
+          Timer(const Duration(seconds: 2), () {
+            context.read<SURMCS001_Bloc>().add(SURMCS001_READ());
+          });
+        }
+      },
       ACCEPT: (v) {
         if (SURMCS001var.PCS != '' &&
             SURMCS001var.POINTs != '' &&

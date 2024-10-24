@@ -145,6 +145,8 @@ class _ROCKWELL_SURBAL013bodyState extends State<ROCKWELL_SURBAL013body> {
 
         SURBAL013var.FORMULA = widget.data?.FORMULA ?? '';
 
+        SURBAL013var.REFLOT = widget.data?.REFLOT ?? '';
+
         if (SURBAL013var.PCSleft == '0') {
           BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
               "ITEM STATUS", "COMPLETE DATA", enumNotificationlist.Success);
@@ -225,6 +227,12 @@ class _ROCKWELL_SURBAL013bodyState extends State<ROCKWELL_SURBAL013body> {
       },
 
       //------- Bottom
+      REFLOT: SURBAL013var.REFLOT,
+      REFLOTfn: (v) {
+        if (SURBAL013var.REFLOT != '') {
+          context.read<TRICKER_SURBAL013_Bloc>().add(TRICKER_SURBAL013REFER());
+        }
+      },
       ACCEPT: (v) {
         print(SURBAL013var.ARAE_ANS);
         print(SURBAL013var.AearI);

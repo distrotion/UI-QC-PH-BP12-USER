@@ -32,6 +32,8 @@ class TRICKER_SURBAL013SETZERO extends TRICKER_Event {}
 
 //-------------------------------- FINISH
 
+class TRICKER_SURBAL013REFER extends TRICKER_Event {}
+
 class TRICKER_SURBAL013FINISH extends TRICKER_Event {}
 
 class TRICKER_SURBAL013AEAR extends TRICKER_Event {}
@@ -78,6 +80,10 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
     });
 
     //-------------------------------- FINISH
+
+    on<TRICKER_SURBAL013REFER>((event, emit) {
+      return _TRICKER_SURBAL013REFER('', emit);
+    });
 
     on<TRICKER_SURBAL013FINISH>((event, emit) {
       return _TRICKER_SURBAL013FINISH('', emit);
@@ -175,6 +181,15 @@ class TRICKER_SURBAL013_Bloc extends Bloc<TRICKER_Event, String> {
 
   //-------------------------------- FINISH
   //TRICKER_SURBAL013FINISH
+
+  Future<void> _TRICKER_SURBAL013REFER(
+      String toAdd, Emitter<String> emit) async {
+    final response = await Dio().post(
+      server + 'FINAL/SURBAL013-REFLOT',
+      data: {},
+    );
+    emit('');
+  }
 
   Future<void> _TRICKER_SURBAL013FINISH(
       String toAdd, Emitter<String> emit) async {

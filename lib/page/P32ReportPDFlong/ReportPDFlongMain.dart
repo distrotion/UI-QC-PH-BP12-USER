@@ -1375,7 +1375,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 widget04: Center(
                                   child: Text(
                                     // ReportPDFlongvar.PROCESS,
-                                    "-",
+                                    "Phosphate",
                                     style: const TextStyle(
                                       fontSize: 22,
                                     ),
@@ -1490,8 +1490,11 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                       ReportPDFlongvar.TPKLOTEDIT == ''
                                           ? ReportPDFlongvar.TPKLOT
                                           : ReportPDFlongvar.TPKLOTEDIT,
-                                      style: const TextStyle(
-                                        fontSize: 22,
+                                      style: TextStyle(
+                                        fontSize:
+                                            ReportPDFlongvar.TPKLOT.length > 30
+                                                ? 16
+                                                : 22,
                                       ),
                                     ),
                                   ),
@@ -3834,8 +3837,13 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                               TAILSLOT(
                                 PASS: ReportPDFlongvar.PASS,
                                 PICS: _dataCOMMON.databasic.PICstd,
-                                Remark: ReportPDFlongvar.remark,
-                                NAME01: ReportPDFlongvar.INSBY.toUpperCase(),
+                                Remark: ReportPDFlongvar.REMARKEDIT == ''
+                                    ? ReportPDFlongvar.remark
+                                    : "Reference data from TP LOT NO." +
+                                        ReportPDFlongvar.REMARKEDIT,
+                                NAME01: ReportPDFlongvar.NAMEEDIT == ''
+                                    ? ReportPDFlongvar.INSBY.toUpperCase()
+                                    : ReportPDFlongvar.NAMEEDIT,
                                 NAME02: ReportPDFlongvar.CHECKBY,
                                 NAME03: ReportPDFlongvar.APPBY,
                               ),

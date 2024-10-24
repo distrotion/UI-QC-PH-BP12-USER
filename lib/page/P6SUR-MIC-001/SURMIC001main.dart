@@ -122,6 +122,8 @@ class _ROCKWELL_SURMIC001bodyState extends State<ROCKWELL_SURMIC001body> {
         SURMIC001var.ITEMleftUNIT = widget.data?.ITEMleftUNIT ?? [];
         SURMIC001var.ITEMleftVALUE = widget.data?.ITEMleftVALUE ?? [];
 
+        SURMIC001var.REFLOT = widget.data?.REFLOT ?? '';
+
         if (SURMIC001var.PCSleft == '0') {
           BlocProvider.of<BlocNotification>(contextGB).UpdateNotification(
               "ITEM STATUS", "COMPLETE DATA", enumNotificationlist.Success);
@@ -176,6 +178,12 @@ class _ROCKWELL_SURMIC001bodyState extends State<ROCKWELL_SURMIC001body> {
             .add(TRICKER_SURMIC001geteachGRAPH());
       },
       //------- Bottom
+      REFLOT: SURMIC001var.REFLOT,
+      REFLOTfn: (v) {
+        if (SURMIC001var.REFLOT != '') {
+          context.read<TRICKER_SURMIC001_Bloc>().add(TRICKER_SURMIC001REFER());
+        }
+      },
       ACCEPT: (v) {
         if ((SURMIC001var.RESULTFORMAT == 'Graph' &&
                 SURMIC001var.GAPname != '') ||

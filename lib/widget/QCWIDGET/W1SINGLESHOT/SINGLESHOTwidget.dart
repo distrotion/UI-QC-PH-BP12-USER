@@ -49,6 +49,9 @@ class SINGLESHOTmain extends StatelessWidget {
     this.ITEMleftVALUE,
     //-------
     this.PICB64,
+    //--------
+    this.REFLOT,
+    this.REFLOTfn,
   }) : super(key: key);
 
   //Left --------------------------------------------
@@ -98,6 +101,9 @@ class SINGLESHOTmain extends StatelessWidget {
 
   String? PICB64;
 
+  Function(String)? REFLOTfn;
+  String? REFLOT;
+
   @override
   Widget build(BuildContext context) {
     return SINGLESHITLAYOUT(
@@ -120,6 +126,28 @@ class SINGLESHOTmain extends StatelessWidget {
             padding: const EdgeInsets.all(2.0),
             child: Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: InkWell(
+                    onTap: () {
+                      if (REFLOTfn != null) {
+                        REFLOTfn!("S");
+                      }
+                    },
+                    child: Container(
+                      height: 40,
+                      color: (REFLOT ?? '') == ''
+                          ? Colors.grey
+                          : Colors.lightGreen,
+                      child: Center(
+                        child: Text("REFER FORM LOT: ${REFLOT ?? ''}",
+                            style: TxtStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                  ),
+                ),
                 Row(
                   children: [
                     Expanded(

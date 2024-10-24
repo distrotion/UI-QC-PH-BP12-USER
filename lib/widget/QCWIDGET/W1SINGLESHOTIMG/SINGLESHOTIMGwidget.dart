@@ -43,7 +43,9 @@ class SINGLESHOTIMGmain extends StatelessWidget {
     required this.RESETVALUE,
     this.ITEMleftUNIT,
     this.ITEMleftVALUE,
-
+    //--------
+    this.REFLOT,
+    this.REFLOTfn,
     //-------
   }) : super(key: key);
 
@@ -91,6 +93,9 @@ class SINGLESHOTIMGmain extends StatelessWidget {
   List<INSDATA>? ITEMleftUNIT; // ok
   List<INSDATA>? ITEMleftVALUE; // ok
 
+  Function(String)? REFLOTfn;
+  String? REFLOT;
+
   @override
   Widget build(BuildContext context) {
     return SINGLESHITLAYOUT(
@@ -115,6 +120,28 @@ class SINGLESHOTIMGmain extends StatelessWidget {
               children: [
                 // Row(
                 //   children: [
+                Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: InkWell(
+                    onTap: () {
+                      if (REFLOTfn != null) {
+                        REFLOTfn!("S");
+                      }
+                    },
+                    child: Container(
+                      height: 40,
+                      color: (REFLOT ?? '') == ''
+                          ? Colors.grey
+                          : Colors.lightGreen,
+                      child: Center(
+                        child: Text("REFER FORM LOT: ${REFLOT ?? ''}",
+                            style: TxtStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                  ),
+                ),
                 Expanded(
                   flex: 1,
                   child: Padding(
