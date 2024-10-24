@@ -766,6 +766,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
       ReportPDFCommonvar.rawlistCORE = [];
       ReportPDFCommonvar.INC01 = '';
       ReportPDFCommonvar.INC02 = '';
+      ReportPDFCommonvar.remark = '';
 
       ReportPDFCommonvar.datalist_ic = [
         ReportPDFCommonlist(),

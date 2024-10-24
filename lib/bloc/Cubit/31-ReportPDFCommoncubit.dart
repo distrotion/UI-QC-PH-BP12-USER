@@ -402,31 +402,46 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
           INSBY: INSBY,
           CHECKBY: CHECKBY,
           APPBY: APPBY,
+
+          REFLOT: BasicDATAr['REFLOT'] != null
+              ? BasicDATAr['REFLOT'].toString()
+              : '',
         );
 
-        if (BasicDATAr['ReferFrom'].toString() != PO) {
-          if (BasicDATAr['ReferFrom'] != null) {
-            final response02 = await Dio().post(
-              server + "BP12PH_Report_PDF",
-              data: {
-                "PO": BasicDATAr['ReferFrom'].toString(),
-              },
-            );
+        print(BasicCommonDATAs.REFLOT);
 
-            if (response02.statusCode == 200) {
-              var databuffref = response02.data;
-              // print(databuffref);
-              BasicCommonDATAs.PARTNAMEref =
-                  databuffref['DATA']?[0]['PARTNAME'].toString() ?? '';
-              BasicCommonDATAs.PARTref =
-                  databuffref['DATA']?[0]['PART'].toString() ?? '';
-              BasicCommonDATAs.TPKLOTref =
-                  databuffref['DATA']?[0]['TPKLOT'].toString() ?? '';
+        if (BasicCommonDATAs.REFLOT == '') {
+          if (BasicDATAr['ReferFrom'].toString() != PO) {
+            if (BasicDATAr['ReferFrom'] != null) {
+              final response02 = await Dio().post(
+                server + "BP12PH_Report_PDF",
+                data: {
+                  "PO": BasicDATAr['ReferFrom'].toString(),
+                },
+              );
 
-              // print(databuffref['DATA']?[0]['PART']);
-              // print(databuffref['DATA']?[0]['PARTNAME']);
+              if (response02.statusCode == 200) {
+                var databuffref = response02.data;
+                // print(databuffref);
+                BasicCommonDATAs.PARTNAMEref =
+                    databuffref['DATA']?[0]['PARTNAME'].toString() ?? '';
+                BasicCommonDATAs.PARTref =
+                    databuffref['DATA']?[0]['PART'].toString() ?? '';
+                BasicCommonDATAs.TPKLOTref =
+                    databuffref['DATA']?[0]['TPKLOT'].toString() ?? '';
+
+                // print(databuffref['DATA']?[0]['PART']);
+                // print(databuffref['DATA']?[0]['PARTNAME']);
+              }
             }
           }
+        } else {
+          BasicCommonDATAs.PARTNAMEref =
+              // 'Reference data from TP LOT NO. ${BasicCommonDATAs.REFLOT}';
+              '${BasicCommonDATAs.REFLOT}';
+
+          BasicCommonDATAs.PARTref = '${BasicCommonDATAs.REFLOT}';
+          BasicCommonDATAs.TPKLOTref = '${BasicCommonDATAs.REFLOT}';
         }
 
         // if (BasicDATAr['ReferFrom'].toString() != PO) {
@@ -3005,6 +3020,7 @@ class BasicCommonDATA {
     this.CHECKBY = '',
     this.APPBY = '',
     this.TPKLOTref = '',
+    this.REFLOT = '',
   });
 
   String PO;
@@ -3038,6 +3054,8 @@ class BasicCommonDATA {
   String CHECKBY;
   String APPBY;
   String TPKLOTref;
+
+  String REFLOT;
 }
 
 class CommonReportOutput {
