@@ -39,6 +39,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
       ReportPDFlongvar.TPKLOTEDIT = '';
       ReportPDFlongvar.QTYEDIT = '';
       ReportPDFlongvar.INCresult = '';
+      ReportPDFlongvar.HIDEDATA = false;
     }
     super.initState();
   }
@@ -111,7 +112,25 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
       ReportPDFlongvar.rawlistRoughness = [];
       ReportPDFlongvar.rawlistCORE = [];
 
-      ReportPDFlongvar.rawlistDATA = [];
+      ReportPDFlongvar.rawlistDATA = [
+        [
+          rawlist(
+            DATANO: "1",
+            DATAPCS: '1',
+            DATA: "9.48",
+          ),
+          rawlist(
+            DATANO: "2",
+            DATAPCS: '1',
+            DATA: "8.30",
+          ),
+          rawlist(
+            DATANO: "3",
+            DATAPCS: '1',
+            DATA: "9.09",
+          ),
+        ]
+      ];
 
       ReportPDFlongvar.graphupper = [];
       ReportPDFlongvar.graphdata = [];
@@ -119,7 +138,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
       ReportPDFlongvar.graphdata3 = [];
       ReportPDFlongvar.graphdata4 = [];
       ReportPDFlongvar.graphunder = [];
-      ReportPDFlongvar.Listitemname = [];
+      ReportPDFlongvar.Listitemname = ["Coating weight"];
 
       for (var i = 0; i < _dataCOMMON.datain_IC.length; i++) {
         ReportPDFlongvar.datalist_ic[i].ITEMname =
@@ -874,14 +893,24 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 30),
-                child: Container(
-                  color: ReportPDFlongvar.STATUS == 'REPORT READY'
-                      ? Colors.green
-                      : Colors.yellow,
-                  height: 40,
-                  width: 100,
-                  child: Center(
-                    child: Text(ReportPDFlongvar.STATUS),
+                child: InkWell(
+                  onLongPress: () {
+                    if (ReportPDFlongvar.HIDEDATA) {
+                      ReportPDFlongvar.HIDEDATA = false;
+                    } else {
+                      ReportPDFlongvar.HIDEDATA = true;
+                    }
+                    setState(() {});
+                  },
+                  child: Container(
+                    color: ReportPDFlongvar.STATUS == 'REPORT READY'
+                        ? Colors.green
+                        : Colors.yellow,
+                    height: 40,
+                    width: 100,
+                    child: Center(
+                      child: Text(ReportPDFlongvar.STATUS),
+                    ),
                   ),
                 ),
               ),
@@ -1334,7 +1363,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 ),
                               ),
                               HEAD4SLOT(
-                                ListFlex: [4, 8, 3, 5],
+                                ListFlex: [3, 9, 3, 5],
                                 widget01: const Center(
                                   child: Row(
                                     children: [
@@ -1384,7 +1413,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                               ),
 
                               BODY4SLOT(
-                                ListFlex: [4, 8, 3, 5],
+                                ListFlex: [3, 9, 3, 5],
                                 widget01: const Center(
                                   child: Row(
                                     children: [
@@ -1432,7 +1461,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 ),
                               ),
                               BODY2SLOT(
-                                ListFlex: [4, 16],
+                                ListFlex: [3, 17],
                                 widget01: const Center(
                                   child: Row(
                                     children: [
@@ -1465,7 +1494,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 ),
                               ),
                               BODY6SLOT(
-                                ListFlex: const [4, 6, 3, 3, 1, 3],
+                                ListFlex: const [3, 7, 3, 3, 1, 3],
                                 widget01: const Center(
                                   child: Row(
                                     children: [
@@ -1960,16 +1989,35 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFlongvar.datalist[0].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFlongvar
-                                                  .datalist[0].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFlongvar.datalist[0].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFlongvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFlongvar
+                                                  .datalist[0].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[0]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFlongvar.datalist[0].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[0]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2045,25 +2093,45 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFlongvar.datalist[1].RESULT ==
-                                                '0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[1].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[1].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFlongvar.datalist[1].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFlongvar
-                                                  .datalist[1].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFlongvar.datalist[1].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFlongvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFlongvar
+                                                  .datalist[1].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[1]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFlongvar.datalist[1].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[1].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[1].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFlongvar
+                                                  .datalist[1].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[1]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2139,25 +2207,45 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFlongvar.datalist[2].RESULT ==
-                                                '0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[2].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[2].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFlongvar.datalist[2].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFlongvar
-                                                  .datalist[2].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFlongvar.datalist[2].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFlongvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFlongvar
+                                                  .datalist[2].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[2]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFlongvar.datalist[2].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[2].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[2].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFlongvar
+                                                  .datalist[2].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[2]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2233,25 +2321,45 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFlongvar.datalist[3].RESULT ==
-                                                '0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[3].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[3].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFlongvar.datalist[3].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFlongvar
-                                                  .datalist[3].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFlongvar.datalist[3].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFlongvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFlongvar
+                                                  .datalist[3].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[3]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFlongvar.datalist[3].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[3].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[3].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFlongvar
+                                                  .datalist[3].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[3]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2327,25 +2435,45 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFlongvar.datalist[4].RESULT ==
-                                                '0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[4].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[4].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFlongvar.datalist[4].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFlongvar
-                                                  .datalist[4].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFlongvar.datalist[4].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFlongvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFlongvar
+                                                  .datalist[4].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[4]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFlongvar.datalist[4].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[4].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[4].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFlongvar
+                                                  .datalist[4].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[4]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2421,25 +2549,45 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFlongvar.datalist[5].RESULT ==
-                                                '0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[5].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[5].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFlongvar.datalist[5].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFlongvar
-                                                  .datalist[5].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFlongvar.datalist[5].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFlongvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFlongvar
+                                                  .datalist[5].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[5]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFlongvar.datalist[5].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[5].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[5].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFlongvar
+                                                  .datalist[5].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[5]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -2515,25 +2663,45 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                   ),
                                 ),
                                 widget06: Center(
-                                  child: Text(
-                                    ReportPDFlongvar.datalist[6].RESULT ==
-                                                '0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[6].RESULT ==
-                                                '0.0' ||
-                                            ReportPDFlongvar
-                                                    .datalist[6].RESULT ==
-                                                '0.00'
-                                        ? "N/A"
-                                        : ReportPDFlongvar.datalist[6].RESULT,
-                                    style: TextStyle(
-                                      fontSize: ReportPDFlongvar
-                                                  .datalist[6].RESULT.length >
-                                              30
-                                          ? 12
-                                          : 16,
-                                    ),
-                                  ),
+                                  child: ReportPDFlongvar.datalist[6].FREQ
+                                          .contains("/6M")
+                                      ? Text(
+                                          ReportPDFlongvar.HIDEDATA
+                                              ? "-"
+                                              : ReportPDFlongvar
+                                                  .datalist[6].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[6]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        )
+                                      : Text(
+                                          ReportPDFlongvar.datalist[6].RESULT ==
+                                                      '0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[6].RESULT ==
+                                                      '0.0' ||
+                                                  ReportPDFlongvar
+                                                          .datalist[6].RESULT ==
+                                                      '0.00'
+                                              ? "N/A"
+                                              : ReportPDFlongvar
+                                                  .datalist[6].RESULT,
+                                          style: TextStyle(
+                                            fontSize: ReportPDFlongvar
+                                                        .datalist[6]
+                                                        .RESULT
+                                                        .length >
+                                                    30
+                                                ? 12
+                                                : 16,
+                                          ),
+                                        ),
                                 ),
                                 widget07: Center(
                                   child: Text(
@@ -3829,7 +3997,9 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 height: 6,
                               ),
                               PICSLO2NORMAL(
-                                PIC01: _dataCOMMON.databasic.PIC01,
+                                PIC01: ReportPDFlongvar.HIDEDATA
+                                    ? ""
+                                    : _dataCOMMON.databasic.PIC01,
                                 ITEMPIC01: _dataCOMMON.databasic.ITEMPIC01,
                                 PIC02: _dataCOMMON.databasic.PIC02,
                                 ITEMPIC02: _dataCOMMON.databasic.ITEMPIC02,

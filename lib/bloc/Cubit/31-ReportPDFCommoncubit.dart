@@ -2465,6 +2465,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   // String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
                   String remark = '';
 
+                  String SUMDATA =
+                      PATTERNlist['FINAL'][fi]['SUMDATA'].toString();
+
                   final rest2 = await Dio().post(
                     serverGBW + "GET_FINAL_COMMENT",
                     data: {
@@ -2686,7 +2689,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     NO: NO_NUMBER,
                     FREQ: FREQ,
                     datapackset: listdataset,
-                    RESULT: (resultdata).toStringAsFixed(desinal),
+                    RESULT: SUMDATA == 'NO'
+                        ? "See at table"
+                        : (resultdata).toStringAsFixed(desinal),
                     LOAD: LOAD,
                     Remark: remark,
                     SRAWDATA: SRAWDATA,

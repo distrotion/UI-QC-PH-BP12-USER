@@ -38,7 +38,7 @@ class MainContext extends StatelessWidget {
     return BlocBuilder<BlocPageRebuild, bool>(
       builder: (_, e) {
         return MaterialApp(
-          title: 'UI QC GAS HES',
+          title: 'UI QC PH BP12',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),

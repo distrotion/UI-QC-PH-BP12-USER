@@ -1329,7 +1329,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                               ),
                               HEAD4SLOT(
-                                ListFlex: [4, 8, 3, 5],
+                                ListFlex: [3, 9, 3, 5],
                                 widget01: const Center(
                                   child: Row(
                                     children: [
@@ -1379,7 +1379,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                               ),
 
                               BODY4SLOT(
-                                ListFlex: [4, 8, 3, 5],
+                                ListFlex: [3, 9, 3, 5],
                                 widget01: const Center(
                                   child: Row(
                                     children: [
@@ -1427,7 +1427,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                               ),
                               BODY2SLOT(
-                                ListFlex: [4, 16],
+                                ListFlex: [3, 17],
                                 widget01: const Center(
                                   child: Row(
                                     children: [
@@ -1460,7 +1460,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 ),
                               ),
                               BODY6SLOT(
-                                ListFlex: const [4, 6, 3, 3, 1, 3],
+                                ListFlex: const [3, 8, 2, 3, 1, 3],
                                 widget01: const Center(
                                   child: Row(
                                     children: [
@@ -1489,7 +1489,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                         fontSize:
                                             ReportPDFCommonvar.TPKLOT.length >
                                                     30
-                                                ? 16
+                                                ? 18
                                                 : 22,
                                       ),
                                     ),
