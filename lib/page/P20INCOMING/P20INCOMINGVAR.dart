@@ -9,6 +9,7 @@ class P20INCOMINGVAR {
   static int ItemNow = 0;
 
   static String MATIN = "";
+  static String POIN = "";
   //
 
   static String SEQ = "";

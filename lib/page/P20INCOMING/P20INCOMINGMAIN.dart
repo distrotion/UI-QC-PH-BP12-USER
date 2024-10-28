@@ -4,6 +4,7 @@ import 'package:qc_ui_isn_hes/model/model.dart';
 
 import '../../bloc/BlocEvent/20-01-INCOMINGGETPO.dart';
 import '../../bloc/BlocEvent/20-02-INCOMINGGETLIST.dart';
+import '../../bloc/BlocEvent/20-03-INCOMINGGETDATA.dart';
 import '../../data/Base64Img.dart';
 import '../../widget/common/ComInputText.dart';
 import 'P20INCOMINGMAIN_CONSOLEbox.dart';
@@ -16,10 +17,12 @@ class P20INCONINGMAIN extends StatefulWidget {
     Key? key,
     this.data,
     this.list,
+    this.getdata,
   }) : super(key: key);
 
   INCOMINGGETPOclass? data;
   List<INCOMINGGETLISTclass>? list;
+  INCOMINGGETDATAclass? getdata;
 
   @override
   State<P20INCONINGMAIN> createState() => _P20INCONINGMAINState();
@@ -31,6 +34,10 @@ class _P20INCONINGMAINState extends State<P20INCONINGMAIN> {
     P20INCONINGMAINcontext = context;
     INCOMINGGETPOclass _data = widget.data ?? INCOMINGGETPOclass();
     List<INCOMINGGETLISTclass> _list = widget.list ?? [];
+
+    INCOMINGGETDATAclass _getdata = widget.getdata ?? INCOMINGGETDATAclass();
+
+    print(_getdata.data.length);
     return Container(
       height: 600,
       width: 900,
@@ -248,6 +255,33 @@ class _P20INCONINGMAINState extends State<P20INCONINGMAIN> {
                           InkWell(
                             onTap: () {
                               //
+                              P20INCOMINGVAR.POIN = P20INCOMINGVAR.ORDER;
+                              if (_list.length > 0) {
+                                context
+                                    .read<INCOMINGGETDATA_Bloc>()
+                                    .add(INCOMINGGETDATA_GET());
+                              }
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 150,
+                              color:
+                                  _list.length > 0 ? Colors.blue : Colors.grey,
+                              child: Center(
+                                child: Text("GET DATA"),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 12,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              //
 
                               P20INCOMINGVAR.iscontrol = true;
 
@@ -275,6 +309,8 @@ class _P20INCONINGMAINState extends State<P20INCONINGMAIN> {
                               P20INCOMINGVAR_INPROCESSBOX.datainlist = [];
                               P20INCOMINGVAR_INPROCESSBOX.setofdatainlist = [];
                               P20INCOMINGVAR_INPROCESSBOX.itemlistbuffer = [];
+
+                              _getdata = INCOMINGGETDATAclass();
 
                               context
                                   .read<INCOMINGGETPO_Bloc>()
@@ -305,15 +341,28 @@ class _P20INCONINGMAINState extends State<P20INCONINGMAIN> {
                       padding: const EdgeInsetsDirectional.only(
                           start: 15, top: 2, bottom: 2),
                       child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2.0, color: Colors.black),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(8)),
-                            color: Colors.white,
-                          ),
-                          child: Center(
-                            child: PicShowFront(base64: logo),
-                          )),
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 2.0, color: Colors.black),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
+                          color: Colors.white,
+                        ),
+                        child: _getdata.data.length == 0
+                            ? Center(
+                                child: PicShowFront(base64: logo),
+                              )
+                            : SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    for (int i = 0;
+                                        i < _getdata.data.length;
+                                        i++) ...[
+                                      Text(_getdata.data[i].toString()),
+                                    ],
+                                  ],
+                                ),
+                              ),
+                      ),
                     ),
                   ),
                 )

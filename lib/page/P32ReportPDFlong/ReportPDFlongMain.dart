@@ -113,23 +113,23 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
       ReportPDFlongvar.rawlistCORE = [];
 
       ReportPDFlongvar.rawlistDATA = [
-        [
-          rawlist(
-            DATANO: "1",
-            DATAPCS: '1',
-            DATA: "9.48",
-          ),
-          rawlist(
-            DATANO: "2",
-            DATAPCS: '1',
-            DATA: "8.30",
-          ),
-          rawlist(
-            DATANO: "3",
-            DATAPCS: '1',
-            DATA: "9.09",
-          ),
-        ]
+        // [
+        //   rawlist(
+        //     DATANO: "1",
+        //     DATAPCS: '1',
+        //     DATA: "9.48",
+        //   ),
+        //   rawlist(
+        //     DATANO: "2",
+        //     DATAPCS: '1',
+        //     DATA: "8.30",
+        //   ),
+        //   rawlist(
+        //     DATANO: "3",
+        //     DATAPCS: '1',
+        //     DATA: "9.09",
+        //   ),
+        // ]
       ];
 
       ReportPDFlongvar.graphupper = [];
@@ -138,7 +138,9 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
       ReportPDFlongvar.graphdata3 = [];
       ReportPDFlongvar.graphdata4 = [];
       ReportPDFlongvar.graphunder = [];
-      ReportPDFlongvar.Listitemname = ["Coating weight"];
+      ReportPDFlongvar.Listitemname = [
+        // "Coating weight"
+      ];
 
       for (var i = 0; i < _dataCOMMON.datain_IC.length; i++) {
         ReportPDFlongvar.datalist_ic[i].ITEMname =

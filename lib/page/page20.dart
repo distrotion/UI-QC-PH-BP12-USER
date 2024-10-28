@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/BlocEvent/20-01-INCOMINGGETPO.dart';
 import '../bloc/BlocEvent/20-02-INCOMINGGETLIST.dart';
+import '../bloc/BlocEvent/20-03-INCOMINGGETDATA.dart';
 import '../model/model.dart';
 import 'P20INCOMING/P20INCOMINGMAIN.dart';
 
@@ -46,9 +47,34 @@ class Page20BlocTableBody2 extends StatelessWidget {
         create: (_) => INCOMINGGETLIST_Bloc(),
         child: BlocBuilder<INCOMINGGETLIST_Bloc, List<INCOMINGGETLISTclass>>(
           builder: (context, list) {
+            return Page20BlocTableBodyDATA(
+              list: list,
+              data: data,
+            );
+          },
+        ));
+  }
+}
+
+class Page20BlocTableBodyDATA extends StatelessWidget {
+  Page20BlocTableBodyDATA({
+    Key? key,
+    this.data,
+    this.list,
+  }) : super(key: key);
+  INCOMINGGETPOclass? data;
+  List<INCOMINGGETLISTclass>? list;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (_) => INCOMINGGETDATA_Bloc(),
+        child: BlocBuilder<INCOMINGGETDATA_Bloc, INCOMINGGETDATAclass>(
+          builder: (context, getdata) {
             return Page20Body(
               list: list,
               data: data,
+              getdata: getdata,
             );
           },
         ));
@@ -60,10 +86,12 @@ class Page20Body extends StatelessWidget {
     Key? key,
     this.data,
     this.list,
+    this.getdata,
   }) : super(key: key);
 
   INCOMINGGETPOclass? data;
   List<INCOMINGGETLISTclass>? list;
+  INCOMINGGETDATAclass? getdata;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +99,7 @@ class Page20Body extends StatelessWidget {
       child: P20INCONINGMAIN(
         data: data,
         list: list,
+        getdata: getdata,
       ),
     );
   }

@@ -246,7 +246,7 @@ class SINGLESHOTmain extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 165,
+                  height: 125,
                   child: SingleChildScrollView(
                     child: _tabtableB3(
                       height: 40,
