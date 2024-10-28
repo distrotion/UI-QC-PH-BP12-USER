@@ -159,7 +159,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
         //Surface Hardness
 
         // if (_dataCOMMON.datain[i].TYPE == 'Number') {
-        if (_dataCOMMON.datain[i].TYPE == 'Number') {
+        if (_dataCOMMON.datain[i].TYPE == 'Number' ||
+            _dataCOMMON.datain[i].TYPE == 'CAL2') {
           if (_dataCOMMON.datain[i].SRAWDATA != 'NO') {
             ReportPDFCommonvar.Listitemname.add(_dataCOMMON.datain[i].ITEMname);
 

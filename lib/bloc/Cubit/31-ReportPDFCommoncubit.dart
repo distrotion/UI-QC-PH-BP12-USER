@@ -2435,267 +2435,774 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
             for (var mi = 0; mi < MACHINElist.length; mi++) {
               if (FINALdata[MACHINElist[mi]] != null) {
-                if (FINALdata[MACHINElist[mi]]
-                        [PATTERNlist['FINAL'][fi]['ITEMs']] !=
-                    null) {
-                  // print(PATTERNlist['FINAL'][fi]['RESULTFORMAT']);
-                  // print(FINALdata[MACHINElist[mi]]
-                  //     [PATTERNlist['FINAL'][fi]['ITEMs']]);
+                if (MACHINElist[mi].toString() != 'SUR-MIC-001') {
+                  if (FINALdata[MACHINElist[mi]]
+                          [PATTERNlist['FINAL'][fi]['ITEMs']] !=
+                      null) {
+                    // print(PATTERNlist['FINAL'][fi]['RESULTFORMAT']);
+                    // print(FINALdata[MACHINElist[mi]]
+                    //     [PATTERNlist['FINAL'][fi]['ITEMs']]);
 
-                  String POINTs = (int.parse(ConverstStrOne(
-                          PATTERNlist['FINAL'][fi]['PCS'].toString())))
-                      .toString();
+                    String POINTs = (int.parse(ConverstStrOne(
+                            PATTERNlist['FINAL'][fi]['PCS'].toString())))
+                        .toString();
 
-                  String SPECIFICATIONbuff =
-                      PATTERNlist['FINAL'][fi]['SPECIFICATIONve'].toString();
-                  String itemss = PATTERNlist['FINAL'][fi]['ITEMs'].toString();
-                  String SCmasks =
-                      PATTERNlist['FINAL'][fi]['SCMARK'].toString();
-                  String ITEMname = '';
-                  String METHODss = '';
-                  String METHODname = '';
-                  String FREQ =
-                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
-                  String SPECIFICATION = '';
-                  String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
+                    String SPECIFICATIONbuff =
+                        PATTERNlist['FINAL'][fi]['SPECIFICATIONve'].toString();
+                    String itemss =
+                        PATTERNlist['FINAL'][fi]['ITEMs'].toString();
+                    String SCmasks =
+                        PATTERNlist['FINAL'][fi]['SCMARK'].toString();
+                    String ITEMname = '';
+                    String METHODss = '';
+                    String METHODname = '';
+                    String FREQ =
+                        '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                    String SPECIFICATION = '';
+                    String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
 
-                  double maxdata = 0;
-                  double mindata = 0;
+                    double maxdata = 0;
+                    double mindata = 0;
 
-                  // String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
-                  String remark = '';
+                    // String remark = PATTERNlist['FINAL'][fi]['REMARK'].toString();
+                    String remark = '';
 
-                  String SUMDATA =
-                      PATTERNlist['FINAL'][fi]['SUMDATA'].toString();
+                    String SUMDATA =
+                        PATTERNlist['FINAL'][fi]['SUMDATA'].toString();
 
-                  final rest2 = await Dio().post(
-                    serverGBW + "GET_FINAL_COMMENT",
-                    data: {
-                      "masterID": PATTERNlist['FINAL'][fi]['REMARK'] != null
-                          ? PATTERNlist['FINAL'][fi]['REMARK'].toString()
-                          : '',
-                    },
-                  );
+                    final rest2 = await Dio().post(
+                      serverGBW + "GET_FINAL_COMMENT",
+                      data: {
+                        "masterID": PATTERNlist['FINAL'][fi]['REMARK'] != null
+                            ? PATTERNlist['FINAL'][fi]['REMARK'].toString()
+                            : '',
+                      },
+                    );
 
-                  if (rest2.statusCode == 200) {
-                    var databuff = rest2.data;
+                    if (rest2.statusCode == 200) {
+                      var databuff = rest2.data;
 
-                    remark = databuff['COMMENT'] != null
-                        ? databuff['COMMENT'].toString()
-                        : "";
-                  }
+                      remark = databuff['COMMENT'] != null
+                          ? databuff['COMMENT'].toString()
+                          : "";
+                    }
 
-                  String SRAWDATA =
-                      PATTERNlist['FINAL'][fi]['SRAWDATA'].toString();
+                    String SRAWDATA =
+                        PATTERNlist['FINAL'][fi]['SRAWDATA'].toString();
 
-                  // print('>>${remark}');
+                    // print('>>${remark}');
 
-                  // String convss =
-                  //     PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
+                    // String convss =
+                    //     PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
 
-                  // if (convss != '' && convss != '-') {
-                  //   for (var ih = 0; ih < UNITlist.length; ih++) {
-                  //     // print(UNITlist[ih]['masterID'].toString());
-                  //     if (convss == UNITlist[ih]['masterID'].toString()) {
-                  //       // print(UNITlist[ih]);
-                  //       String Unitss = "${UNITlist[ih]['UNIT']}";
-                  //       if (Unitss.contains("-") == false) {
-                  //         remark = "From ${UNITlist[ih]['UNIT']}";
-                  //       }
+                    // if (convss != '' && convss != '-') {
+                    //   for (var ih = 0; ih < UNITlist.length; ih++) {
+                    //     // print(UNITlist[ih]['masterID'].toString());
+                    //     if (convss == UNITlist[ih]['masterID'].toString()) {
+                    //       // print(UNITlist[ih]);
+                    //       String Unitss = "${UNITlist[ih]['UNIT']}";
+                    //       if (Unitss.contains("-") == false) {
+                    //         remark = "From ${UNITlist[ih]['UNIT']}";
+                    //       }
 
-                  //       break;
-                  //     }
-                  //   }
-                  // }
+                    //       break;
+                    //     }
+                    //   }
+                    // }
 
-                  try {
-                    String SPECIFICATIONbuff2 =
-                        SPECIFICATIONbuff.replaceAll('{', '{"');
-                    String SPECIFICATIONbuff3 =
-                        SPECIFICATIONbuff2.replaceAll('}', '"}');
-                    String SPECIFICATIONbuff4 =
-                        SPECIFICATIONbuff3.replaceAll(':', '":"');
-                    String SPECIFICATIONbuff5 =
-                        SPECIFICATIONbuff4.replaceAll(',', '","');
-                    // print(SPECIFICATIONbuff5);
-                    var SPECIFICATIONdata =
-                        json.decode(SPECIFICATIONbuff5.replaceAll(' ', ''));
-                    if (SPECIFICATIONdata['condition'] != null) {
-                      // print(SPECIFICATIONdata['condition']);
-                      String condition =
-                          SPECIFICATIONdata['condition'].toString();
+                    try {
+                      String SPECIFICATIONbuff2 =
+                          SPECIFICATIONbuff.replaceAll('{', '{"');
+                      String SPECIFICATIONbuff3 =
+                          SPECIFICATIONbuff2.replaceAll('}', '"}');
+                      String SPECIFICATIONbuff4 =
+                          SPECIFICATIONbuff3.replaceAll(':', '":"');
+                      String SPECIFICATIONbuff5 =
+                          SPECIFICATIONbuff4.replaceAll(',', '","');
+                      // print(SPECIFICATIONbuff5);
+                      var SPECIFICATIONdata =
+                          json.decode(SPECIFICATIONbuff5.replaceAll(' ', ''));
+                      if (SPECIFICATIONdata['condition'] != null) {
+                        // print(SPECIFICATIONdata['condition']);
+                        String condition =
+                            SPECIFICATIONdata['condition'].toString();
 
-                      // print(condition.contains("LOL(<)"));
-                      // print(condition.contains("HIM(>)"));
-                      // Actual
-                      // print(SPECIFICATIONdata);
+                        // print(condition.contains("LOL(<)"));
+                        // print(condition.contains("HIM(>)"));
+                        // Actual
+                        // print(SPECIFICATIONdata);
 
-                      String dataUNIT =
-                          PATTERNlist['FINAL'][fi]['UNIT'].toString();
+                        String dataUNIT =
+                            PATTERNlist['FINAL'][fi]['UNIT'].toString();
 
-                      String unitP = '';
+                        String unitP = '';
 
-                      for (var ih = 0; ih < UNITlist.length; ih++) {
-                        // print(UNITlist[ih]['masterID'].toString());
-                        if (dataUNIT == UNITlist[ih]['masterID'].toString()) {
-                          // print(UNITlist[ih]);
-                          unitP = UNITlist[ih]['UNIT'].toString();
-                          break;
+                        for (var ih = 0; ih < UNITlist.length; ih++) {
+                          // print(UNITlist[ih]['masterID'].toString());
+                          if (dataUNIT == UNITlist[ih]['masterID'].toString()) {
+                            // print(UNITlist[ih]);
+                            unitP = UNITlist[ih]['UNIT'].toString();
+                            break;
+                          }
+                        }
+
+                        if (condition.contains("BTW")) {
+                          print(SPECIFICATIONdata['BTW_LOW']);
+                          print(SPECIFICATIONdata['BTW_HI']);
+                          SPECIFICATION =
+                              '${SPECIFICATIONdata['BTW_LOW'].toString()}-${SPECIFICATIONdata['BTW_HI'].toString()} ${unitP.replaceAll('?', 'µ')}';
+
+                          maxdata = double.parse(ConverstStr(
+                              SPECIFICATIONdata['BTW_HI'].toString()));
+                          mindata = double.parse(ConverstStr(
+                              SPECIFICATIONdata['BTW_LOW'].toString()));
+                        } else if (condition.contains("LOL(<)")) {
+                          // print(SPECIFICATIONdata['LOL_H']);
+                          SPECIFICATION =
+                              '≤ ${SPECIFICATIONdata['LOL_H'].toString()} ${unitP.replaceAll('?', 'µ')}';
+                          maxdata = double.parse(ConverstStr(
+                              SPECIFICATIONdata['LOL_H'].toString()));
+                        } else if (condition.contains("HIM(>)")) {
+                          // print(SPECIFICATIONdata['HIM_L']);
+                          SPECIFICATION =
+                              '≥ ${SPECIFICATIONdata['HIM_L'].toString()} ${unitP.replaceAll('?', 'µ')}';
+                          mindata = double.parse(ConverstStr(
+                              SPECIFICATIONdata['HIM_L'].toString()));
+                        } else if (condition.contains("Actual")) {
+                          // print(SPECIFICATIONdata['TARGET']);
+                          SPECIFICATION = 'Actual';
                         }
                       }
+                    } catch (er) {
+                      print(er);
+                    }
 
-                      if (condition.contains("BTW")) {
-                        print(SPECIFICATIONdata['BTW_LOW']);
-                        print(SPECIFICATIONdata['BTW_HI']);
-                        SPECIFICATION =
-                            '${SPECIFICATIONdata['BTW_LOW'].toString()}-${SPECIFICATIONdata['BTW_HI'].toString()} ${unitP.replaceAll('?', 'µ')}';
-
-                        maxdata = double.parse(ConverstStr(
-                            SPECIFICATIONdata['BTW_HI'].toString()));
-                        mindata = double.parse(ConverstStr(
-                            SPECIFICATIONdata['BTW_LOW'].toString()));
-                      } else if (condition.contains("LOL(<)")) {
-                        // print(SPECIFICATIONdata['LOL_H']);
-                        SPECIFICATION =
-                            '≤ ${SPECIFICATIONdata['LOL_H'].toString()} ${unitP.replaceAll('?', 'µ')}';
-                        maxdata = double.parse(
-                            ConverstStr(SPECIFICATIONdata['LOL_H'].toString()));
-                      } else if (condition.contains("HIM(>)")) {
-                        // print(SPECIFICATIONdata['HIM_L']);
-                        SPECIFICATION =
-                            '≥ ${SPECIFICATIONdata['HIM_L'].toString()} ${unitP.replaceAll('?', 'µ')}';
-                        mindata = double.parse(
-                            ConverstStr(SPECIFICATIONdata['HIM_L'].toString()));
-                      } else if (condition.contains("Actual")) {
-                        // print(SPECIFICATIONdata['TARGET']);
-                        SPECIFICATION = 'Actual';
+                    for (var Fci = 0; Fci < FINALCHECKlist.length; Fci++) {
+                      if (FINALCHECKlist[Fci]['key'].toString() == itemss) {
+                        ITEMname = FINALCHECKlist[Fci]['value'].toString();
+                        METHODss = FINALCHECKlist[Fci]['METHOD'].toString();
                       }
                     }
-                  } catch (er) {
-                    print(er);
-                  }
 
-                  for (var Fci = 0; Fci < FINALCHECKlist.length; Fci++) {
-                    if (FINALCHECKlist[Fci]['key'].toString() == itemss) {
-                      ITEMname = FINALCHECKlist[Fci]['value'].toString();
-                      METHODss = FINALCHECKlist[Fci]['METHOD'].toString();
-                    }
-                  }
-
-                  for (var Fci = 0; Fci < METHODlist.length; Fci++) {
-                    if (METHODlist[Fci]['masterID'].toString() == METHODss) {
-                      METHODname = METHODlist[Fci]['METHOD'].toString();
-                      break;
-                    }
-                  }
-                  int desinal = 2;
-
-                  // for (var Fci = 0; Fci < ITEMSlist.length; Fci++) {
-                  //   if (ITEMSlist[Fci]['masterID'].toString() == itemss) {
-                  //     // print(ITEMSlist[Fci]);
-                  //     if (ITEMSlist[Fci]['ITEMs']
-                  //         .toString()
-                  //         .toUpperCase()
-                  //         .contains("HARDNESS")) {
-                  //       desinal = 1;
-                  //     }
-
-                  //     if (ITEMSlist[Fci]['ITEMs'].toString().contains("trid")) {
-                  //       desinal = 1;
-                  //     }
-                  //   }
-                  // }
-                  // for (var B = 0; B < ITEMSlist.length; B++) {
-                  //   for (var d = 0; d < DESIMALlist.length; d++) {
-                  //     if (DESIMALlist[d]['ITEMs'].toString() ==
-                  //         ITEMSlist[B]['masterID'].toString()) {
-                  //       desinal =
-                  //           int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
-                  //     } else {
-                  //       desinal = 1;
-                  //     }
-                  //   }
-                  // }
-                  for (var d = 0; d < DESIMALlist.length; d++) {
-                    if (DESIMALlist[d]['ITEMs'].toString() == itemss) {
-                      desinal =
-                          int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
-                      break;
-                    } else {
-                      desinal = 2;
-                    }
-                  }
-                  // print(ITEMname);
-                  // desinal = 1;
-                  List<datainlist> listdataset = [];
-                  for (var i = 0; i < 20; i++) {
-                    if (FINALdata[MACHINElist[mi]]
-                                [PATTERNlist['FINAL'][fi]['ITEMs']]
-                            ['PSC${i + 1}'] !=
-                        null) {
-                      //
-                      // print(FINALdata[MACHINElist[mi]]
-                      //         [PATTERNlist['FINAL'][fi]['ITEMs']]['PSC${i + 1}']
-                      //     .length);
-                      var datainside = FINALdata[MACHINElist[mi]]
-                          [PATTERNlist['FINAL'][fi]['ITEMs']]['PSC${i + 1}'];
-                      datainlist datainpcsi = datainlist();
-                      int pcsi = 0;
-                      // print(PATTERNlist['FINAL'][fi]);
-                      // print(ITEMSlist);
-                      print(PATTERNlist['FINAL'][fi]['CONVERSEDATA']);
-                      String conves = PATTERNlist['FINAL'][fi]
-                                  ['CONVERSEDATA'] !=
-                              null
-                          ? PATTERNlist['FINAL'][fi]['CONVERSEDATA'].toString()
-                          : '';
-
-                      String ConvesData = 'PO3';
-                      if (conves == 'yes') {
-                        ConvesData = 'PO5';
-                        // ConvesData = 'PO3';
+                    for (var Fci = 0; Fci < METHODlist.length; Fci++) {
+                      if (METHODlist[Fci]['masterID'].toString() == METHODss) {
+                        METHODname = METHODlist[Fci]['METHOD'].toString();
+                        break;
                       }
-
-                      datainpcsi.DATAAVG =
-                          datainside[pcsi][ConvesData].toString();
-                      datainpcsi.dimensionX = pcsi;
-
-                      datainpcsi.TYPE = 'Number';
-
-                      listdataset.add(datainpcsi);
-                    } else {
-                      break;
                     }
+                    int desinal = 2;
+
+                    // for (var Fci = 0; Fci < ITEMSlist.length; Fci++) {
+                    //   if (ITEMSlist[Fci]['masterID'].toString() == itemss) {
+                    //     // print(ITEMSlist[Fci]);
+                    //     if (ITEMSlist[Fci]['ITEMs']
+                    //         .toString()
+                    //         .toUpperCase()
+                    //         .contains("HARDNESS")) {
+                    //       desinal = 1;
+                    //     }
+
+                    //     if (ITEMSlist[Fci]['ITEMs'].toString().contains("trid")) {
+                    //       desinal = 1;
+                    //     }
+                    //   }
+                    // }
+                    // for (var B = 0; B < ITEMSlist.length; B++) {
+                    //   for (var d = 0; d < DESIMALlist.length; d++) {
+                    //     if (DESIMALlist[d]['ITEMs'].toString() ==
+                    //         ITEMSlist[B]['masterID'].toString()) {
+                    //       desinal =
+                    //           int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
+                    //     } else {
+                    //       desinal = 1;
+                    //     }
+                    //   }
+                    // }
+                    for (var d = 0; d < DESIMALlist.length; d++) {
+                      if (DESIMALlist[d]['ITEMs'].toString() == itemss) {
+                        desinal =
+                            int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
+                        break;
+                      } else {
+                        desinal = 2;
+                      }
+                    }
+                    // print(ITEMname);
+                    // desinal = 1;
+                    List<datainlist> listdataset = [];
+                    for (var i = 0; i < 20; i++) {
+                      if (FINALdata[MACHINElist[mi]]
+                                  [PATTERNlist['FINAL'][fi]['ITEMs']]
+                              ['PSC${i + 1}'] !=
+                          null) {
+                        //
+                        // print(FINALdata[MACHINElist[mi]]
+                        //         [PATTERNlist['FINAL'][fi]['ITEMs']]['PSC${i + 1}']
+                        //     .length);
+                        var datainside = FINALdata[MACHINElist[mi]]
+                            [PATTERNlist['FINAL'][fi]['ITEMs']]['PSC${i + 1}'];
+                        datainlist datainpcsi = datainlist();
+                        int pcsi = 0;
+                        // print(PATTERNlist['FINAL'][fi]);
+                        // print(ITEMSlist);
+                        print(PATTERNlist['FINAL'][fi]['CONVERSEDATA']);
+                        String conves =
+                            PATTERNlist['FINAL'][fi]['CONVERSEDATA'] != null
+                                ? PATTERNlist['FINAL'][fi]['CONVERSEDATA']
+                                    .toString()
+                                : '';
+
+                        String ConvesData = 'PO3';
+                        if (conves == 'yes') {
+                          ConvesData = 'PO5';
+                          // ConvesData = 'PO3';
+                        }
+
+                        datainpcsi.DATAAVG =
+                            datainside[pcsi][ConvesData].toString();
+                        datainpcsi.dimensionX = pcsi;
+
+                        datainpcsi.TYPE = 'Number';
+
+                        listdataset.add(datainpcsi);
+                      } else {
+                        break;
+                      }
+                    }
+
+                    // double avgall = 0;
+                    // for (var ig = 0; ig < listdataset.length; ig++) {
+                    //   // print(ConverstStr(listdataset[ig].DATAAVG));
+                    //   avgall = avgall +
+                    //       double.parse(ConverstStr(listdataset[ig].DATAAVG));
+                    // }
+                    double resultdata = double.parse(
+                        ConverstStr(FINALANSdata[itemss].toString()));
+                    // print(avgall);
+
+                    ITEMlist.add(FINALCHECKlistCommonClass(
+                      TYPE: "CAL1",
+                      ITEM: itemss,
+                      ITEMname: ITEMname,
+                      METHOD: METHODss,
+                      METHODname: METHODname,
+                      SCMARK: SCmasks,
+                      SPECIFICATION: SPECIFICATION,
+                      NO: NO_NUMBER,
+                      FREQ: FREQ,
+                      datapackset: listdataset,
+                      RESULT: SUMDATA == 'NO'
+                          ? "See at table"
+                          : (resultdata).toStringAsFixed(desinal),
+                      LOAD: LOAD,
+                      Remark: remark,
+                      SRAWDATA: SRAWDATA,
+                    ));
                   }
+                } else {
+                  if (FINALdata[MACHINElist[mi]]
+                          [PATTERNlist['FINAL'][fi]['ITEMs']] !=
+                      null) {
+                    // print(PATTERNlist['FINAL'][fi]['RESULTFORMAT']);
+                    // print(FINALdata[MACHINElist[mi]]
+                    //     [PATTERNlist['FINAL'][fi]['ITEMs']]);
 
-                  // double avgall = 0;
-                  // for (var ig = 0; ig < listdataset.length; ig++) {
-                  //   // print(ConverstStr(listdataset[ig].DATAAVG));
-                  //   avgall = avgall +
-                  //       double.parse(ConverstStr(listdataset[ig].DATAAVG));
-                  // }
-                  double resultdata = double.parse(
-                      ConverstStr(FINALANSdata[itemss].toString()));
-                  // print(avgall);
+                    String POINTs = (int.parse(ConverstStrOne(
+                            PATTERNlist['FINAL'][fi]['PCS'].toString())))
+                        .toString();
 
-                  ITEMlist.add(FINALCHECKlistCommonClass(
-                    TYPE: "CAL1",
-                    ITEM: itemss,
-                    ITEMname: ITEMname,
-                    METHOD: METHODss,
-                    METHODname: METHODname,
-                    SCMARK: SCmasks,
-                    SPECIFICATION: SPECIFICATION,
-                    NO: NO_NUMBER,
-                    FREQ: FREQ,
-                    datapackset: listdataset,
-                    RESULT: SUMDATA == 'NO'
-                        ? "See at table"
-                        : (resultdata).toStringAsFixed(desinal),
-                    LOAD: LOAD,
-                    Remark: remark,
-                    SRAWDATA: SRAWDATA,
-                  ));
+                    String SPECIFICATIONbuff =
+                        PATTERNlist['FINAL'][fi]['SPECIFICATIONve'].toString();
+                    String itemss =
+                        PATTERNlist['FINAL'][fi]['ITEMs'].toString();
+                    String SCmasks =
+                        PATTERNlist['FINAL'][fi]['SCMARK'].toString();
+                    String ITEMname = '';
+                    String METHODss = '';
+                    String METHODname = '';
+                    String FREQ =
+                        '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+                    String SPECIFICATION = '';
+                    String LOAD = PATTERNlist['FINAL'][fi]['LOAD'].toString();
+
+                    String SRAWDATA =
+                        PATTERNlist['FINAL'][fi]['SRAWDATA'].toString();
+                    //   "SRAWDATA": "NO"
+
+                    String RESULTDSW =
+                        PATTERNlist['FINAL'][fi]['RESULTDSW'].toString();
+
+                    String SUMDATA =
+                        PATTERNlist['FINAL'][fi]['SUMDATA'].toString();
+                    print("--------------------------------------------------");
+                    print(SUMDATA);
+                    print("--------------------------------------------------");
+
+                    double maxdata = 0;
+                    double mindata = 0;
+
+                    String remark = '';
+
+                    final rest2 = await Dio().post(
+                      serverGBW + "GET_FINAL_COMMENT",
+                      data: {
+                        "masterID": PATTERNlist['FINAL'][fi]['REMARK'] != null
+                            ? PATTERNlist['FINAL'][fi]['REMARK'].toString()
+                            : '',
+                      },
+                    );
+
+                    if (rest2.statusCode == 200) {
+                      var databuff = rest2.data;
+
+                      remark = databuff['COMMENT'] != null
+                          ? databuff['COMMENT'].toString()
+                          : "";
+                    }
+
+                    // print('>>${remark}');
+
+                    // String convss =
+                    //     PATTERNlist['FINAL'][fi]['CONVERSE'].toString();
+
+                    // if (convss != '' && convss != '-') {
+                    //   for (var ih = 0; ih < UNITlist.length; ih++) {
+                    //     // print(UNITlist[ih]['masterID'].toString());
+                    //     if (convss == UNITlist[ih]['masterID'].toString()) {
+                    //       // print(UNITlist[ih]);
+                    //       String Unitss = "${UNITlist[ih]['UNIT']}";
+                    //       if (Unitss.contains("-") == false) {
+                    //         remark = "From ${UNITlist[ih]['UNIT']}";
+                    //       }
+
+                    //       break;
+                    //     }
+                    //   }
+                    // }
+
+                    try {
+                      String SPECIFICATIONbuff2 =
+                          SPECIFICATIONbuff.replaceAll('{', '{"');
+                      String SPECIFICATIONbuff3 =
+                          SPECIFICATIONbuff2.replaceAll('}', '"}');
+                      String SPECIFICATIONbuff4 =
+                          SPECIFICATIONbuff3.replaceAll(':', '":"');
+                      String SPECIFICATIONbuff5 =
+                          SPECIFICATIONbuff4.replaceAll(',', '","');
+                      // print(SPECIFICATIONbuff5);
+                      var SPECIFICATIONdata =
+                          json.decode(SPECIFICATIONbuff5.replaceAll(' ', ''));
+                      if (SPECIFICATIONdata['condition'] != null) {
+                        // print(SPECIFICATIONdata['condition']);
+                        String condition =
+                            SPECIFICATIONdata['condition'].toString();
+
+                        // print(condition.contains("LOL(<)"));
+                        // print(condition.contains("HIM(>)"));
+                        // Actual
+                        // print(SPECIFICATIONdata);
+
+                        String dataUNIT =
+                            PATTERNlist['FINAL'][fi]['UNIT'].toString();
+
+                        String unitP = '';
+
+                        for (var ih = 0; ih < UNITlist.length; ih++) {
+                          // print(UNITlist[ih]['masterID'].toString());
+                          if (dataUNIT == UNITlist[ih]['masterID'].toString()) {
+                            // print(UNITlist[ih]);
+                            unitP = UNITlist[ih]['UNIT'].toString();
+                            break;
+                          }
+                        }
+
+                        if (condition.contains("BTW")) {
+                          // print(SPECIFICATIONdata['BTW_LOW']);
+                          // print(SPECIFICATIONdata['BTW_HI']);
+                          SPECIFICATION =
+                              '${SPECIFICATIONdata['BTW_LOW'].toString()}-${SPECIFICATIONdata['BTW_HI'].toString()} ${unitP.replaceAll('?', 'µ')}';
+
+                          maxdata = double.parse(ConverstStr(
+                              SPECIFICATIONdata['BTW_HI'].toString()));
+                          mindata = double.parse(ConverstStr(
+                              SPECIFICATIONdata['BTW_LOW'].toString()));
+                        } else if (condition.contains("LOL(<)")) {
+                          // print(SPECIFICATIONdata['LOL_H']);
+                          SPECIFICATION =
+                              '≤ ${SPECIFICATIONdata['LOL_H'].toString()} ${unitP.replaceAll('?', 'µ')}';
+                          maxdata = double.parse(ConverstStr(
+                              SPECIFICATIONdata['LOL_H'].toString()));
+                        } else if (condition.contains("HIM(>)")) {
+                          // print(SPECIFICATIONdata['HIM_L']);
+                          SPECIFICATION =
+                              '≥ ${SPECIFICATIONdata['HIM_L'].toString()} ${unitP.replaceAll('?', 'µ')}';
+                          mindata = double.parse(ConverstStr(
+                              SPECIFICATIONdata['HIM_L'].toString()));
+                        } else if (condition.contains("Actual")) {
+                          // print(SPECIFICATIONdata['TARGET']);
+                          SPECIFICATION = 'Actual';
+                        }
+                      }
+                    } catch (er) {
+                      print(er);
+                    }
+
+                    for (var Fci = 0; Fci < FINALCHECKlist.length; Fci++) {
+                      if (FINALCHECKlist[Fci]['key'].toString() == itemss) {
+                        ITEMname = FINALCHECKlist[Fci]['value'].toString();
+                        METHODss = FINALCHECKlist[Fci]['METHOD'].toString();
+                      }
+                    }
+
+                    for (var Fci = 0; Fci < METHODlist.length; Fci++) {
+                      if (METHODlist[Fci]['masterID'].toString() == METHODss) {
+                        METHODname = METHODlist[Fci]['METHOD'].toString();
+                        break;
+                      }
+                    }
+                    int desinal = 1;
+
+                    // for (var Fci = 0; Fci < ITEMSlist.length; Fci++) {
+                    //   if (ITEMSlist[Fci]['masterID'].toString() == itemss) {
+                    //     // print(ITEMSlist[Fci]);
+                    //     if (ITEMSlist[Fci]['ITEMs']
+                    //         .toString()
+                    //         .toUpperCase()
+                    //         .contains("HARDNESS")) {
+                    //       desinal = 1;
+                    //     }
+
+                    //     if (ITEMSlist[Fci]['ITEMs'].toString().contains("trid")) {
+                    //       desinal = 1;
+                    //     }
+                    //   }
+                    // }
+                    // for (var B = 0; B < ITEMSlist.length; B++) {
+                    //   for (var d = 0; d < DESIMALlist.length; d++) {
+                    //     if (DESIMALlist[d]['ITEMs'].toString() ==
+                    //         ITEMSlist[B]['masterID'].toString()) {
+                    //       desinal =
+                    //           int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
+                    //     } else {
+                    //       desinal = 1;
+                    //     }
+                    //   }
+                    // }
+                    for (var d = 0; d < DESIMALlist.length; d++) {
+                      if (DESIMALlist[d]['ITEMs'].toString() == itemss) {
+                        desinal =
+                            int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
+                        break;
+                      } else {
+                        desinal = 1;
+                      }
+                    }
+                    // print(ITEMname);
+                    // desinal = 1;
+                    List<datainlist> listdataset = [];
+                    for (var i = 0; i < 20; i++) {
+                      if (FINALdata[MACHINElist[mi]]
+                                  [PATTERNlist['FINAL'][fi]['ITEMs']]
+                              ['PSC${i + 1}'] !=
+                          null) {
+                        //
+                        // print(FINALdata[MACHINElist[mi]]
+                        //         [PATTERNlist['FINAL'][fi]['ITEMs']]['PSC${i + 1}']
+                        //     .length);
+                        var datainside = FINALdata[MACHINElist[mi]]
+                            [PATTERNlist['FINAL'][fi]['ITEMs']]['PSC${i + 1}'];
+                        datainlist datainpcsi = datainlist();
+                        int pcsi = 0;
+                        // print(PATTERNlist['FINAL'][fi]);
+                        // print(ITEMSlist);
+                        print(PATTERNlist['FINAL'][fi]['CONVERSEDATA']);
+                        String conves =
+                            PATTERNlist['FINAL'][fi]['CONVERSEDATA'] != null
+                                ? PATTERNlist['FINAL'][fi]['CONVERSEDATA']
+                                    .toString()
+                                : '';
+
+                        String ConvesData = 'PO3';
+                        if (conves == 'yes') {
+                          ConvesData = 'PO5';
+                          // ConvesData = 'PO3';
+                        }
+
+                        for (pcsi = 0; pcsi < datainside.length - 1; pcsi++) {
+                          // print(pcsi);
+                          // print(datainside[pcsi]['PO3']);
+                          //   double.parse(ConverstStr(datainside[pcsi]['PIC1data'].toString())).toStringAsFixed(2);
+
+                          if (pcsi == 0) {
+                            datainpcsi.DATA01 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 1) {
+                            datainpcsi.DATA02 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 2) {
+                            datainpcsi.DATA03 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 3) {
+                            datainpcsi.DATA04 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 4) {
+                            datainpcsi.DATA05 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 5) {
+                            datainpcsi.DATA06 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 6) {
+                            datainpcsi.DATA07 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 7) {
+                            datainpcsi.DATA08 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 8) {
+                            datainpcsi.DATA09 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 9) {
+                            datainpcsi.DATA10 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 10) {
+                            datainpcsi.DATA11 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 11) {
+                            datainpcsi.DATA12 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 12) {
+                            datainpcsi.DATA13 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 13) {
+                            datainpcsi.DATA14 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 14) {
+                            datainpcsi.DATA15 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 15) {
+                            datainpcsi.DATA16 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 16) {
+                            datainpcsi.DATA17 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 17) {
+                            datainpcsi.DATA18 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 18) {
+                            datainpcsi.DATA19 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          } else if (pcsi == 19) {
+                            datainpcsi.DATA20 = double.parse(ConverstStr(
+                                    datainside[pcsi][ConvesData].toString()))
+                                .toStringAsFixed(desinal);
+                            passlist.add(checkdata(
+                                    maxdata,
+                                    mindata,
+                                    double.parse(ConverstStr(datainside[pcsi]
+                                            [ConvesData]
+                                        .toString())))
+                                .toString());
+                          }
+                        }
+
+                        datainpcsi.DATAAVG =
+                            datainside[pcsi][ConvesData].toString();
+                        datainpcsi.dimensionX = pcsi;
+
+                        datainpcsi.TYPE = 'Number';
+
+                        listdataset.add(datainpcsi);
+                      } else {
+                        break;
+                      }
+                    }
+
+                    double avgall = 0;
+                    for (var ig = 0; ig < listdataset.length; ig++) {
+                      // print(ConverstStr(listdataset[ig].DATAAVG));
+                      avgall = avgall +
+                          double.parse(ConverstStr(listdataset[ig].DATAAVG));
+                    }
+                    // print(avgall);
+                    if ((avgall / listdataset.length) == 0) {
+                      nadata = "N/A";
+                    }
+
+                    ITEMlist.add(FINALCHECKlistCommonClass(
+                      TYPE: "CAL2",
+                      ITEM: itemss,
+                      ITEMname: ITEMname,
+                      METHOD: METHODss,
+                      METHODname: METHODname,
+                      SCMARK: SCmasks,
+                      SPECIFICATION: SPECIFICATION,
+                      NO: NO_NUMBER,
+                      FREQ: FREQ,
+                      datapackset: listdataset,
+                      RESULT: SPECIFICATION.contains("MMC")
+                          ? "PASSED"
+                          : (SUMDATA == 'NO'
+                              ? "See at table"
+                              : (avgall / listdataset.length)
+                                  .toStringAsFixed(desinal)),
+                      LOAD: LOAD,
+                      Remark: remark,
+                      SRAWDATA: SRAWDATA,
+                      RESULTDSW: RESULTDSW,
+                    ));
+                  }
                 }
               }
             }
