@@ -310,7 +310,7 @@ class _P20INCONINGMAINState extends State<P20INCONINGMAIN> {
                               P20INCOMINGVAR_INPROCESSBOX.setofdatainlist = [];
                               P20INCOMINGVAR_INPROCESSBOX.itemlistbuffer = [];
 
-                              _getdata = INCOMINGGETDATAclass();
+                              _getdata.data = [];
 
                               context
                                   .read<INCOMINGGETPO_Bloc>()
