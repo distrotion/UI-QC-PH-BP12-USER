@@ -2664,7 +2664,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                         datainpcsi.TYPE = 'Number';
 
-                        listdataset.add(datainpcsi);
+                        // listdataset.add(datainpcsi);
                       } else {
                         break;
                       }
@@ -2679,6 +2679,35 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     double resultdata = double.parse(
                         ConverstStr(FINALANSdata[itemss].toString()));
                     // print(avgall);
+                    datainlist datainpcsi = datainlist();
+                    if (FINALANSdata['${itemss}_SET'] != null) {
+                      if (FINALANSdata['${itemss}_SET']['PSC1'] != null) {
+                        datainpcsi.DATA01 = double.parse(ConverstStr(
+                                FINALANSdata['${itemss}_SET']['PSC1']
+                                    .toString()))
+                            .toStringAsFixed(desinal);
+                        datainpcsi.dimensionX = 1;
+                      }
+
+                      if (FINALANSdata['${itemss}_SET']['PSC2'] != null) {
+                        datainpcsi.DATA02 = double.parse(ConverstStr(
+                                FINALANSdata['${itemss}_SET']['PSC2']
+                                    .toString()))
+                            .toStringAsFixed(desinal);
+                        datainpcsi.dimensionX = 2;
+                      }
+
+                      if (FINALANSdata['${itemss}_SET']['PSC3'] != null) {
+                        datainpcsi.DATA03 = double.parse(ConverstStr(
+                                FINALANSdata['${itemss}_SET']['PSC3']
+                                    .toString()))
+                            .toStringAsFixed(desinal);
+
+                        datainpcsi.dimensionX = 3;
+                      }
+
+                      listdataset.add(datainpcsi);
+                    }
 
                     ITEMlist.add(FINALCHECKlistCommonClass(
                       TYPE: "CAL1",

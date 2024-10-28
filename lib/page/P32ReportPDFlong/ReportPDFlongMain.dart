@@ -179,7 +179,12 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
 
         // if (_dataCOMMON.datain[i].TYPE == 'Number') {
         if (_dataCOMMON.datain[i].TYPE == 'Number' ||
+            (_dataCOMMON.datain[i].TYPE == 'CAL1' &&
+                _dataCOMMON.datain[i].datapackset.isNotEmpty) ||
             _dataCOMMON.datain[i].TYPE == 'CAL2') {
+          // print("_dataCOMMON.datain[i].datapackset");
+          // print(_dataCOMMON.datain[i].datapackset);
+          // print("_dataCOMMON.datain[i].datapackset");
           if (_dataCOMMON.datain[i].SRAWDATA != 'NO') {
             ReportPDFlongvar.Listitemname.add(_dataCOMMON.datain[i].ITEMname);
 
@@ -196,7 +201,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                 li < _dataCOMMON.datain[i].datapackset.length;
                 li++) {
               // print(_dataCOMMON.datain[i].datapackset[li].dimensionX);
-              print(_dataCOMMON.datain[i].datapackset[li]);
+              // print(_dataCOMMON.datain[i].datapackset[li]);
               if (_dataCOMMON.datain[i].datapackset[li].dimensionX == 0) {}
               if (_dataCOMMON.datain[i].datapackset[li].dimensionX >= 1) {
                 ReportPDFlongvar.rawlistDATA[lengthdata].add(rawlist(
