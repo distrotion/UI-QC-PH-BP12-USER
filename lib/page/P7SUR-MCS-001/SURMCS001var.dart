@@ -34,6 +34,8 @@ class SURMCS001var {
   static String base64pic02 = imgw;
   static String base64pic03 = imgw;
   static String base64pic04 = imgw;
+
+  static String base64picPOP = '';
   static String base64pic01data = '';
   static String base64pic02data = '';
   static String base64pic03data = '';

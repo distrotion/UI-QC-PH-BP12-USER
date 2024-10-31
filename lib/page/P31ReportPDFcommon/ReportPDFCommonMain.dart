@@ -102,9 +102,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
       ReportPDFCommonvar.APPBY = _dataCOMMON.databasic.APPBY;
 
       // _dataCOMMON.datain[i].ITEMname
-
-//remark
-
+      //remark
       // print(_dataCOMMON.datain[0]);
       // print(_dataCOMMON.datain.length);
       // ReportPDFCommonvar.rawlistDATA[0] = [];
@@ -160,6 +158,8 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
 
         // if (_dataCOMMON.datain[i].TYPE == 'Number') {
         if (_dataCOMMON.datain[i].TYPE == 'Number' ||
+            (_dataCOMMON.datain[i].TYPE == 'CAL1' &&
+                _dataCOMMON.datain[i].datapackset.isNotEmpty) ||
             _dataCOMMON.datain[i].TYPE == 'CAL2') {
           if (_dataCOMMON.datain[i].SRAWDATA != 'NO') {
             ReportPDFCommonvar.Listitemname.add(_dataCOMMON.datain[i].ITEMname);

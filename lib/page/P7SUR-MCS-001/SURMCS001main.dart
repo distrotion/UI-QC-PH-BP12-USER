@@ -286,10 +286,17 @@ class _FileUploadButton01State extends State<FileUploadButton01> {
               SURMCS001var.base64pic01data = s;
             },
           ),
-          PicShow(
-            width: 200,
-            height: 100,
-            base64: SURMCS001var.base64pic01,
+          InkWell(
+            onTap: () {
+              //
+              PICPOP_ConsoleBoxBODY(context);
+              SURMCS001var.base64picPOP = SURMCS001var.base64pic01;
+            },
+            child: PicShow(
+              width: 200,
+              height: 100,
+              base64: SURMCS001var.base64pic01,
+            ),
           ),
           IMGbutton(
             base64pic: SURMCS001var.base64pic01,
@@ -334,10 +341,17 @@ class _FileUploadButton02State extends State<FileUploadButton02> {
               SURMCS001var.base64pic02data = s;
             },
           ),
-          PicShow(
-            width: 200,
-            height: 100,
-            base64: SURMCS001var.base64pic02,
+          InkWell(
+            onTap: () {
+              //
+              PICPOP_ConsoleBoxBODY(context);
+              SURMCS001var.base64picPOP = SURMCS001var.base64pic02;
+            },
+            child: PicShow(
+              width: 200,
+              height: 100,
+              base64: SURMCS001var.base64pic02,
+            ),
           ),
           IMGbutton(
             base64pic: SURMCS001var.base64pic02,
@@ -382,10 +396,17 @@ class _FileUploadButton03State extends State<FileUploadButton03> {
               SURMCS001var.base64pic03data = s;
             },
           ),
-          PicShow(
-            width: 200,
-            height: 100,
-            base64: SURMCS001var.base64pic03,
+          InkWell(
+            onTap: () {
+              //
+              PICPOP_ConsoleBoxBODY(context);
+              SURMCS001var.base64picPOP = SURMCS001var.base64pic03;
+            },
+            child: PicShow(
+              width: 200,
+              height: 100,
+              base64: SURMCS001var.base64pic03,
+            ),
           ),
           IMGbutton(
             base64pic: SURMCS001var.base64pic03,
@@ -430,10 +451,17 @@ class _FileUploadButton04State extends State<FileUploadButton04> {
               SURMCS001var.base64pic04data = s;
             },
           ),
-          PicShow(
-            width: 200,
-            height: 100,
-            base64: SURMCS001var.base64pic04,
+          InkWell(
+            onTap: () {
+              //
+              PICPOP_ConsoleBoxBODY(context);
+              SURMCS001var.base64picPOP = SURMCS001var.base64pic04;
+            },
+            child: PicShow(
+              width: 200,
+              height: 100,
+              base64: SURMCS001var.base64pic04,
+            ),
           ),
           IMGbutton(
             base64pic: SURMCS001var.base64pic04,
@@ -444,6 +472,40 @@ class _FileUploadButton04State extends State<FileUploadButton04> {
           ),
         ],
       ),
+    );
+  }
+}
+
+void PICPOP_ConsoleBoxBODY(
+  BuildContext contextin,
+) {
+  showDialog(
+    context: contextin,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return Container(
+        // color: Colors.blue,
+
+        child: Dialog(child: PICPOPUP()),
+      );
+    },
+  );
+}
+
+class PICPOPUP extends StatefulWidget {
+  const PICPOPUP({Key? key}) : super(key: key);
+
+  @override
+  State<PICPOPUP> createState() => _PICPOPUPState();
+}
+
+class _PICPOPUPState extends State<PICPOPUP> {
+  @override
+  Widget build(BuildContext context) {
+    return PicShow(
+      width: 900,
+      height: 600,
+      base64: SURMCS001var.base64picPOP,
     );
   }
 }

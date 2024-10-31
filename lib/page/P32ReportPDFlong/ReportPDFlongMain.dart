@@ -182,9 +182,6 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
             (_dataCOMMON.datain[i].TYPE == 'CAL1' &&
                 _dataCOMMON.datain[i].datapackset.isNotEmpty) ||
             _dataCOMMON.datain[i].TYPE == 'CAL2') {
-          // print("_dataCOMMON.datain[i].datapackset");
-          // print(_dataCOMMON.datain[i].datapackset);
-          // print("_dataCOMMON.datain[i].datapackset");
           if (_dataCOMMON.datain[i].SRAWDATA != 'NO') {
             ReportPDFlongvar.Listitemname.add(_dataCOMMON.datain[i].ITEMname);
 
