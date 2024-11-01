@@ -135,8 +135,8 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                       PATTERNlist['INCOMMING'][fi]['METHOD'].toString();
                   String METHODname = '';
                   String FREQ =
-                      '${PATTERNlist['FINAL'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['INCOMMING'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
-                  print(double.parse(POINTs));
+                      '${PATTERNlist['INCOMMING'][fi]['FREQUENCY'].toString().contains("%") ? "" : POINTs} ${PATTERNlist['INCOMMING'][fi]['FREQUENCY'].toString().replaceAll('?', 'pcs/Lot').replaceAll('[]', 'pcs/Lot')}';
+
                   if (double.parse(POINTs) < 1) {
                     FREQ = "${POINTs} AQL";
                   }
@@ -144,7 +144,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   String SPECIFICATION = '';
                   String LOAD = PATTERNlist['INCOMMING'][fi]['LOAD'].toString();
 
-                  String AQL = PATTERNlist['FINAL'][fi]['AQL'].toString();
+                  String AQL = PATTERNlist['INCOMMING'][fi]['AQL'].toString();
 
                   // for (var Fci = 0; Fci < INCOMMINGCHECKlist.length; Fci++) {
                   //   print(INCOMMINGCHECKlist[Fci]);
@@ -666,9 +666,6 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                   String SUMDATA =
                       PATTERNlist['FINAL'][fi]['SUMDATA'].toString();
-                  print("--------------------------------------------------");
-                  print(SUMDATA);
-                  print("--------------------------------------------------");
 
                   double maxdata = 0;
                   double mindata = 0;
@@ -1969,6 +1966,15 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                         // print('>>${datainpcsi.DATAAVG}');
 
                         if (pcsi == 0) {
+                          if (BasicCommonDATAs.PIC02 == NOPIC &&
+                              BasicCommonDATAs.PIC01 != NOPIC) {
+                            BasicCommonDATAs.PIC02 =
+                                datainside[pcsi]['PIC1'].toString();
+                            if (BasicCommonDATAs.PIC02 != NOPIC) {
+                              BasicCommonDATAs.ITEMPIC02 = ITEMname;
+                            }
+                          }
+
                           if (BasicCommonDATAs.PIC01 == '') {
                             BasicCommonDATAs.PIC01 =
                                 datainside[pcsi]['PIC1'].toString();
