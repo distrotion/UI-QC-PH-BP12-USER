@@ -408,8 +408,6 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
               : '',
         );
 
-        print(BasicCommonDATAs.REFLOT);
-
         if (BasicCommonDATAs.REFLOT == '') {
           if (BasicDATAr['ReferFrom'].toString() != PO) {
             if (BasicDATAr['ReferFrom'] != null) {
@@ -459,8 +457,6 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
         if (response02.statusCode == 200) {
           var databuffref = response02.data;
 
-//DATAlist
-
           double qty = 0;
 
           if (databuffref['DATAlist'].length > 0) {
@@ -484,7 +480,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                 //     ('${lastst.substring(7, 10)}');
                 // lotlist
                 //   .add(int.parse(ConverstStr('${lastst.substring(7, 10)}')));
-                lotlist.add('${lastst.substring(7, 10)}');
+                if (lastst.length >= 10) {
+                  lotlist.add('${lastst.substring(7, 10)}');
+                }
 
                 BasicCommonDATAs.CUSLOT = BasicCommonDATAs.CUSLOT +
                     ',' +
@@ -2023,8 +2021,6 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                   }
                   //GET_FINAL_COMMENT
 
-                  print("==================>>>>>>>>>>>>>>>>>");
-
                   print(SUMDATA);
                   if (BasicCommonDATAs.ITEMPIC01 == '' && SUMDATA != 'NO') {
                     nadata = "N/A";
@@ -2382,7 +2378,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                             }
                           }
                         }
-//3310275880
+
                         if (pcsi == 1) {
                           if (BasicCommonDATAs.PIC02 == '') {
                             BasicCommonDATAs.PIC02 =
@@ -3274,7 +3270,9 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
             }
           }
         }
+
         // print('>>${ITEMlist.length}');
+
         if (nadata == '') {
           if (passlist.contains("false")) {
             BasicCommonDATAs.PASS = 'NO PASSED';
