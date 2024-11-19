@@ -5,6 +5,7 @@ import '../../widget/common/imgset.dart';
 class ReportPDFlongvar {
   static bool iscontrol = false;
   static bool HIDEDATA = false;
+  static bool HIDEDATAPIC = false;
   static bool canf = true;
   static String PO = '';
 

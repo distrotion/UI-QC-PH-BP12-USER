@@ -40,6 +40,7 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
       ReportPDFCommonvar.QTYEDIT = '';
       ReportPDFCommonvar.INCresult = '';
       ReportPDFCommonvar.HIDEDATA = false;
+      ReportPDFCommonvar.HIDEDATAPIC = false;
     }
     super.initState();
   }
@@ -883,6 +884,15 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                     ReportPDFCommonvar.HIDEDATA = false;
                   } else {
                     ReportPDFCommonvar.HIDEDATA = true;
+                  }
+                  setState(() {});
+                },
+                onDoubleTap: () {
+                  //  ReportPDFCommonvar.HIDEDATAPIC
+                  if (ReportPDFCommonvar.HIDEDATAPIC) {
+                    ReportPDFCommonvar.HIDEDATAPIC = false;
+                  } else {
+                    ReportPDFCommonvar.HIDEDATAPIC = true;
                   }
                   setState(() {});
                 },
@@ -3943,16 +3953,16 @@ class _ReportPDFCommonState extends State<ReportPDFCommon> {
                                 height: 6,
                               ),
                               PICSLO2NORMAL(
-                                PIC01: ReportPDFCommonvar.HIDEDATA
+                                PIC01: ReportPDFCommonvar.HIDEDATAPIC
                                     ? ""
                                     : _dataCOMMON.databasic.PIC01,
                                 ITEMPIC01: ReportPDFCommonvar.HIDEDATA
                                     ? ""
                                     : _dataCOMMON.databasic.ITEMPIC01,
-                                PIC02: ReportPDFCommonvar.HIDEDATA
+                                PIC02: ReportPDFCommonvar.HIDEDATAPIC
                                     ? ""
                                     : _dataCOMMON.databasic.PIC02,
-                                ITEMPIC02: ReportPDFCommonvar.HIDEDATA
+                                ITEMPIC02: ReportPDFCommonvar.HIDEDATAPIC
                                     ? ""
                                     : _dataCOMMON.databasic.ITEMPIC02,
                               ),

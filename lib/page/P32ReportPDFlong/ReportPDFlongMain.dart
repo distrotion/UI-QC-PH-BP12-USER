@@ -40,6 +40,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
       ReportPDFlongvar.QTYEDIT = '';
       ReportPDFlongvar.INCresult = '';
       ReportPDFlongvar.HIDEDATA = false;
+      ReportPDFlongvar.HIDEDATAPIC = false;
     }
     super.initState();
   }
@@ -833,326 +834,365 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 60),
-                child: ComInputText(
-                  height: 40,
-                  width: 200,
-                  isContr: ReportPDFlongvar.iscontrol,
-                  fnContr: (input) {
-                    setState(() {
-                      ReportPDFlongvar.iscontrol = input;
-                    });
-                  },
-                  isEnabled: ReportPDFlongvar.canf,
-                  sValue: ReportPDFlongvar.PO,
-                  returnfunc: (String s) {
-                    ReportPDFlongvar.PO = s;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: InkWell(
-                  onTap: () {
-                    if (ReportPDFlongvar.PO != '') {
-                      context
-                          .read<ReportPDFCommon_Cubit>()
-                          .ReportPDFCommonCubit(ReportPDFlongvar.PO);
-                    }
-                  },
-                  child: Container(
-                    color: Colors.black,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 60),
+                  child: ComInputText(
                     height: 40,
-                    width: 40,
-                    child: const Center(
-                      child: Icon(
-                        Icons.search,
-                        color: Colors.white,
+                    width: 200,
+                    isContr: ReportPDFlongvar.iscontrol,
+                    fnContr: (input) {
+                      setState(() {
+                        ReportPDFlongvar.iscontrol = input;
+                      });
+                    },
+                    isEnabled: ReportPDFlongvar.canf,
+                    sValue: ReportPDFlongvar.PO,
+                    returnfunc: (String s) {
+                      ReportPDFlongvar.PO = s;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: InkWell(
+                    onTap: () {
+                      if (ReportPDFlongvar.PO != '') {
+                        context
+                            .read<ReportPDFCommon_Cubit>()
+                            .ReportPDFCommonCubit(ReportPDFlongvar.PO);
+                      }
+                    },
+                    child: Container(
+                      color: Colors.black,
+                      height: 40,
+                      width: 40,
+                      child: const Center(
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: InkWell(
-                  onTap: () {
-                    context.read<ReportPDFCommon_Cubit>().Flush();
-                    ReportPDFlongvar.canf = true;
-                    ReportPDFlongvar.iscontrol = true;
-                    ReportPDFlongvar.PO = '';
-                    setState(() {});
-                  },
-                  child: Container(
-                    color: Colors.red,
-                    height: 40,
-                    width: 100,
-                    child: const Center(
-                      child: Text("CLEAR"),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: InkWell(
+                    onTap: () {
+                      context.read<ReportPDFCommon_Cubit>().Flush();
+                      ReportPDFlongvar.canf = true;
+                      ReportPDFlongvar.iscontrol = true;
+                      ReportPDFlongvar.PO = '';
+                      setState(() {});
+                    },
+                    child: Container(
+                      color: Colors.red,
+                      height: 40,
+                      width: 100,
+                      child: const Center(
+                        child: Text("CLEAR"),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: InkWell(
-                  onLongPress: () {
-                    if (ReportPDFlongvar.HIDEDATA) {
-                      ReportPDFlongvar.HIDEDATA = false;
-                    } else {
-                      ReportPDFlongvar.HIDEDATA = true;
-                    }
-                    setState(() {});
-                  },
-                  child: Container(
-                    color: ReportPDFlongvar.STATUS == 'REPORT READY'
-                        ? Colors.green
-                        : Colors.yellow,
-                    height: 40,
-                    width: 100,
-                    child: Center(
-                      child: Text(ReportPDFlongvar.STATUS),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: InkWell(
+                    onLongPress: () {
+                      if (ReportPDFlongvar.HIDEDATA) {
+                        ReportPDFlongvar.HIDEDATA = false;
+                      } else {
+                        ReportPDFlongvar.HIDEDATA = true;
+                      }
+                      setState(() {});
+                    },
+                    onDoubleTap: () {
+                      if (ReportPDFlongvar.HIDEDATAPIC) {
+                        ReportPDFlongvar.HIDEDATAPIC = false;
+                      } else {
+                        ReportPDFlongvar.HIDEDATAPIC = true;
+                      }
+                      setState(() {});
+                    },
+                    child: Container(
+                      color: ReportPDFlongvar.STATUS == 'REPORT READY'
+                          ? Colors.green
+                          : Colors.yellow,
+                      height: 40,
+                      width: 100,
+                      child: Center(
+                        child: Text(ReportPDFlongvar.STATUS),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 30),
-              //   child: SizedBox(
-              //     height: 40,
-              //     width: 150,
-              //     child: AdvanceDropDown(
-              //       imgpath: 'assets/icons/icon-down_4@3x.png',
-              //       listdropdown: const [
-              //         MapEntry("-", "-"),
-              //         MapEntry("General", "1"),
-              //         MapEntry("JTEKT", "2"),
-              //         MapEntry("NTN", "3"),
-              //         MapEntry("TBKK", "4"),
-              //         MapEntry("GKN", "5"),
-              //       ],
-              //       onChangeinside: (d, v) {
-              //         // print(d);
-              //         ReportPDFlongvar.TYPE = d;
-              //         if (d == '1') {
-              //           setState(() {
-              //             ReportPDFlongvar.SCMASKTYPE = imgGeneral;
-              //             ReportPDFlongvar.SCMASKTYPEonTop = '';
-              //           });
-              //         } else if (d == '2') {
-              //           setState(() {
-              //             ReportPDFlongvar.SCMASKTYPE = imgJTEKT;
-              //             ReportPDFlongvar.SCMASKTYPEonTop = '';
-              //           });
-              //         } else if (d == '3') {
-              //           setState(() {
-              //             ReportPDFlongvar.SCMASKTYPE = imgNTN;
-              //             ReportPDFlongvar.SCMASKTYPEonTop = imgNTNonH;
-              //           });
-              //         } else if (d == '4') {
-              //           setState(() {
-              //             ReportPDFlongvar.SCMASKTYPE = imgTBKK;
-              //             ReportPDFlongvar.SCMASKTYPEonTop = '';
-              //           });
-              //         } else if (d == '5') {
-              //           setState(() {
-              //             ReportPDFlongvar.SCMASKTYPE = imgGKN;
-              //             ReportPDFlongvar.SCMASKTYPEonTop = '';
-              //           });
-              //         } else {
-              //           setState(() {
-              //             ReportPDFlongvar.SCMASKTYPE = imgGeneral;
-              //             ReportPDFlongvar.SCMASKTYPEonTop = '';
-              //           });
-              //         }
-              //       },
-              //       value: ReportPDFlongvar.TYPE,
-              //       height: 40,
-              //       width: 100,
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 60),
-              //   child: ComInputText(
-              //     height: 40,
-              //     width: 200,
-              //     isContr: ReportPDFlongvar.iscontrol,
-              //     fnContr: (input) {
-              //       setState(() {
-              //         ReportPDFlongvar.iscontrol = input;
-              //       });
-              //     },
-              //     sPlaceholder: "Inspected By",
-              //     sValue: ReportPDFlongvar.SignInsBy,
-              //     returnfunc: (String s) {
-              //       setState(() {
-              //         ReportPDFlongvar.SignInsBy = s;
-              //       });
-              //     },
-              //   ),
-              // ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: ComInputText(
-                  height: 40,
-                  width: 150,
-                  isContr: ReportPDFlongvar.iscontrol,
-                  fnContr: (input) {
-                    setState(() {
-                      ReportPDFlongvar.iscontrol = input;
-                    });
-                  },
-                  sPlaceholder: "QTY EDIT",
-                  sValue: ReportPDFlongvar.QTYEDIT,
-                  returnfunc: (String s) {
-                    setState(() {
-                      ReportPDFlongvar.QTYEDIT = s;
-                    });
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: ComInputText(
-                  height: 40,
-                  width: 150,
-                  isContr: ReportPDFlongvar.iscontrol,
-                  fnContr: (input) {
-                    setState(() {
-                      ReportPDFlongvar.iscontrol = input;
-                    });
-                  },
-                  sPlaceholder: "TPK.LOT EDIT",
-                  sValue: ReportPDFlongvar.TPKLOTEDIT,
-                  returnfunc: (String s) {
-                    setState(() {
-                      ReportPDFlongvar.TPKLOTEDIT = s;
-                    });
-                  },
-                ),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: ComInputText(
-                  height: 40,
-                  width: 150,
-                  isContr: ReportPDFlongvar.iscontrol,
-                  fnContr: (input) {
-                    setState(() {
-                      ReportPDFlongvar.iscontrol = input;
-                    });
-                  },
-                  sPlaceholder: "NAME",
-                  sValue: ReportPDFlongvar.NAMEEDIT,
-                  returnfunc: (String s) {
-                    setState(() {
-                      ReportPDFlongvar.NAMEEDIT = s;
-                    });
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15),
-                child: ComInputText(
-                  height: 40,
-                  width: 150,
-                  isContr: ReportPDFlongvar.iscontrol,
-                  fnContr: (input) {
-                    setState(() {
-                      ReportPDFlongvar.iscontrol = input;
-                    });
-                  },
-                  sPlaceholder: "REMARK",
-                  sValue: ReportPDFlongvar.REMARKEDIT,
-                  returnfunc: (String s) {
-                    setState(() {
-                      ReportPDFlongvar.REMARKEDIT = s;
-                    });
-                  },
-                ),
-              ),
-              // InkWell(
-              //   onTap: () {
-              //     setState(() {
-              //       ReportPDFlongvar.QTY = ReportPDFlongvar.QTYEDIT;
-              //     });
-              //   },
-              //   child: Container(
-              //     height: 40,
-              //     width: 40,
-              //     color: Colors.blue,
-              //     child: Center(child: Text("SET")),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 15),
-              //   child: ComInputText(
-              //     height: 40,
-              //     width: 150,
-              //     isContr: ReportPDFlongvar.iscontrol,
-              //     fnContr: (input) {
-              //       setState(() {
-              //         ReportPDFlongvar.iscontrol = input;
-              //       });
-              //     },
-              //     sPlaceholder: "INC result",
-              //     sValue: ReportPDFlongvar.INCresult,
-              //     returnfunc: (String s) {
-              //       setState(() {
-              //         ReportPDFlongvar.INCresult = s;
-              //       });
-              //     },
-              //   ),
-              // ),
-              // InkWell(
-              //   onTap: () {
-              //     setState(() {
-              //       ReportPDFlongvar.datalist_ic[2].RESULT =
-              //           ReportPDFlongvar.INCresult;
-              //     });
-              //   },
-              //   child: Container(
-              //     height: 40,
-              //     width: 40,
-              //     color: Colors.blue,
-              //     child: Center(child: Text("SET")),
-              //   ),
-              // ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: InkWell(
-                  onTap: () {
-                    PDFloader(context);
-                    Future.delayed(const Duration(milliseconds: 1000), () {
-                      // capture(
-                      captureToback(
-                        // capture(
-                        _globalKey,
-                        ReportPDFlongvar.PO,
-                      ).then((value) {
-                        print(value);
-
-                        Navigator.pop(context);
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 30),
+                //   child: SizedBox(
+                //     height: 40,
+                //     width: 150,
+                //     child: AdvanceDropDown(
+                //       imgpath: 'assets/icons/icon-down_4@3x.png',
+                //       listdropdown: const [
+                //         MapEntry("-", "-"),
+                //         MapEntry("General", "1"),
+                //         MapEntry("JTEKT", "2"),
+                //         MapEntry("NTN", "3"),
+                //         MapEntry("TBKK", "4"),
+                //         MapEntry("GKN", "5"),
+                //       ],
+                //       onChangeinside: (d, v) {
+                //         // print(d);
+                //         ReportPDFlongvar.TYPE = d;
+                //         if (d == '1') {
+                //           setState(() {
+                //             ReportPDFlongvar.SCMASKTYPE = imgGeneral;
+                //             ReportPDFlongvar.SCMASKTYPEonTop = '';
+                //           });
+                //         } else if (d == '2') {
+                //           setState(() {
+                //             ReportPDFlongvar.SCMASKTYPE = imgJTEKT;
+                //             ReportPDFlongvar.SCMASKTYPEonTop = '';
+                //           });
+                //         } else if (d == '3') {
+                //           setState(() {
+                //             ReportPDFlongvar.SCMASKTYPE = imgNTN;
+                //             ReportPDFlongvar.SCMASKTYPEonTop = imgNTNonH;
+                //           });
+                //         } else if (d == '4') {
+                //           setState(() {
+                //             ReportPDFlongvar.SCMASKTYPE = imgTBKK;
+                //             ReportPDFlongvar.SCMASKTYPEonTop = '';
+                //           });
+                //         } else if (d == '5') {
+                //           setState(() {
+                //             ReportPDFlongvar.SCMASKTYPE = imgGKN;
+                //             ReportPDFlongvar.SCMASKTYPEonTop = '';
+                //           });
+                //         } else {
+                //           setState(() {
+                //             ReportPDFlongvar.SCMASKTYPE = imgGeneral;
+                //             ReportPDFlongvar.SCMASKTYPEonTop = '';
+                //           });
+                //         }
+                //       },
+                //       value: ReportPDFlongvar.TYPE,
+                //       height: 40,
+                //       width: 100,
+                //     ),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 60),
+                //   child: ComInputText(
+                //     height: 40,
+                //     width: 200,
+                //     isContr: ReportPDFlongvar.iscontrol,
+                //     fnContr: (input) {
+                //       setState(() {
+                //         ReportPDFlongvar.iscontrol = input;
+                //       });
+                //     },
+                //     sPlaceholder: "Inspected By",
+                //     sValue: ReportPDFlongvar.SignInsBy,
+                //     returnfunc: (String s) {
+                //       setState(() {
+                //         ReportPDFlongvar.SignInsBy = s;
+                //       });
+                //     },
+                //   ),
+                // ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: ComInputText(
+                    height: 40,
+                    width: 150,
+                    isContr: ReportPDFlongvar.iscontrol,
+                    fnContr: (input) {
+                      setState(() {
+                        ReportPDFlongvar.iscontrol = input;
                       });
-                    });
-                  },
-                  child: Container(
-                    color: Colors.yellow,
-                    height: 50,
-                    width: 100,
-                    child: const Center(
-                      child: Text("Print"),
+                    },
+                    sPlaceholder: "QTY EDIT",
+                    sValue: ReportPDFlongvar.QTYEDIT,
+                    returnfunc: (String s) {
+                      setState(() {
+                        ReportPDFlongvar.QTYEDIT = s;
+                      });
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: ComInputText(
+                    height: 40,
+                    width: 150,
+                    isContr: ReportPDFlongvar.iscontrol,
+                    fnContr: (input) {
+                      setState(() {
+                        ReportPDFlongvar.iscontrol = input;
+                      });
+                    },
+                    sPlaceholder: "TPK.LOT EDIT",
+                    sValue: ReportPDFlongvar.TPKLOTEDIT,
+                    returnfunc: (String s) {
+                      setState(() {
+                        ReportPDFlongvar.TPKLOTEDIT = s;
+                      });
+                    },
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: ComInputText(
+                    height: 40,
+                    width: 150,
+                    isContr: ReportPDFlongvar.iscontrol,
+                    fnContr: (input) {
+                      setState(() {
+                        ReportPDFlongvar.iscontrol = input;
+                      });
+                    },
+                    sPlaceholder: "NAME",
+                    sValue: ReportPDFlongvar.NAMEEDIT,
+                    returnfunc: (String s) {
+                      setState(() {
+                        ReportPDFlongvar.NAMEEDIT = s;
+                      });
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: ComInputText(
+                    height: 40,
+                    width: 150,
+                    isContr: ReportPDFlongvar.iscontrol,
+                    fnContr: (input) {
+                      setState(() {
+                        ReportPDFlongvar.iscontrol = input;
+                      });
+                    },
+                    sPlaceholder: "REMARK",
+                    sValue: ReportPDFlongvar.REMARKEDIT,
+                    returnfunc: (String s) {
+                      setState(() {
+                        ReportPDFlongvar.REMARKEDIT = s;
+                      });
+                    },
+                  ),
+                ),
+                // InkWell(
+                //   onTap: () {
+                //     setState(() {
+                //       ReportPDFlongvar.QTY = ReportPDFlongvar.QTYEDIT;
+                //     });
+                //   },
+                //   child: Container(
+                //     height: 40,
+                //     width: 40,
+                //     color: Colors.blue,
+                //     child: Center(child: Text("SET")),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 15),
+                //   child: ComInputText(
+                //     height: 40,
+                //     width: 150,
+                //     isContr: ReportPDFlongvar.iscontrol,
+                //     fnContr: (input) {
+                //       setState(() {
+                //         ReportPDFlongvar.iscontrol = input;
+                //       });
+                //     },
+                //     sPlaceholder: "INC result",
+                //     sValue: ReportPDFlongvar.INCresult,
+                //     returnfunc: (String s) {
+                //       setState(() {
+                //         ReportPDFlongvar.INCresult = s;
+                //       });
+                //     },
+                //   ),
+                // ),
+                // InkWell(
+                //   onTap: () {
+                //     setState(() {
+                //       ReportPDFlongvar.datalist_ic[2].RESULT =
+                //           ReportPDFlongvar.INCresult;
+                //     });
+                //   },
+                //   child: Container(
+                //     height: 40,
+                //     width: 40,
+                //     color: Colors.blue,
+                //     child: Center(child: Text("SET")),
+                //   ),
+                // ),
+
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: InkWell(
+                    onTap: () {
+                      PDFloader(context);
+                      Future.delayed(const Duration(milliseconds: 1000), () {
+                        // capture(
+                        captureToback(
+                          // capture(
+                          _globalKey,
+                          ReportPDFlongvar.PO,
+                        ).then((value) {
+                          print(value);
+
+                          Navigator.pop(context);
+                        });
+                      });
+                    },
+                    child: Container(
+                      color: Colors.yellow,
+                      height: 50,
+                      width: 100,
+                      child: const Center(
+                        child: Text("Print"),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: InkWell(
+                    onTap: () {
+                      PDFloader(context);
+                      Future.delayed(const Duration(milliseconds: 1000), () {
+                        // capture(
+                        captureToback(
+                          // capture(
+                          _globalKey,
+                          ReportPDFlongvar.PO,
+                        ).then((value) {
+                          print(value);
+
+                          Navigator.pop(context);
+                        });
+                      });
+                    },
+                    child: Container(
+                      color: Colors.green,
+                      height: 50,
+                      width: 100,
+                      child: const Center(
+                        child: Text("TO Receive"),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           // Row(
           //   children: [
@@ -4002,7 +4042,7 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                                 height: 6,
                               ),
                               PICSLO2NORMAL(
-                                PIC01: ReportPDFlongvar.HIDEDATA
+                                PIC01: ReportPDFlongvar.HIDEDATAPIC
                                     ? ""
                                     : _dataCOMMON.databasic.PIC01,
                                 ITEMPIC01: _dataCOMMON.databasic.ITEMPIC01,
