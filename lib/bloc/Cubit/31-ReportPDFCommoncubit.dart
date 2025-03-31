@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../data/Base64Img.dart';
 import '../../data/global.dart';
@@ -3288,6 +3289,42 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
         output.datain_IC = ITEMlist_IC;
       }
     }
+    //-----------
+    var now1 = DateTime.now().subtract(Duration(days: 30));
+    var now2 = DateTime.now().add(Duration(days: 5));
+    String day = DateFormat('dd').format(now1);
+    String month = DateFormat('MM').format(now1);
+    String year = DateFormat('yyyy').format(now1);
+
+    String days = DateFormat('dd').format(now2);
+    String months = DateFormat('MM').format(now2);
+    String years = DateFormat('yyyy').format(now2);
+    final response9 = await Dio().post(
+      "${server2}10GETDATAFROMJOBBINGAQC/GETDATA",
+      data: {
+        "HEADER": {
+          "PLANT": "2300",
+          "ORD_ST_DATE_FR": "${day}.${month}.${year}",
+          "ORD_ST_DATE_TO": "${days}.${months}.${years}",
+          "ORDER_TYPE": "",
+          "PROD_SUP": ""
+        },
+        "PROC_ORD": [
+          {"PROCESS_ORDER": PO, "MATERIAL": ""}
+        ]
+      },
+    );
+    if (response9.statusCode == 200) {
+      var databuffref = response9.data;
+      // print(databuffref);
+      if (databuffref['HEADER_INFO'] != null) {
+        if (databuffref['HEADER_INFO'].length > 0) {
+          // print(databuffref['HEADER_INFO'][0]['USER_STATUS']);
+          output.databasic.USER_STATUS =
+              databuffref['HEADER_INFO'][0]['USER_STATUS'].toString();
+        }
+      }
+    }
     print(passlist);
     // print(BasicCommonDATAs.PASS);
 
@@ -3566,6 +3603,7 @@ class BasicCommonDATA {
     this.APPBY = '',
     this.TPKLOTref = '',
     this.REFLOT = '',
+    this.USER_STATUS = '',
   });
 
   String PO;
@@ -3601,6 +3639,7 @@ class BasicCommonDATA {
   String TPKLOTref;
 
   String REFLOT;
+  String USER_STATUS;
 }
 
 class CommonReportOutput {

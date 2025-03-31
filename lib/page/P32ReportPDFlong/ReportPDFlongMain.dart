@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../bloc/Cubit/31-ReportPDFCommoncubit.dart';
 import '../../widget/GRAPH/LineGraph01.dart';
@@ -13,6 +14,8 @@ import '../../widget/common/Loading.dart';
 import '../../widget/common/Safty.dart';
 import '../../widget/common/imgset.dart';
 import '../../widget/function/helper.dart';
+import '../P303QMMASTERQC/P303QMMASTERQCVAR.dart';
+import '../P31ReportPDFcommon/ReportPDFCommonMain.dart';
 import 'ReportPDFlongvar.dart';
 
 late BuildContext ReportPDFlongcontext;
@@ -1134,35 +1137,36 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
                 //     child: Center(child: Text("SET")),
                 //   ),
                 // ),
-
-                Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: InkWell(
-                    onTap: () {
-                      PDFloader(context);
-                      Future.delayed(const Duration(milliseconds: 1000), () {
-                        // capture(
-                        captureToback(
+                if (_dataCOMMON.databasic.USER_STATUS == 'QCFN') ...[
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: InkWell(
+                      onTap: () {
+                        PDFloader(context);
+                        Future.delayed(const Duration(milliseconds: 1000), () {
                           // capture(
-                          _globalKey,
-                          ReportPDFlongvar.PO,
-                        ).then((value) {
-                          print(value);
+                          captureToback(
+                            // capture(
+                            _globalKey,
+                            ReportPDFlongvar.PO,
+                          ).then((value) {
+                            print(value);
 
-                          Navigator.pop(context);
+                            Navigator.pop(context);
+                          });
                         });
-                      });
-                    },
-                    child: Container(
-                      color: Colors.yellow,
-                      height: 50,
-                      width: 100,
-                      child: const Center(
-                        child: Text("Print"),
+                      },
+                      child: Container(
+                        color: Colors.yellow,
+                        height: 50,
+                        width: 100,
+                        child: const Center(
+                          child: Text("Print"),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                ],
                 Padding(
                   padding: const EdgeInsets.all(3.0),
                   child: InkWell(
@@ -1220,6 +1224,47 @@ class _ReportPDFlongState extends State<ReportPDFlong> {
           //     ),
           //   ],
           // ),
+          Row(children: [
+            Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: InkWell(
+                onTap: () {
+                  P303QMMASTERQCVAR.SETDAY = 'OK';
+                  P303QMMASTERQCVAR.SEARCH = ReportPDFlongvar.PO;
+                  var now = DateTime.now().subtract(Duration(days: 25));
+                  P303QMMASTERQCVAR.day = DateFormat('dd').format(now);
+                  P303QMMASTERQCVAR.month = DateFormat('MM').format(now);
+                  P303QMMASTERQCVAR.year = DateFormat('yyyy').format(now);
+                  STDreport2(context);
+                },
+                child: Container(
+                  color: Colors.yellow,
+                  height: 50,
+                  width: 100,
+                  child: const Center(
+                    child: Text("UD and QCFN"),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: InkWell(
+                onTap: () {
+                  //ReportPDFCommonvar.PO
+                  QCFN(context);
+                },
+                child: Container(
+                  color: Colors.yellow,
+                  height: 50,
+                  width: 100,
+                  child: const Center(
+                    child: Text("_QCFN"),
+                  ),
+                ),
+              ),
+            ),
+          ]),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: RepaintBoundary(
