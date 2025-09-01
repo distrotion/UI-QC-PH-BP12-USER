@@ -380,7 +380,10 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
           PARTNAME: BasicDATAr['PARTNAME'] != null
               ? BasicDATAr['PARTNAME'].toString()
               : '',
-          PARTNO:
+          PARTNO: BasicDATAr['PART_s'] != null
+              ? BasicDATAr['PART_s'].toString()
+              : '',
+          PARTNO_s:
               BasicDATAr['PART'] != null ? BasicDATAr['PART'].toString() : '',
           CUSLOT: BasicDATAr['CUSLOT'] != null
               ? BasicDATAr['CUSLOT'].toString()
@@ -388,8 +391,8 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
           TPKLOT: BasicDATAr['FG_CHARG'] != null
               ? BasicDATAr['FG_CHARG'].toString()
               : '',
-          MATERIAL: BasicDATAr['MATERIAL'] != null
-              ? BasicDATAr['MATERIAL'].toString()
+          MATERIAL: BasicDATAr['MATERIAL_s'] != null
+              ? BasicDATAr['MATERIAL_s'].toString()
               : '',
           QTY: BasicDATAr['QTY'] != null ? BasicDATAr['QTY'].toString() : '',
           UNITSAP: BasicDATAr['UNITSAP'] != null
@@ -407,13 +410,88 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
           REFLOT: BasicDATAr['REFLOT'] != null
               ? BasicDATAr['REFLOT'].toString()
               : '',
+
+          Inspected: BasicDATAr['IDInspected'] != null
+              ? BasicDATAr['IDInspected'].toString()
+              : '',
+          Check: BasicDATAr['IDCheck'] != null
+              ? BasicDATAr['IDCheck'].toString()
+              : '',
+          Approve: BasicDATAr['IDApprove'] != null
+              ? BasicDATAr['IDApprove'].toString()
+              : '',
+
+          dateInspected: BasicDATAr['dateInspected'] != null
+              ? BasicDATAr['dateInspected'].toString()
+              : '',
+          dateCheck: BasicDATAr['dateCheck'] != null
+              ? BasicDATAr['dateCheck'].toString()
+              : '',
+          dateApprove: BasicDATAr['dateApprove'] != null
+              ? BasicDATAr['dateApprove'].toString()
+              : '',
+
+          GP3POINT: PATTERNlist['GP3POINT'] != null
+              ? PATTERNlist['GP3POINT'].toString()
+              : '',
         );
+
+        if (BasicCommonDATAs.Inspected != '') {
+          final responseS1 = await Dio().post(
+            'http://172.23.10.40:16714/' + "re_login",
+            data: {
+              "ID": BasicCommonDATAs.Inspected,
+              // "PASS": logindata.userPASS,
+            },
+          );
+          if (responseS1.statusCode == 200) {
+            //SIGNATURE
+            // print(responseS1.data);
+            var input = responseS1.data;
+            BasicCommonDATAs.Inspected_sign =
+                input['SIGNATURE'] != null ? input['SIGNATURE'].toString() : '';
+          }
+        }
+
+        if (BasicCommonDATAs.Check != '') {
+          final responseS2 = await Dio().post(
+            'http://172.23.10.40:16714/' + "re_login",
+            data: {
+              "ID": BasicCommonDATAs.Check,
+              // "PASS": logindata.userPASS,
+            },
+          );
+          if (responseS2.statusCode == 200) {
+            //SIGNATURE
+            // print(response.data);
+            var input = responseS2.data;
+            BasicCommonDATAs.Check_sign =
+                input['SIGNATURE'] != null ? input['SIGNATURE'].toString() : '';
+          }
+        }
+
+        if (BasicCommonDATAs.Approve != '') {
+          final responseS3 = await Dio().post(
+            'http://172.23.10.40:16714/' + "re_login",
+            data: {
+              "ID": BasicCommonDATAs.Approve,
+              // "PASS": logindata.userPASS,
+            },
+          );
+          if (responseS3.statusCode == 200) {
+            //SIGNATURE
+            // print(response.data);
+            var input = responseS3.data;
+            BasicCommonDATAs.Approve_sign =
+                input['SIGNATURE'] != null ? input['SIGNATURE'].toString() : '';
+          }
+        }
 
         if (BasicCommonDATAs.REFLOT == '') {
           if (BasicDATAr['ReferFrom'].toString() != PO) {
             if (BasicDATAr['ReferFrom'] != null) {
               final response02 = await Dio().post(
-                server + "BP12PH_Report_PDF",
+                server + "BP12PH_Report_PDF_onlydata",
                 data: {
                   "PO": BasicDATAr['ReferFrom'].toString(),
                 },
@@ -1229,6 +1307,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     }
                   }
                   int desinal = 1;
+                  int desinalG = 1;
                   // for (var Fci = 0; Fci < ITEMSlist.length; Fci++) {
                   //   if (ITEMSlist[Fci]['masterID'].toString() == itemss) {
                   //     // print(ITEMSlist[Fci]);
@@ -1259,9 +1338,12 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     if (DESIMALlist[d]['ITEMs'].toString() == itemss) {
                       desinal =
                           int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
+                      desinalG =
+                          int.parse(ConverstStr(DESIMALlist[d]['DESIMAL01']));
                       break;
                     } else {
                       desinal = 1;
+                      desinalG = 1;
                     }
                   }
 
@@ -1296,7 +1378,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA01p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1311,7 +1393,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA02p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1326,7 +1408,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA03p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1341,7 +1423,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA04p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1356,7 +1438,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA05p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1371,7 +1453,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA06p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1386,7 +1468,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA07p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1401,7 +1483,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA08p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1416,7 +1498,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA09p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1431,7 +1513,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA10p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1446,7 +1528,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA11p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1461,7 +1543,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA12p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1476,7 +1558,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA13p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1490,7 +1572,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                               .toStringAsFixed(desinal);
                           datainpcsi.DATA14p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1505,7 +1587,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA15p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1520,7 +1602,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA16p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1535,7 +1617,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA17p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1550,7 +1632,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA18p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1565,7 +1647,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA19p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -1580,7 +1662,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
 
                           datainpcsi.DATA20p = double.parse(ConverstStr(
                                   datainside[pcsi]['PO8'].toString()))
-                              .toString();
+                              .toStringAsFixed(desinalG);
 
                           passlist.add(checkdata(
                                   maxdata,
@@ -2773,8 +2855,6 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                     double maxdata = 0;
                     double mindata = 0;
 
-                    String remark = '';
-
                     final rest2 = await Dio().post(
                       serverGBW + "GET_FINAL_COMMENT",
                       data: {
@@ -2783,7 +2863,7 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
                             : '',
                       },
                     );
-
+                    String remark = '';
                     if (rest2.statusCode == 200) {
                       var databuff = rest2.data;
 
@@ -3299,32 +3379,32 @@ class ReportPDFCommon_Cubit extends Cubit<CommonReportOutput> {
     String days = DateFormat('dd').format(now2);
     String months = DateFormat('MM').format(now2);
     String years = DateFormat('yyyy').format(now2);
-    final response9 = await Dio().post(
-      "${server2}10GETDATAFROMJOBBINGAQC/GETDATA",
-      data: {
-        "HEADER": {
-          "PLANT": "2300",
-          "ORD_ST_DATE_FR": "${day}.${month}.${year}",
-          "ORD_ST_DATE_TO": "${days}.${months}.${years}",
-          "ORDER_TYPE": "",
-          "PROD_SUP": ""
-        },
-        "PROC_ORD": [
-          {"PROCESS_ORDER": PO, "MATERIAL": ""}
-        ]
-      },
-    );
-    if (response9.statusCode == 200) {
-      var databuffref = response9.data;
-      // print(databuffref);
-      if (databuffref['HEADER_INFO'] != null) {
-        if (databuffref['HEADER_INFO'].length > 0) {
-          // print(databuffref['HEADER_INFO'][0]['USER_STATUS']);
-          output.databasic.USER_STATUS =
-              databuffref['HEADER_INFO'][0]['USER_STATUS'].toString();
-        }
-      }
-    }
+    // final response9 = await Dio().post(
+    //   "${server2}10GETDATAFROMJOBBINGAQC/GETDATA",
+    //   data: {
+    //     "HEADER": {
+    //       "PLANT": "2100",
+    //       "ORD_ST_DATE_FR": "${day}.${month}.${year}",
+    //       "ORD_ST_DATE_TO": "${days}.${months}.${years}",
+    //       "ORDER_TYPE": "",
+    //       "PROD_SUP": ""
+    //     },
+    //     "PROC_ORD": [
+    //       {"PROCESS_ORDER": PO, "MATERIAL": ""}
+    //     ]
+    //   },
+    // );
+    // if (response9.statusCode == 200) {
+    //   var databuffref = response9.data;
+    //   // print(databuffref);
+    //   if (databuffref['HEADER_INFO'] != null) {
+    //     if (databuffref['HEADER_INFO'].length > 0) {
+    //       // print(databuffref['HEADER_INFO'][0]['USER_STATUS']);
+    //       output.databasic.USER_STATUS =
+    //           databuffref['HEADER_INFO'][0]['USER_STATUS'].toString();
+    //     }
+    //   }
+    // }
     print(passlist);
     // print(BasicCommonDATAs.PASS);
 
@@ -3581,6 +3661,7 @@ class BasicCommonDATA {
     this.PROCESS = '',
     this.PARTNAME = '',
     this.PARTNO = '',
+    this.PARTNO_s = '',
     this.CUSLOT = '',
     this.TPKLOT = '',
     this.MATERIAL = '',
@@ -3604,6 +3685,16 @@ class BasicCommonDATA {
     this.TPKLOTref = '',
     this.REFLOT = '',
     this.USER_STATUS = '',
+    this.Inspected = '',
+    this.Check = '',
+    this.Approve = '',
+    this.Inspected_sign = '',
+    this.Check_sign = '',
+    this.Approve_sign = '',
+    this.GP3POINT = '',
+    this.dateInspected = '',
+    this.dateCheck = '',
+    this.dateApprove = '',
   });
 
   String PO;
@@ -3612,6 +3703,7 @@ class BasicCommonDATA {
   String PROCESS;
   String PARTNAME;
   String PARTNO;
+  String PARTNO_s;
   String CUSLOT;
   String TPKLOT;
   String MATERIAL;
@@ -3640,6 +3732,18 @@ class BasicCommonDATA {
 
   String REFLOT;
   String USER_STATUS;
+  String Inspected;
+  String Check;
+  String Approve;
+
+  String Inspected_sign;
+  String Check_sign;
+  String Approve_sign;
+  String GP3POINT;
+
+  String dateInspected;
+  String dateCheck;
+  String dateApprove;
 }
 
 class CommonReportOutput {

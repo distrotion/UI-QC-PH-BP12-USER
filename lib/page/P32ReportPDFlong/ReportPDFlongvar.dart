@@ -15,6 +15,7 @@ class ReportPDFlongvar {
   static String PROCESS = '';
   static String PARTNAME = '';
   static String PARTNO = '';
+  static String PARTNO_s = '';
   static String CUSLOT = '';
   static String TPKLOT = '';
   static String MATERIAL = '';
@@ -62,6 +63,8 @@ class ReportPDFlongvar {
 
   static String QTYEDIT = '';
   static String INCresult = '';
+
+  static String MATERIALEDIT = '';
 
   static List<ReportPDFCommonlist> datalist = [
     ReportPDFCommonlist(),
@@ -158,6 +161,7 @@ ReportPDFACTclear() {
   ReportPDFlongvar.PROCESS = '';
   ReportPDFlongvar.PARTNAME = '';
   ReportPDFlongvar.PARTNO = '';
+  ReportPDFlongvar.PARTNO_s = '';
   ReportPDFlongvar.CUSLOT = '';
   ReportPDFlongvar.TPKLOT = '';
   ReportPDFlongvar.MATERIAL = '';

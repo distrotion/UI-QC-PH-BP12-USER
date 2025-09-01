@@ -161,10 +161,33 @@ class _REPORTuiBODYState extends State<REPORTuiBODY> {
                     child: PaginatedDataTable(
                       controller: controllerReport,
                       source: _data,
-                      header: const Row(
+                      header: Row(
                         children: [
                           Text('PH BP12 REPORT'),
                           Spacer(),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.only(
+                                start: 2, end: 2, top: 10, bottom: 10),
+                            child: InkWell(
+                              onTap: () {
+                                // WORNINGpop(context, "Please clear cookies ");
+                                // context
+                                //     .read<REPORT_CALL_Bloc>()
+                                //     .add(REPORT_CALL_RESET());
+                                context.read<REPORT_Bloc>().add(REPORT_GET());
+                              },
+                              child: Container(
+                                width: 100,
+                                color: Colors.blueAccent,
+                                child: const Center(
+                                  child: Text(
+                                    "Refresh",
+                                    style: TxtStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       columns: [
@@ -194,6 +217,11 @@ class _REPORTuiBODYState extends State<REPORTuiBODY> {
                                     ascending)),
                         DataColumn(
                             label: const Text('PARTNAME'),
+                            onSort: (int columnIndex, bool ascending) =>
+                                _sort<String>((dataset d) => d.f05, columnIndex,
+                                    ascending)),
+                        DataColumn(
+                            label: const Text('STATUS'),
                             onSort: (int columnIndex, bool ascending) =>
                                 _sort<String>((dataset d) => d.f05, columnIndex,
                                     ascending)),
@@ -397,6 +425,18 @@ class _MyData extends DataTableSource {
   DataRow getRow(int index) {
     final dataset data = _data_exp[index];
 
+    String STATUS = '-';
+
+    if (data.f21 != '') {
+      STATUS = 'Inspected';
+    }
+    if (data.f22 != '') {
+      STATUS = 'Checked';
+    }
+    if (data.f23 != '') {
+      STATUS = 'Approved';
+    }
+
     return DataRow.byIndex(
         index: index,
         selected: data.selected,
@@ -412,6 +452,22 @@ class _MyData extends DataTableSource {
           DataCell(Text(data.f03)),
           DataCell(Text(data.f04)),
           DataCell(Text(data.f05)),
+          DataCell(
+            Container(
+              height: 45,
+              width: 90,
+              color: STATUS == 'Inspected'
+                  ? Colors.blue.shade400
+                  : STATUS == 'Checked'
+                      ? Colors.blue
+                      : STATUS == 'Approved'
+                          ? Colors.green
+                          : Colors.white,
+              child: Center(
+                child: Text(STATUS),
+              ),
+            ),
+          ),
           DataCell(Padding(
             padding: const EdgeInsets.all(2.0),
             child: Row(

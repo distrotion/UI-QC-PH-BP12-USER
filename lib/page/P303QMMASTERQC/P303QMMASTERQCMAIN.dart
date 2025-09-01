@@ -14,6 +14,8 @@ import '../../mainBody.dart';
 import '../../widget/common/Calendarwid.dart';
 import '../../widget/common/ComInputText.dart';
 
+import '../../widget/common/ErrorPopup.dart';
+import '../../widget/common/Error_NO_Popup.dart';
 import '../../widget/common/Safty.dart';
 import '../../widget/common/popup.dart';
 import '../../widget/newtable/INSP_SPECtable.dart';
@@ -645,23 +647,57 @@ class _NEWNEWREQUESTState extends State<NEWNEWREQUEST> {
                                             //     .add(P303QMMASTERQCget_GET());
                                             // //
                                             print(v.data);
-                                            Dio().post(
-                                              "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              data: {
-                                                "BAPI_NAME": "ZFMPP_QCFN_IN",
-                                                "ORDERID": P303QMMASTERQCVAR
-                                                    .PROCESS_ORDERset,
-                                                "PERNR_ID": "99"
-                                              },
-                                            ).then((v) {
-                                              Navigator.pop(context);
-                                              P303QMMASTERQCMAINcontext.read<
-                                                      P303QMMASTERQCget_Bloc>()
-                                                  .add(P303QMMASTERQCget_GET());
-                                              //
-                                              print(v.data);
-                                            });
+                                            if (v.data.length > 0) {
+                                              if (v.data[0]['TYPE'] != null) {
+                                                if (v.data[0]['TYPE']
+                                                        .toString() ==
+                                                    'E') {
+                                                  showErrorPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                } else {
+                                                  showGoodPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                }
+                                              }
+                                            }
+                                            // Dio().post(
+                                            //   "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   data: {
+                                            //     "BAPI_NAME": "ZFMPP_QCFN_IN",
+                                            //     "ORDERID": P303QMMASTERQCVAR
+                                            //         .PROCESS_ORDERset,
+                                            //     "PERNR_ID": USERDATA.ID
+                                            //   },
+                                            // ).then((v) {
+                                            //   Navigator.pop(context);
+                                            //   P303QMMASTERQCMAINcontext.read<
+                                            //           P303QMMASTERQCget_Bloc>()
+                                            //       .add(P303QMMASTERQCget_GET());
+                                            //   //
+                                            //   print(v.data);
+                                            //   // if (v.data['ExportParameter'] !=
+                                            //   //     null) {
+                                            //   //   if (v.data['ExportParameter']
+                                            //   //               ['INACT_NEW']
+                                            //   //           .toString() ==
+                                            //   //       'E') {
+                                            //   //     showErrorPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   } else {
+                                            //   //     showGoodPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   }
+                                            //   // } else {
+                                            //   //   showErrorPopup(
+                                            //   //       P303QMMASTERQCMAINcontext,
+                                            //   //       v.data.toString());
+                                            //   // }
+                                            // });
                                           });
                                         } else {
                                           //
@@ -741,26 +777,60 @@ class _NEWNEWREQUESTState extends State<NEWNEWREQUEST> {
                                             //         P303QMMASTERQCget_Bloc>()
                                             //     .add(P303QMMASTERQCget_GET());
                                             //
+                                            // print(v.data);
                                             print(v.data);
-                                            print(v.data);
-                                            Dio().post(
-                                              "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              data: {
-                                                "BAPI_NAME": "ZFMPP_QCFN_IN",
-                                                "ORDERID": P303QMMASTERQCVAR
-                                                        .PROCESS_ORDERset
-                                                    .substring(2, 12),
-                                                "PERNR_ID": "99"
-                                              },
-                                            ).then((v) {
-                                              Navigator.pop(context);
-                                              P303QMMASTERQCMAINcontext.read<
-                                                      P303QMMASTERQCget_Bloc>()
-                                                  .add(P303QMMASTERQCget_GET());
-                                              //
-                                              print(v.data);
-                                            });
+                                            if (v.data.length > 0) {
+                                              if (v.data[0]['TYPE'] != null) {
+                                                if (v.data[0]['TYPE']
+                                                        .toString() ==
+                                                    'E') {
+                                                  showErrorPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                } else {
+                                                  showGoodPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                }
+                                              }
+                                            }
+                                            // Dio().post(
+                                            //   "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   data: {
+                                            //     "BAPI_NAME": "ZFMPP_QCFN_IN",
+                                            //     "ORDERID": P303QMMASTERQCVAR
+                                            //             .PROCESS_ORDERset
+                                            //         .substring(2, 12),
+                                            //     "PERNR_ID": USERDATA.ID
+                                            //   },
+                                            // ).then((v) {
+                                            //   Navigator.pop(context);
+                                            //   P303QMMASTERQCMAINcontext.read<
+                                            //           P303QMMASTERQCget_Bloc>()
+                                            //       .add(P303QMMASTERQCget_GET());
+                                            //   //
+                                            //   print(v.data);
+                                            //   // if (v.data['ExportParameter'] !=
+                                            //   //     null) {
+                                            //   //   if (v.data['ExportParameter']
+                                            //   //               ['INACT_NEW']
+                                            //   //           .toString() ==
+                                            //   //       'E') {
+                                            //   //     showErrorPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   } else {
+                                            //   //     showGoodPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   }
+                                            //   // } else {
+                                            //   //   showErrorPopup(
+                                            //   //       P303QMMASTERQCMAINcontext,
+                                            //   //       v.data.toString());
+                                            //   // }
+                                            // });
                                           });
                                         } else {
                                           //
@@ -846,23 +916,57 @@ class _NEWNEWREQUESTState extends State<NEWNEWREQUEST> {
                                             // //
                                             // print(v.data);
                                             print(v.data);
-                                            Dio().post(
-                                              "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              data: {
-                                                "BAPI_NAME": "ZFMPP_QCFN_IN",
-                                                "ORDERID": P303QMMASTERQCVAR
-                                                    .PROCESS_ORDERset,
-                                                "PERNR_ID": "99"
-                                              },
-                                            ).then((v) {
-                                              Navigator.pop(context);
-                                              P303QMMASTERQCMAINcontext.read<
-                                                      P303QMMASTERQCget_Bloc>()
-                                                  .add(P303QMMASTERQCget_GET());
-                                              //
-                                              print(v.data);
-                                            });
+                                            if (v.data.length > 0) {
+                                              if (v.data[0]['TYPE'] != null) {
+                                                if (v.data[0]['TYPE']
+                                                        .toString() ==
+                                                    'E') {
+                                                  showErrorPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                } else {
+                                                  showGoodPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                }
+                                              }
+                                            }
+                                            // Dio().post(
+                                            //   "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   data: {
+                                            //     "BAPI_NAME": "ZFMPP_QCFN_IN",
+                                            //     "ORDERID": P303QMMASTERQCVAR
+                                            //         .PROCESS_ORDERset,
+                                            //     "PERNR_ID": USERDATA.ID
+                                            //   },
+                                            // ).then((v) {
+                                            //   Navigator.pop(context);
+                                            //   P303QMMASTERQCMAINcontext.read<
+                                            //           P303QMMASTERQCget_Bloc>()
+                                            //       .add(P303QMMASTERQCget_GET());
+                                            //   //
+                                            //   print(v.data);
+                                            //   // if (v.data['ExportParameter'] !=
+                                            //   //     null) {
+                                            //   //   if (v.data['ExportParameter']
+                                            //   //               ['INACT_NEW']
+                                            //   //           .toString() ==
+                                            //   //       'E') {
+                                            //   //     showErrorPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   } else {
+                                            //   //     showGoodPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   }
+                                            //   // } else {
+                                            //   //   showErrorPopup(
+                                            //   //       P303QMMASTERQCMAINcontext,
+                                            //   //       v.data.toString());
+                                            //   // }
+                                            // });
                                           });
                                         } else {
                                           //
@@ -942,24 +1046,57 @@ class _NEWNEWREQUESTState extends State<NEWNEWREQUEST> {
                                             //     .add(P303QMMASTERQCget_GET());
                                             //
                                             print(v.data);
-                                            print(v.data);
-                                            Dio().post(
-                                              "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              data: {
-                                                "BAPI_NAME": "ZFMPP_QCFN_IN",
-                                                "ORDERID": P303QMMASTERQCVAR
-                                                    .PROCESS_ORDERset,
-                                                "PERNR_ID": "99"
-                                              },
-                                            ).then((v) {
-                                              Navigator.pop(context);
-                                              P303QMMASTERQCMAINcontext.read<
-                                                      P303QMMASTERQCget_Bloc>()
-                                                  .add(P303QMMASTERQCget_GET());
-                                              //
-                                              print(v.data);
-                                            });
+                                            if (v.data.length > 0) {
+                                              if (v.data[0]['TYPE'] != null) {
+                                                if (v.data[0]['TYPE']
+                                                        .toString() ==
+                                                    'E') {
+                                                  showErrorPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                } else {
+                                                  showGoodPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                }
+                                              }
+                                            }
+                                            // Dio().post(
+                                            //   "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   data: {
+                                            //     "BAPI_NAME": "ZFMPP_QCFN_IN",
+                                            //     "ORDERID": P303QMMASTERQCVAR
+                                            //         .PROCESS_ORDERset,
+                                            //     "PERNR_ID": USERDATA.ID
+                                            //   },
+                                            // ).then((v) {
+                                            //   Navigator.pop(context);
+                                            //   P303QMMASTERQCMAINcontext.read<
+                                            //           P303QMMASTERQCget_Bloc>()
+                                            //       .add(P303QMMASTERQCget_GET());
+                                            //   //
+                                            //   print(v.data);
+                                            //   // if (v.data['ExportParameter'] !=
+                                            //   //     null) {
+                                            //   //   if (v.data['ExportParameter']
+                                            //   //               ['INACT_NEW']
+                                            //   //           .toString() ==
+                                            //   //       'E') {
+                                            //   //     showErrorPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   } else {
+                                            //   //     showGoodPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   }
+                                            //   // } else {
+                                            //   //   showErrorPopup(
+                                            //   //       P303QMMASTERQCMAINcontext,
+                                            //   //       v.data.toString());
+                                            //   // }
+                                            // });
                                           });
                                         } else {
                                           //
@@ -1039,24 +1176,57 @@ class _NEWNEWREQUESTState extends State<NEWNEWREQUEST> {
                                             //     .add(P303QMMASTERQCget_GET());
                                             //
                                             print(v.data);
-                                            print(v.data);
-                                            Dio().post(
-                                              "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
-                                              data: {
-                                                "BAPI_NAME": "ZFMPP_QCFN_IN",
-                                                "ORDERID": P303QMMASTERQCVAR
-                                                    .PROCESS_ORDERset,
-                                                "PERNR_ID": "99"
-                                              },
-                                            ).then((v) {
-                                              Navigator.pop(context);
-                                              P303QMMASTERQCMAINcontext.read<
-                                                      P303QMMASTERQCget_Bloc>()
-                                                  .add(P303QMMASTERQCget_GET());
-                                              //
-                                              print(v.data);
-                                            });
+                                            if (v.data.length > 0) {
+                                              if (v.data[0]['TYPE'] != null) {
+                                                if (v.data[0]['TYPE']
+                                                        .toString() ==
+                                                    'E') {
+                                                  showErrorPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                } else {
+                                                  showGoodPopup(
+                                                      P303QMMASTERQCMAINcontext,
+                                                      v.data.toString());
+                                                }
+                                              }
+                                            }
+                                            // Dio().post(
+                                            //   "${server2}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   // "${'http://127.0.0.1:14094/'}10GETDATAFROMJOBBINGAQC/QCFN",
+                                            //   data: {
+                                            //     "BAPI_NAME": "ZFMPP_QCFN_IN",
+                                            //     "ORDERID": P303QMMASTERQCVAR
+                                            //         .PROCESS_ORDERset,
+                                            //     "PERNR_ID": USERDATA.ID
+                                            //   },
+                                            // ).then((v) {
+                                            //   Navigator.pop(context);
+                                            //   P303QMMASTERQCMAINcontext.read<
+                                            //           P303QMMASTERQCget_Bloc>()
+                                            //       .add(P303QMMASTERQCget_GET());
+                                            //   //
+                                            //   print(v.data);
+                                            //   // if (v.data['ExportParameter'] !=
+                                            //   //     null) {
+                                            //   //   if (v.data['ExportParameter']
+                                            //   //               ['INACT_NEW']
+                                            //   //           .toString() ==
+                                            //   //       'E') {
+                                            //   //     showErrorPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   } else {
+                                            //   //     showGoodPopup(
+                                            //   //         P303QMMASTERQCMAINcontext,
+                                            //   //         v.data.toString());
+                                            //   //   }
+                                            //   // } else {
+                                            //   //   showErrorPopup(
+                                            //   //       P303QMMASTERQCMAINcontext,
+                                            //   //       v.data.toString());
+                                            //   // }
+                                            // });
                                           });
                                         } else {
                                           //
@@ -1310,13 +1480,24 @@ class _QCFNWDState extends State<QCFNWD> {
                 data: {
                   "BAPI_NAME": "ZFMPP_QCFN_IN",
                   "ORDERID": P303QMMASTERQCVAR.PROCESS_ORDERset,
-                  "PERNR_ID": "99"
+                  "PERNR_ID": USERDATA.ID
                 },
               ).then((v) {
-                Navigator.pop(context);
+                // Navigator.pop(context);
 
                 //
                 print(v.data);
+                if (v.data['ExportParameter'] != null) {
+                  if (v.data['ExportParameter']['INACT_NEW'].toString() ==
+                      'E') {
+                    showErrorPopup(
+                        P303QMMASTERQCMAINcontext, v.data.toString());
+                  } else {
+                    showGoodPopup(P303QMMASTERQCMAINcontext, v.data.toString());
+                  }
+                } else {
+                  showErrorPopup(P303QMMASTERQCMAINcontext, v.data.toString());
+                }
               });
             },
             child: Container(

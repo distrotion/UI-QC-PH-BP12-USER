@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../bloc/BlocEvent/01-01-SAP.dart';
 import '../../../bloc/BlocEvent/01-02-GetINS.dart';
 
+import '../../../data/global.dart';
 import '../../../model/model.dart';
 import '../../../widget/common/ComInputText.dart';
 
@@ -90,40 +91,40 @@ class _MAINTABLEP1State extends State<MAINTABLEP1> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () async {
-                    await Dio().post(
-                      "http://172.23.10.40:16700/" + 'RAWDATA/sapget',
-                      data: {
-                        "ORDER": FIRSTUI.SEARCH,
-                      },
-                    ).then((result) {
-                      //
-                      var buff = result.data;
-                      if (buff.length > 0) {
-                        FIRSTUI.POACTIVE = FIRSTUI.SEARCH;
-                        FIRSTUI.CPACTIVE =
-                            int.parse(ConverstStr(buff[0]['CPMAT'].toString()))
-                                .toString();
-                        context.read<GetINS_Bloc>().add(GETINSset());
-                      }
-                    });
+                // InkWell(
+                //   onTap: () async {
+                //     await Dio().post(
+                //       "http://172.23.10.40:16700/" + 'RAWDATA/sapget',
+                //       data: {
+                //         "ORDER": FIRSTUI.SEARCH,
+                //       },
+                //     ).then((result) {
+                //       //
+                //       var buff = result.data;
+                //       if (buff.length > 0) {
+                //         FIRSTUI.POACTIVE = FIRSTUI.SEARCH;
+                //         FIRSTUI.CPACTIVE =
+                //             int.parse(ConverstStr(buff[0]['CPMAT'].toString()))
+                //                 .toString();
+                //         context.read<GetINS_Bloc>().add(GETINSset());
+                //       }
+                //     });
 
-                    // context.read<GetINS_Bloc>().add(GETINSset());
-                  },
-                  child: Container(
-                    height: 40,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      color: Colors.brown,
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    ),
-                    child: const Center(
-                      child: Text("Query"),
-                    ),
-                  ),
-                ),
+                //     // context.read<GetINS_Bloc>().add(GETINSset());
+                //   },
+                //   child: Container(
+                //     height: 40,
+                //     width: 100,
+                //     decoration: BoxDecoration(
+                //       border: Border.all(color: Colors.black),
+                //       color: Colors.brown,
+                //       borderRadius: const BorderRadius.all(Radius.circular(8)),
+                //     ),
+                //     child: const Center(
+                //       child: Text("Query"),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -241,7 +242,25 @@ class tabledetailsearch extends StatelessWidget {
           FIRSTUI.POACTIVE = PO;
           FIRSTUI.CPACTIVE = CP;
 
-          context.read<GetINS_Bloc>().add(GETINSset());
+          // context.read<GetINS_Bloc>().add(GETINSset());
+          if (CP.toString().substring(0, 2) == '21') {
+            Dio().post(
+              GLOserver + 'GETfg',
+              data: {
+                "FG": CP,
+              },
+            ).then((value) {
+              var input = value.data;
+              if (input.length > 0) {
+                FIRSTUI.CPACTIVE = input[0]['CP'].toString();
+                print(FIRSTUI.CPACTIVE);
+                context.read<GetINS_Bloc>().add(GETINSset());
+              }
+            });
+          } else {
+            FIRSTUI.CPACTIVE = CP;
+            context.read<GetINS_Bloc>().add(GETINSset());
+          }
         },
       ));
     }

@@ -30,7 +30,7 @@ class INCOMINGGETPO_Bloc extends Bloc<INCOMINGGETPO_Event, INCOMINGGETPOclass> {
     INCOMINGGETPOclass output = INCOMINGGETPOclass();
     print(P20INCOMINGVAR.ORDER);
     final response = await Dio().post(
-      "http://172.23.10.40:16700/" + 'RAWDATA/sapget',
+      "http://172.23.10.40:1885/" + 'getitemBP12',
       data: {
         "ORDER": P20INCOMINGVAR.ORDER,
       },
@@ -38,7 +38,7 @@ class INCOMINGGETPO_Bloc extends Bloc<INCOMINGGETPO_Event, INCOMINGGETPOclass> {
 
     if (response.statusCode == 200) {
       var databuff = response.data;
-      // print(databuff);
+      print(databuff);
       if (databuff.length > 0) {
         //
         output.PO = P20INCOMINGVAR.ORDER;

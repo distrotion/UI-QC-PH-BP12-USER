@@ -37,6 +37,8 @@ class ReportPDFcommonlistvar {
 
   //rawlistCORE
 
+  static String MATERIALEDIT = '';
+
   static List<rawlist> rawlistGraph = [];
   static rawlist rawlistGraphCore = rawlist();
 
@@ -136,10 +138,12 @@ class rawlist {
     this.DATANO = '',
     this.DATAPCS = '',
     this.DATA = '',
+    this.DATA2 = '',
   });
   String DATANO;
   String DATAPCS = '';
   String DATA = '';
+  String DATA2 = '';
 }
 
 ReportPDFACTclear() {

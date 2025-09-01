@@ -41,6 +41,7 @@ class _ReportPDFcommonlistState extends State<ReportPDFcommonlist> {
           .ReportPDFCommonCubit(ReportPDFcommonlistvar.PO);
 
       ReportPDFcommonlistvar.QTYEDIT = '';
+      ReportPDFcommonlistvar.MATERIALEDIT = '';
       ReportPDFcommonlistvar.INCresult = '';
     }
     super.initState();
@@ -1136,6 +1137,26 @@ class _ReportPDFcommonlistState extends State<ReportPDFcommonlist> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: ComInputText(
+                height: 40,
+                width: 150,
+                isContr: P303QMMASTERQCVAR.iscontrol,
+                fnContr: (input) {
+                  setState(() {
+                    P303QMMASTERQCVAR.iscontrol = input;
+                  });
+                },
+                sPlaceholder: "MATERIAL",
+                sValue: ReportPDFcommonlistvar.MATERIALEDIT,
+                returnfunc: (String s) {
+                  setState(() {
+                    ReportPDFcommonlistvar.MATERIALEDIT = s;
+                  });
+                },
+              ),
+            ),
           ]),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -1475,7 +1496,10 @@ class _ReportPDFcommonlistState extends State<ReportPDFcommonlist> {
                                               .SCMASKTYPEonTop),
                                     ],
                                     Text(
-                                      ReportPDFcommonlistvar.MATERIAL,
+                                      // ReportPDFcommonlistvar.MATERIAL,
+                                      ReportPDFcommonlistvar.MATERIALEDIT == ''
+                                          ? ReportPDFcommonlistvar.MATERIAL
+                                          : ReportPDFcommonlistvar.MATERIALEDIT,
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),

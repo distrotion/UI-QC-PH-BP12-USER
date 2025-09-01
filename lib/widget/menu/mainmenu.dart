@@ -11,6 +11,7 @@ import '../../page/page13.dart';
 
 import '../../page/page18.dart';
 import '../../page/page20.dart';
+import '../../page/page303.dart';
 import '../../page/page9.dart';
 import 'sub_widget.dart';
 
@@ -142,6 +143,11 @@ class Data_Menu_mainmenu extends StatelessWidget {
           page: Page18(),
           Lv: 1,
           // tapcolor: Colors.white,
+        ),
+        menu_normal(
+          name: "Special QCFN",
+          page: Page303(),
+          Lv: 1,
         ),
         // menu_normal(
         //   name: " SUMMARY REPORT",

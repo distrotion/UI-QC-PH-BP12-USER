@@ -102,7 +102,7 @@ Future<String> captureToback(
         // final imageEncoded = base64.encode(databuff['PIC']);
         var base64 = databuff['PIC'].toString();
         var bytes = base64Decode(base64);
-        await FileSaveHelper.saveAndLaunchFile(bytes, '${PO}.pdf');
+        await FileSaveHelper.saveAndLaunchFile(bytes, '${PO}-QC.pdf');
       }
     } else {
       //
