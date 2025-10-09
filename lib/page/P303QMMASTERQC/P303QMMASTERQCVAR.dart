@@ -26,6 +26,8 @@ class P303QMMASTERQCVAR {
   // static SELECTED_SETHSclass iSELECTEDSETset = SELECTED_SETHSclass();
   static List<UDCODEclass> UDCODEdata = [];
 
+  static String BATCH = '';
+
   static String DATASUM = '';
 
   static String TO_ALL = '';
@@ -37,7 +39,7 @@ class P303QMMASTERQCVAR {
 
   static int holding = 999;
 
-  static String PLANT = "2300";
+  static String PLANT = "2100";
   static String LOT_ORI = "03";
 
   static String EVASET = "OK";

@@ -57,6 +57,9 @@ class REPORT_Bloc extends Bloc<REPORT_Event, List<dataset>> {
             f23: databuff[i]['IDApprove'] == null
                 ? ''
                 : databuff[i]['IDApprove'].toString(),
+            f24: databuff[i]['FG_CHARG'] == null
+                ? ''
+                : databuff[i]['FG_CHARG'].toString(),
           ),
         );
       }

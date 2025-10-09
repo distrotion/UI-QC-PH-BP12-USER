@@ -61,7 +61,7 @@ class P303QMMASTERQCgetINSP_SPEC_Bloc extends Bloc<
           // "LOT_ORI": P303QMMASTERQCVAR.LOT_ORI,
           "LOT_ORI": "03",
           "MATERIAL": "",
-          "BATCH": "",
+          "BATCH": P303QMMASTERQCVAR.BATCH,
           "LOT_NO": ""
         }
       },
