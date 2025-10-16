@@ -504,6 +504,7 @@ class _MyData extends DataTableSource {
               ),
             ),
           ),
+
           DataCell(Padding(
             padding: const EdgeInsets.all(2.0),
             child: Row(
